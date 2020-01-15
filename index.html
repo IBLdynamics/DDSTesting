@@ -31,38 +31,53 @@
       ], {
         suffixLabel: 'x0 = '
       });
-
       function graphFunc(x) {
         return a.Value() * x * (1 - x);
       }
-      var li = board.create('functiongraph',
+      var lineGraph = board.create('functiongraph',
         [function (x) {
           return x
         }, -0.5, 1.5], {
-          strokeColor: '#FF0000' // Red
+          strokeColor: 'green'
         }
       );
-      var graph = board.create('functiongraph',
+      var curveGraph = board.create('functiongraph',
         [graphFunc, -0.5, 1.5]
       );
-      // Function to draw a line segment between two points
-      function drawLine(p1, p2) {
-        board.create('segment',
-          [p1, p2], {
-            fixed: true,
-            strokeColor: '#008000' // Green
-          }
-        );
+      // Function to calculate the attracting and repelling points
+      function generatePoints() {
+        var i, xcors, ycors, xi;
+        xcors = [x0.Value()]; // Populate xcors with the first value = x0
+        ycors = [graphFunc(x0.Value())]; // Populate ycors with the first value = x1
+        for (i = 0; i < 10; i++) {
+          xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
+          // Add new point (xi, xi)
+          xcors.push(xi);
+          ycors.push(xi);
+          // Add new point (xi, xi+1)
+          xcors.push(xi);
+          ycors.push(graphFunc(xi));
+        }
+        return {
+          'xcors': xcors,
+          'ycors': ycors
+        };
       }
-      // Graph attracting/repelling points
-      var xcors, p1, p2, i;
-      xcors = [x0.Value()]; // Start array of points to graph with x0
-      for (i = 0; i < 9; i++) {
-        xcors.push(graphFunc(xcors[i])); // Calculate next xcor
-        p1 = [xcors[i], xcors[i + 1]];
-        p2 = [xcors[i + 1], xcors[i + 1]];
-        drawLine(p1, p2); // Graph line between (xi, xi+1) and (xi+1, xi+1)
-      }
+      // Create a step function that will be updated each time a or x0 changes
+      var stepGraph = board.create('stepfunction', [
+        [0], // Use as filler for now. It will be replaced on board update
+        [0]
+      ], {
+        strokeColor: 'red'
+      });
+      // Re-calculate the attracting and repelling points each time the board is updated
+      board.on('update', function () {
+        var points = generatePoints();
+        stepGraph.xterm = points['xcors'];
+        stepGraph.yterm = points['ycors'];
+      });
+      // Update the board right away to replace (0,0) filler
+      board.update(); // Not working the way I thought it would
     </script>
   </div>
 </body>
