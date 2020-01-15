@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+  <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+  <title>Discovering Dynamical Systems</title>
+</head>
+
+<body>
+  <h1>Discovering Dynamical Systems Through Experiment and Inquiry</h1>
+  <div id="box" class="jxgbox" style="width:500px; height:500px;">
+    <script type="text/javascript">
+      // Initialize board, graphs, and sliders
+      var board = JXG.JSXGraph.initBoard('box', {
+        boundingbox: [-0.5, 1.5, 1.5, -0.5],
+        axis: true,
+        grid: true
+      });
+      var a = board.create('slider', [
+        [-0.4, 0],
+        [-0.4, 1],
+        [0, 2, 4]
+      ], {
+        suffixLabel: 'a = '
+      });
+      var x0 = board.create('slider', [
+        [-0.2, 0],
+        [-0.2, 1],
+        [0, 0.5, 1]
+      ], {
+        suffixLabel: 'x0 = '
+      });
+
+      function graphFunc(x) {
+        return a.Value() * x * (1 - x);
+      }
+      var li = board.create('functiongraph',
+        [function (x) {
+          return x
+        }, -0.5, 1.5], {
+          strokeColor: '#FF0000' // Red
+        }
+      );
+      var graph = board.create('functiongraph',
+        [graphFunc, -0.5, 1.5]
+      );
+      // Function to draw a line segment between two points
+      function drawLine(p1, p2) {
+        board.create('segment',
+          [p1, p2], {
+            fixed: true,
+            strokeColor: '#008000' // Green
+          }
+        );
+      }
+      // Graph attracting/repelling points
+      var xcors, p1, p2, i;
+      xcors = [x0.Value()]; // Start array of points to graph with x0
+      for (i = 0; i < 9; i++) {
+        xcors.push(graphFunc(xcors[i])); // Calculate next xcor
+        p1 = [xcors[i], xcors[i + 1]];
+        p2 = [xcors[i + 1], xcors[i + 1]];
+        drawLine(p1, p2); // Graph line between (xi, xi+1) and (xi+1, xi+1)
+      }
+    </script>
+  </div>
+</body>
+
+</html>
