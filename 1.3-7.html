@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <title>Graphical Iteration Tool</title>
+</head>
+
+<body>
+    <h1>Graphical Iteration Tool</h1>
+    <!-- Create a slider to determine the value of x0 -->
+    <div id="rangeslider" style="width: 500px; height: 40px;">
+        <p style="display: inline;">Initial Condition</p>
+        <input id="x0Slider" type="range" min="-1" max="2" value="0.5" step="0.01" style="width: 50%;">
+        <p style="display: inline;">x0: <span id="x0Out"></span></p>
+        <script>
+            // Get the value of x0 from the slider
+            var x0Slider = document.getElementById("x0Slider");
+            var x0Output = document.getElementById("x0Out");
+            x0Output.innerHTML = x0Slider.value; // Output value for student to see
+        </script>
+    </div>
+    <!-- Create checkboxes to determine the value of c -->
+    <div id="checkboxes" style="width: 500px; height: 40px;">
+        <!-- Check "a" by default -->
+        <label>a<input class="cValueCheckbox" type="radio" name="c" value="-0.2" onclick="updateC(this);"
+                checked></label>
+        <label>b<input class="cValueCheckbox" type="radio" name="c" value="-1" onclick="updateC(this);"></label>
+        <label>c<input class="cValueCheckbox" type="radio" name="c" value="1" onclick="updateC(this);"></label>
+        <label>d<input class="cValueCheckbox" type="radio" name="c" value="-1.3" onclick="updateC(this);"></label>
+        <p style="display: inline; padding-left: 5px;">c: <span id="cOut"></span></p>
+        <script>
+            // Get the value of c from the checkboxes
+            var cValue = document.querySelector('.cValueCheckbox:checked').value;
+            var cOutput = document.getElementById("cOut");
+            cOutput.innerHTML = cValue; // Output value for student to see
+        </script>
+    </div>
+    <!-- Define functions that both boards share -->
+    <script>
+        // Graph function for both boards
+        function graphFunc(x) {
+            return x * x + Number(cValue);
+        }
+        // Function to calculate the attracting and repelling points
+        function generatePoints() {
+            var i, xcors, ycors, xi;
+            xcors = [x0Slider.value]; // Populate xcors with the first value = x0
+            ycors = [graphFunc(x0Slider.value)]; // Populate ycors with the first value = x1
+            for (i = 0; i < 10; i++) {
+                xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
+                // Add new point (xi, xi)
+                xcors.push(xi);
+                ycors.push(xi);
+                // Add new point (xi, xi+1)
+                xcors.push(xi);
+                ycors.push(graphFunc(xi));
+            }
+            return {
+                'xcors': xcors,
+                'ycors': ycors
+            };
+        }
+    </script>
+    <!-- Create board with plotted points -->
+    <div id="box1" class="jxgbox" style="width:500px; height:500px; float: left;">
+        <script type="text/javascript">
+            var board1;
+            // Function to create board and plot the x-coordinates from generatePoints
+            function createBoard1() {
+                board1 = JXG.JSXGraph.initBoard('box1', {
+                    boundingbox: [-1, 6, 12, -3],
+                    axis: true,
+                    grid: true
+                });
+                // Plot points with value (i, xi)
+                var i, xcors;
+                xcors = generatePoints()['xcors'];
+                for (i = 0; i < xcors.length; i++) {
+                    board1.create('point',
+                        [i + 1, xcors[i]], {
+                            fixed: true
+                        });
+                }
+            }
+            createBoard1();
+        </script>
+    </div>
+    <!-- Create board with curve and line graphs -->
+    <div id="box2" class="jxgbox" style="width:500px; height:500px;">
+        <script type="text/javascript">
+            // Create board
+            var board2 = JXG.JSXGraph.initBoard('box2', {
+                boundingbox: [-3, 5, 3, -3],
+                axis: true,
+                grid: true
+            });
+            // Create line graph
+            var lineGraph = board2.create('functiongraph',
+                [function (x) {
+                    return x
+                }, -2, 2], {
+                    strokeColor: 'green'
+                }
+            );
+            // Create curve graph
+            var curveGraph = board2.create('functiongraph',
+                [graphFunc, -2, 2]
+            );
+            // Create a step function that will be updated each time a or x0 changes
+            var stepGraph = board2.create('stepfunction', [
+                [0], // Use as filler for now. It will be replaced on board update
+                [0]
+            ], {
+                strokeColor: 'red'
+            });
+        </script>
+    </div>
+    <!-- Setup boards so they both change when either x0 or c changes-->
+    <script>
+        // Function to re-calculate the attracting and repelling points and graph them
+        function reCalculate() {
+            var points = generatePoints();
+            // Update board1
+            JXG.JSXGraph.freeBoard(board1); // Have to free the whole board to get rid of all the points
+            createBoard1();
+            // Update board2
+            stepGraph.xterm = points['xcors'];
+            stepGraph.yterm = points['ycors'];
+        }
+        // Set both boards to update when the "x0" slider is updated
+        x0Slider.oninput = function () {
+            x0Output.innerHTML = this.value; // Output value for student to see
+            reCalculate();
+            board1.fullUpdate();
+            board2.fullUpdate();
+        }
+        // Set both boards to update when the "c" value checkbox is changed
+        function updateC(checkbox) {
+            cValue = checkbox.value;
+            cOutput.innerHTML = cValue; // Output value for student to see
+            reCalculate();
+            board1.fullUpdate();
+            board2.fullUpdate();
+        }
+    </script>
+</body>
+
+</html>
