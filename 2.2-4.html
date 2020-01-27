@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <title>Convergence of Sequences</title>
+</head>
+
+<body>
+    <h1>Convergence of Sequences</h1>
+    <!-- Create a slider to determine the value of e -->
+    <div id="rangeslider" style="width: 500px; height: 40px;">
+        <p style="display: inline;">Initial Condition</p>
+        <input id="eSlider" type="range" min="0.0001" max="0.1" value="0.1" step="0.0001" style="width: 50%;">
+        <p style="display: inline;">x0: <span id="eOut"></span></p>
+        <script>
+            // Get the value of e from the slider
+            var eSlider = document.getElementById("eSlider");
+            var eOutput = document.getElementById("eOut");
+            eOutput.innerHTML = eSlider.value; // Output value for student to see
+        </script>
+    </div>
+    <!-- Create board with plotted points -->
+    <div id="box" class="jxgbox" style="width:500px; height:500px; float: left;">
+        <script type="text/javascript">
+            var board;
+            // Function to create board, lines, and plot points
+            function createBoard() {
+                var e = eSlider.value
+                // Create board
+                board = JXG.JSXGraph.initBoard('box', {
+                    boundingbox: [0, 1 + (10 * e), Math.floor(2 / e), 1 - (10 * e)],
+                    axis: true,
+                    grid: true
+                });
+                // Create limit line
+                board.create('line',
+                    [
+                        [0, 1],
+                        [Math.floor(2 / e), 1]
+                    ], {
+                        fixed: true,
+                        strokeColor: 'red'
+                    });
+                // Create e-band lines
+                board.create('line',
+                    [
+                        [0, 1 - e],
+                        [Math.floor(2 / e), 1 - e]
+                    ], {
+                        fixed: true,
+                        strokeColor: 'green'
+                    });
+                board.create('line',
+                    [
+                        [0, 1 + e],
+                        [Math.floor(2 / e), 1 + e]
+                    ], {
+                        fixed: true,
+                        strokeColor: 'green'
+                    });
+                // Plot points
+                var n;
+                for (n = 1; n < Math.floor(2 / e); n++) {
+                    board.create('point', [n, 1 - (1 / n)], {
+                        size: 1,
+                        strokeColor: 'blue',
+                        withLabel: false
+                    });
+                }
+            }
+            createBoard();
+        </script>
+    </div>
+    <script>
+        // Set board to update when the "e" slider is updated
+        eSlider.oninput = function () {
+            eOutput.innerHTML = this.value; // Output value for student to see
+            JXG.JSXGraph.freeBoard(board);
+            createBoard();
+        }
+    </script>
+</body>
+
+</html>
