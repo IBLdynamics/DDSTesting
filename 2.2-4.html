@@ -11,9 +11,9 @@
     <h1>Convergence of Sequences</h1>
     <!-- Create a slider to determine the value of e -->
     <div id="rangeslider" style="width: 500px; height: 40px;">
-        <p style="display: inline;">Initial Condition</p>
-        <input id="eSlider" type="range" min="0.0001" max="0.1" value="0.1" step="0.0001" style="width: 50%;">
-        <p style="display: inline;">x0: <span id="eOut"></span></p>
+        <p style="display: inline;">&epsilon;:</p>
+        <input id="eSlider" type="range" min="0.01" max="0.1" value="0.1" step="0.0001" style="width: 50%;">
+        <p style="display: inline;"><span id="eOut"></span></p>
         <script>
             // Get the value of e from the slider
             var eSlider = document.getElementById("eSlider");
@@ -30,15 +30,15 @@
                 var e = eSlider.value
                 // Create board
                 board = JXG.JSXGraph.initBoard('box', {
-                    boundingbox: [0, 1 + (10 * e), Math.floor(2 / e), 1 - (10 * e)],
+                    boundingbox: [-1, 6 * e, Math.floor(2 / e), -6 * e],
                     axis: true,
                     grid: true
                 });
                 // Create limit line
                 board.create('line',
                     [
-                        [0, 1],
-                        [Math.floor(2 / e), 1]
+                        [0, 0],
+                        [Math.floor(2 / e), 0]
                     ], {
                         fixed: true,
                         strokeColor: 'red'
@@ -46,16 +46,16 @@
                 // Create e-band lines
                 board.create('line',
                     [
-                        [0, 1 - e],
-                        [Math.floor(2 / e), 1 - e]
+                        [0, -e],
+                        [Math.floor(2 / e), -e]
                     ], {
                         fixed: true,
                         strokeColor: 'green'
                     });
                 board.create('line',
                     [
-                        [0, 1 + e],
-                        [Math.floor(2 / e), 1 + e]
+                        [0, e],
+                        [Math.floor(2 / e), e]
                     ], {
                         fixed: true,
                         strokeColor: 'green'
@@ -63,7 +63,7 @@
                 // Plot points
                 var n;
                 for (n = 1; n < Math.floor(2 / e); n++) {
-                    board.create('point', [n, 1 - (1 / n)], {
+                    board.create('point', [n, Math.pow(-1, n) / n], {
                         size: 1,
                         strokeColor: 'blue',
                         withLabel: false
