@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <title>Quadratic Family Tool</title>
+</head>
+
+<body>
+    <h1>Quadratic Family Tool</h1>
+    <!-- Create a slider to determine the value of "c" -->
+    <div id="rangeslider" style="width: 500px; height: 50px;">
+        <p style="display: inline;">c:</p>
+        <input id="cSlider" type="range" min="-1" max="0.5" value="-1" step="0.01" style="width: 50%;">
+        <p style="display: inline;"><span id="cOut"></span></p>
+        <script>
+            // Get the value of "c" from the slider
+            var cSlider = document.getElementById("cSlider");
+            var cOutput = document.getElementById("cOut");
+            cOutput.innerHTML = cSlider.value; // Output value for student to see
+        </script>
+    </div>
+    <!-- Create the rest -->
+    <div id="box" class="jxgbox" style="width: 500px; height: 500px;">
+        <script type="text/javascript">
+            // Create board
+            var board = JXG.JSXGraph.initBoard('box', {
+                boundingbox: [-1, 2, 1, -1],
+                axis: true,
+                grid: true
+            });
+            // Create graphs
+            var lineGraph = board.create('functiongraph',
+                [function (x) {
+                    return x;
+                }, -1, 1], {
+                    strokeColor: 'green'
+                }
+            );
+            var curveGraph = board.create('functiongraph',
+                [function (x) {
+                    return x * x + parseFloat(cSlider.value);
+                }, -1, 1]
+            );
+            // Set the whole board to update when the "c" slider is updated
+            cSlider.oninput = function () {
+                cOutput.innerHTML = this.value; // Output value for student to see
+                curveGraph.fullUpdate();
+            }
+        </script>
+    </div>
+</body>
+
+</html>
