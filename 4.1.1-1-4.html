@@ -43,7 +43,7 @@
                     return x * x + parseFloat(cSlider.value);
                 }, -1, 1]
             );
-            // Set the whole board to update when the "c" slider is updated
+            // Set the curve graph to update when the "c" slider is updated
             cSlider.oninput = function () {
                 cOutput.innerHTML = this.value; // Output value for student to see
                 curveGraph.fullUpdate();
