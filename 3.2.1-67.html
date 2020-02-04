@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <title>Stability of Periodic Points: 67</title>
+</head>
+
+<body>
+    <h1>Stability of Periodic Points: 67</h1>
+    <!-- Create a slider to determine the value of "a" -->
+    <div id="arangeslider" style="width: 500px; height: 50px;">
+        <p style="display: inline;">a:</p>
+        <input id="aSlider" type="range" min="0" max="4" value="3" step="0.01" style="width: 50%;">
+        <p style="display: inline;"><span id="aOut"></span></p>
+        <script>
+            // Get the value of "a" from the slider
+            var aSlider = document.getElementById("aSlider");
+            var aOutput = document.getElementById("aOut");
+            aOutput.innerHTML = aSlider.value; // Output value for student to see
+        </script>
+    </div>
+    <!-- Create a slider to determine the value of "n" -->
+    <div id="nrangeslider" style="width: 500px; height: 50px;">
+        <p style="display: inline;">n:</p>
+        <input id="nSlider" type="range" min="1" max="8" value="1" step="1" style="width: 50%;">
+        <p style="display: inline;"><span id="nOut"></span></p>
+        <script>
+            // Get the value of "n" from the slider
+            var nSlider = document.getElementById("nSlider");
+            var nOutput = document.getElementById("nOut");
+            nOutput.innerHTML = nSlider.value; // Output value for student to see
+        </script>
+    </div>
+    <!-- Create the first board -->
+    <div id="box1" class="jxgbox" style="width: 500px; height: 500px; float: left;">
+        <script type="text/javascript">
+            // Create board1
+            var board1 = JXG.JSXGraph.initBoard('box1', {
+                boundingbox: [-0.1, 1, 1, -0.1],
+                axis: true,
+                grid: true
+            });
+            // Create graphs
+            var lineGraph1 = board1.create('functiongraph',
+                [function (x) {
+                    return x
+                }, -0.1, 1], {
+                    strokeColor: 'green'
+                }
+            );
+            // Function used for graphing the function f(x) = ax(1-x)
+            function graphFunc1(x) {
+                return aSlider.value * x * (1 - x);
+            }
+            var curveGraph1 = board1.create('functiongraph',
+                [graphFunc1, -0.1, 1]
+            );
+            // Create a step function that will be updated each time a or x0 changes
+            var stepGraph1 = board1.create('stepfunction', [
+                [0], // Use as filler for now. It will be replaced on board update
+                [0]
+            ], {
+                strokeColor: 'red'
+            });
+            // Function to calculate and plot the attracting and repelling points
+            function plotPoints1() {
+                var i, xcors, ycors, xi;
+                xcors = [0.5]; // Populate xcors with the first value = x0 = 0.5
+                ycors = [graphFunc1(0.5)]; // Populate ycors with the first value = x1
+                for (i = 0; i < 10; i++) {
+                    xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
+                    // Add new point (xi, xi)
+                    xcors.push(xi);
+                    ycors.push(xi);
+                    // Add new point (xi, xi+1)
+                    xcors.push(xi);
+                    ycors.push(graphFunc1(xi));
+                }
+                // Plot points
+                stepGraph1.xterm = xcors;
+                stepGraph1.yterm = ycors;
+            }
+            // Re-calculate the attracting and repelling points each time the board is updated
+            board1.on('update', function () {
+                plotPoints1();
+            });
+            // Update the board right away to replace (0,0) filler from stepGraph
+            board1.fullUpdate();
+        </script>
+    </div>
+    <!-- Create the second board -->
+    <div id="box2" class="jxgbox" style="width: 500px; height: 500px; float: left;">
+        <script type="text/javascript">
+            // Create board2
+            var board2 = JXG.JSXGraph.initBoard('box2', {
+                boundingbox: [-0.1, 1, 1, -0.1],
+                axis: true,
+                grid: true
+            });
+            // Create graphs
+            var lineGraph2 = board2.create('functiongraph',
+                [function (x) {
+                    return x
+                }, -0.1, 1], {
+                    strokeColor: 'green'
+                }
+            );
+            // Function used for graphing the function f(x) = ax(1-x)
+            function graphFunc2(x) {
+                var i, n, returnVal;
+                // Use returnVal to hold the result between compositions
+                returnVal = aSlider.value * x * (1 - x);
+                // Compose f on f n-1 times
+                for (i = 1; i < nSlider.value; i++) {
+                    returnVal = aSlider.value * returnVal * (1 - returnVal);
+                }
+                return returnVal;
+            }
+            var curveGraph2 = board2.create('functiongraph',
+                [graphFunc2, -0.1, 1]
+            );
+            // Create a step function that will be updated each time a or x0 changes
+            var stepGraph2 = board2.create('stepfunction', [
+                [0], // Use as filler for now. It will be replaced on board update
+                [0]
+            ], {
+                strokeColor: 'red'
+            });
+            // Function to calculate and plot the attracting and repelling points
+            function plotPoints2() {
+                var i, xcors, ycors, xi;
+                xcors = [0.5]; // Populate xcors with the first value = x0 = 0.5
+                ycors = [graphFunc2(0.5)]; // Populate ycors with the first value = x1
+                for (i = 0; i < 10; i++) {
+                    xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
+                    // Add new point (xi, xi)
+                    xcors.push(xi);
+                    ycors.push(xi);
+                    // Add new point (xi, xi+1)
+                    xcors.push(xi);
+                    ycors.push(graphFunc2(xi));
+                }
+                // Plot points
+                stepGraph2.xterm = xcors;
+                stepGraph2.yterm = ycors;
+            }
+            // Re-calculate the attracting and repelling points each time the board is updated
+            board2.on('update', function () {
+                plotPoints2();
+            });
+            // Update the board right away to replace (0,0) filler from stepGraph
+            board2.fullUpdate();
+        </script>
+    </div>
+    <!-- Set boards to be updated when the sliders for "a" and "n" are moved -->
+    <script>
+        // Set the whole board to update when the "a" slider is updated
+        aSlider.oninput = function () {
+            aOutput.innerHTML = this.value; // Output value for student to see
+            plotPoints1();
+            plotPoints2();
+            board1.fullUpdate();
+            board2.fullUpdate();
+        }
+        // Set the whole board to update when the "a" slider is updated
+        nSlider.oninput = function () {
+            nOutput.innerHTML = this.value; // Output value for student to see
+            plotPoints2();
+            board2.fullUpdate();
+        }
+    </script>
+</body>
+
+</html>
