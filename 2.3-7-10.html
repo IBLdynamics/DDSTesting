@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <title>The Squeeze Theorem: 7-10</title>
+</head>
+
+<body>
+    <h1>The Squeeze Theorem: 7-10</h1>
+    <script>
+        // Function to generate a random integer between min and max
+        function randomInteger(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+    </script>
+    <!-- Create button to display random limit value -->
+    <div style="height: 50px;">
+        <button onclick="generateRandomLimit();">Click Here for a Limit Value!</button>
+        <p style="display: inline;">Limit: <span id="lOut"></span></p>
+        <script>
+            // Function to generate a random limit and display it
+            function generateRandomLimit() {
+                var limitOutput = document.getElementById("lOut");
+                limitOutput.innerHTML = randomInteger(-5, 5);
+            }
+        </script>
+    </div>
+    <!-- Create textboxes for sequences to enter -->
+    <div style="height: 50px;">
+        <label>a<sub>n</sub>: <input id="aSequence" type="text"></label>
+        <label>b<sub>n</sub>: <input id="bSequence" type="text"></label>
+        <button onclick="plotSequences1();">Plot Sequences</button>
+    </div>
+    <!-- Create first board to display entered sequences -->
+    <div id="box1" class="jxgbox" style="width: 500px; height: 500px;">
+        <script>
+            // Initialize the board
+            var board1 = JXG.JSXGraph.initBoard("box1", {
+                boundingbox: [-2, 10, 50, -10],
+                axis: true,
+                grid: true
+            });
+            // Function to plot the an and bn sequences the student entered
+            function plotSequences1() {
+
+            }
+        </script>
+    </div>
+    <!-- Create button to display random weight value -->
+    <div style="height: 50px;">
+        <button onclick="generateRandomWeight();">Click Here for a Weight Value!</button>
+        <p style="display: inline;">Weight: <span id="wOut"></span></p>
+        <script>
+            // Function to generate a random weight and display it
+            function generateRandomWeight() {
+                var weightOutput = document.getElementById("wOut");
+                weightOutput.innerHTML = randomInteger(1, 9) / 10;
+            }
+        </script>
+    </div>
+    <!-- Create textboxes for sequences to enter -->
+    <div style="height: 50px;">
+        <label>a<sub>n</sub>: <input id="aSequence" type="text"></label>
+        <label>b<sub>n</sub>: <input id="bSequence" type="text"></label>
+        <label>c<sub>n</sub>: <input id="cSequence" type="text"></label>
+        <button onclick="plotSequences2();">Plot Sequences</button>
+    </div>
+    <!-- Create second board to display entered sequences -->
+    <div id="box2" class="jxgbox" style="width: 500px; height: 500px;">
+        <script>
+            // Initialize the board
+            var board2 = JXG.JSXGraph.initBoard("box2", {
+                boundingbox: [-1, 1, 50, -1],
+                axis: true,
+                grid: true
+            });
+            // Function to plot the an, bn, and cn sequences the student entered
+            function plotSequences2() {
+
+            }
+        </script>
+    </div>
+</body>
+
+</html>
