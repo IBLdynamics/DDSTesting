@@ -24,7 +24,7 @@
             var lineGraph = board.create('functiongraph',
                 [function (x) {
                     return x;
-                }, -2, 5], {
+                }, -2, 2], {
                     strokeColor: 'green'
                 }
             );
@@ -33,7 +33,7 @@
                     return x ** 2 + (pB.Y() - pA.Y() + pA.X() ** 2 - pB.X() ** 2) / (pB.X() - pA.X()) * x + (pB
                         .X() * pA.Y() - pA.X() * pB.Y() + pA.X() * pB.X() ** 2 - pB.X() * pA.X() ** 2) / (pB
                         .X() - pA.X());
-                }, -2, 5, {
+                }, -2, 2, {
                     fixed: false
                 }]
             );
