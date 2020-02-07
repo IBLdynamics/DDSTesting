@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <title>The Period Doubling Bifurcation: 61</title>
+</head>
+
+<body>
+    <h1>The Period Doubling Bifurcation: 61</h1>
+    <div>
+        <!-- Create a slider to determine the value of "a" -->
+        <div id="rangeslider" style="width: 500px; height: 20px;">
+            <p style="display: inline;">a:</p>
+            <input id="aSlider" type="range" min="2.5" max="3.3" value="2.5" step="0.01" style="width: 50%;">
+            <p style="display: inline;"><span id="aOut"></span></p>
+            <script>
+                // Get the value of "a" from the slider
+                var aSlider = document.getElementById("aSlider");
+                var aOutput = document.getElementById("aOut");
+                aOutput.innerHTML = aSlider.value; // Output value for student to see
+            </script>
+        </div>
+        <div style="float: left; padding-right: 10px;">
+            <!-- Create the graphs f(x) and f(f(x)) -->
+            <h2>f(x) and f(f(x))</h2>
+            <div id="box1" class="jxgbox" style="width: 500px; height: 500px; float: left;">
+                <script type="text/javascript">
+                    // Create board
+                    var board1 = JXG.JSXGraph.initBoard('box1', {
+                        boundingbox: [-0.1, 1, 1, -0.1],
+                        axis: true,
+                        grid: true
+                    });
+                    // Create graphs
+                    var lineGraph = board1.create('functiongraph',
+                        [function (x) {
+                            return x;
+                        }, 0, 1]
+                    );
+                    // Function for the first graph
+                    function f(x) {
+                        return aSlider.value * x * (1 - x);
+                    }
+                    // Function for the second graph
+                    function fSquared(x) {
+                        return f(aSlider.value * x * (1 - x));
+                    }
+                    var fGraph = board1.create('functiongraph',
+                        [f, 0, 1], {
+                            strokeColor: 'orange'
+                        });
+                    var fSquaredGraph = board1.create('functiongraph',
+                        [fSquared, 0, 1], {
+                            strokeColor: 'green'
+                        });
+                </script>
+            </div>
+        </div>
+        <div>
+            <!-- Create the zoomed graph of f(f(x)) -->
+            <h2>A zoom of f(f(x))</h2>
+            <div id="box2" class="jxgbox" style="width: 500px; height: 500px;">
+                <script type="text/javascript">
+                    // Create board
+                    var board2 = JXG.JSXGraph.initBoard('box2', {
+                        boundingbox: [0.475, 0.8, 0.8, 0.475],
+                        grid: true
+                    });
+                    // Create axis for viewing zoom
+                    var a1 = board2.create('axis', [
+                        [0.5, 0.5],
+                        [0.5, 0.8]
+                    ]);
+                    var a2 = board2.create('axis', [
+                        [0.5, 0.5],
+                        [0.8, 0.5]
+                    ]);
+                    // Create graphs
+                    var lineGraph = board2.create('functiongraph',
+                        [function (x) {
+                            return x;
+                        }, 0, 1]
+                    );
+                    var fSquaredGraphZoomed = board2.create('functiongraph',
+                        [fSquared, 0, 1], {
+                            strokeColor: 'green'
+                        });
+                </script>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Set all functiongraps to update when the "a" slider is updated
+        aSlider.oninput = function () {
+            aOutput.innerHTML = this.value; // Output value for student to see
+            fGraph.fullUpdate();
+            fSquaredGraph.fullUpdate();
+            fSquaredGraphZoomed.fullUpdate();
+        }
+    </script>
+</body>
+
+</html>
