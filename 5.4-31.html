@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <title>The Logistic Map with a > 4: 31</title>
+</head>
+
+<body>
+    <h1>The Logistic Map with a > 4: 31</h1>
+    <!-- Create checkboxes to determine the value of n -->
+    <div id="checkboxes" style="width: 500px; height: 40px;">
+        <p style="display: inline; padding-right: 5px;">n:</p>
+        <label>1<input class="nValueCheckbox" type="radio" name="n" value=1 onclick="updatePlot(this.value);"
+                checked></label>
+        <label>2<input class="nValueCheckbox" type="radio" name="n" value=2 onclick="updatePlot(this.value);"></label>
+        <label>3<input class="nValueCheckbox" type="radio" name="n" value=3 onclick="updatePlot(this.value);"></label>
+        <label>4<input class="nValueCheckbox" type="radio" name="n" value=4 onclick="updatePlot(this.value);"></label>
+        <label>5<input class="nValueCheckbox" type="radio" name="n" value=5 onclick="updatePlot(this.value);"></label>
+    </div>
+    <div id="box" class="jxgbox" style="width: 500px; height: 500px;">
+        <script>
+            let boundingBoxValues = {
+                1: [-0.1, 1.2, 1, -0.1],
+                2: [-0.1, 1.2, 1, -0.7],
+                3: [-0.1, 1.2, 1, -5],
+                4: [-0.1, 1.2, 1, -20],
+                5: [-0.1, 1.2, 1, -250]
+            }
+            // Initialize the board
+            var board = JXG.JSXGraph.initBoard('box', {
+                boundingbox: boundingBoxValues[1],
+                axis: true,
+                grid: true
+            });
+            // Function to update the plot
+            function updatePlot(nValue) {
+                // Free board
+                JXG.JSXGraph.freeBoard(board);
+                // Recreate board
+                board = JXG.JSXGraph.initBoard('box', {
+                    boundingbox: boundingBoxValues[nValue],
+                    axis: true,
+                    grid: true
+                });
+                // Initialize line graph
+                var lineGraph = board.create('functiongraph',
+                    [function (x) {
+                        return 1
+                    }, 0, 1]
+                );
+                // Function used for graphing the function d(x) = 2x(mod1)
+                function graphFunction(x) {
+                    var i, returnValue;
+                    returnValue = x;
+                    for (i = 0; i < nValue; i++) {
+                        returnValue = 4.5 * returnValue * (1 - returnValue);
+                    }
+                    return returnValue;
+                }
+                // Create the curve graph
+                var curveGraph = board.create('functiongraph',
+                    [graphFunction, 0, 1], {
+                        strokeColor: 'orange'
+                    }
+                );
+            }
+            // Update the plot right away with n = 1
+            updatePlot(1);
+        </script>
+    </div>
+</body>
+
+</html>
