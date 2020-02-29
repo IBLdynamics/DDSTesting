@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <title>Topological Transitivity Tool</title>
+</head>
+
+<body>
+    <h1>Topological Transitivity Tool</h1>
+    <!-- Create a slider to determine the value of xmin -->
+    <div style="width: 500px; height: 40px;">
+        <p style="display: inline;">xmin:</p>
+        <input id="xminSlider" type="range" min="0" max="1" value="0" step="0.01" style="width: 50%;">
+        <p style="display: inline;"><span id="xminOut"></span></p>
+        <script>
+            // Get the value of xmin from the slider
+            var xminSlider = document.getElementById("xminSlider");
+            var xminOutput = document.getElementById("xminOut");
+            xminOutput.innerHTML = xminSlider.value; // Output value for student to see
+        </script>
+    </div>
+    <!-- Create a slider to determine the value of xmax -->
+    <div style="width: 500px; height: 40px;">
+        <p style="display: inline;">xmax:</p>
+        <input id="xmaxSlider" type="range" min="0" max="1" value="1" step="0.01" style="width: 50%;">
+        <p style="display: inline;"><span id="xmaxOut"></span></p>
+        <script>
+            // Get the value of xmax from the slider
+            var xmaxSlider = document.getElementById("xmaxSlider");
+            var xmaxOutput = document.getElementById("xmaxOut");
+            xmaxOutput.innerHTML = xmaxSlider.value; // Output value for student to see
+        </script>
+    </div>
+    <!-- Create board with lines and curve graphs -->
+    <div id="box" class="jxgbox" style="width:500px; height:500px; float: left;">
+        <script type="text/javascript">
+            // Create board
+            var board = JXG.JSXGraph.initBoard('box', {
+                boundingbox: [-0.1, 1.1, 1, -0.1],
+                axis: true,
+                grid: true
+            });
+            // Create line graph
+            var xLine = board.create('line', [
+                [0, 0],
+                [1, 1]
+            ], {
+                fixed: true,
+                strokeColor: 'orange'
+            });
+            // Create curve graph function and curve graph
+            function graphFunction(x) {
+                return 4 * x * (1 - x);
+            }
+            var curveGraph = board.create('functiongraph', [graphFunction, 0, 1]);
+            // Create xLine interval line
+            var xLineInterval = board.create('functiongraph', [
+                function () {
+                    return 0;
+                },
+                xminSlider.value, xmaxSlider.value
+            ], {
+                strokeColor: 'blue',
+                strokeWidth: 3
+            });
+            // Create curveGraph interval line
+            var curveGraphInterval = board.create('functiongraph', [
+                function () {
+                    return 0.02;
+                },
+                Math.min(graphFunction(xminSlider.value), graphFunction(xmaxSlider.value)), Math.max(
+                    graphFunction(xminSlider.value), graphFunction(xmaxSlider.value))
+            ], {
+                strokeColor: 'red',
+                strokeWidth: 3
+            });
+        </script>
+    </div>
+    <script>
+        // Set board to update when the xmin slider is updated
+        xminSlider.oninput = function () {
+            xminOutput.innerHTML = this.value; // Output value for student to see
+            xLineInterval.fullUpdate();
+            curveGraphInterval.fullUpdate();
+        }
+        // Set board to update when the xmax slider is updated
+        xmaxSlider.oninput = function () {
+            xmaxOutput.innerHTML = this.value; // Output value for student to see
+            xLineInterval.fullUpdate();
+            curveGraphInterval.fullUpdate();
+        }
+    </script>
+</body>
+
+</html>
