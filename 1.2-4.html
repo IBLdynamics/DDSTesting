@@ -106,6 +106,7 @@
             // Plot points
             for (let element of points) {
                 board.create('point', [element["n"], element["xn"]], {
+                    fixed: true,
                     size: 1,
                     withLabel: false
                 });

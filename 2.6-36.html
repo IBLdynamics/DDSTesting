@@ -32,8 +32,8 @@
             });
             // Generate and graph points of the sequence
             var i;
-            var s = [];
-            for (i = 0; i <= 20; i++) {
+            var s = [null];
+            for (i = 1; i <= 20; i++) {
                 s.push(1 + Math.pow(-1, i) / i);
                 board.create('point', [i, s[i]], {
                     fillColor: 'blue',
@@ -43,23 +43,20 @@
                 });
             }
             // Genereate liminfs and limsups
-            var infs = [],
-                sups = [];
-            for (i = 0; i <= 20; i++) {
-                infs.push(Math.min.apply(null, s.slice(i + 1, s.length)));
-                sups.push(Math.max.apply(null, s.slice(i + 1, s.length)));
+            var infs = [null],
+                sups = [null];
+            for (i = 1; i <= 20; i++) {
+                infs.push(Math.min.apply(null, s.slice(i + 1)));
+                sups.push(Math.max.apply(null, s.slice(i + 1)));
             }
             // Graph liminf and limsup points
-            var N = parseInt(NSlider.value);
-            var liminf = board.create('point', [N, infs[N]], {
+            var liminf = board.create('point', [NSlider.value, infs[NSlider.value]], {
                 fillColor: 'green',
-                fixed: true,
                 strokeColor: 'green',
                 withLabel: false
             });
-            var limsup = board.create('point', [N, sups[N]], {
+            var limsup = board.create('point', [NSlider.value, sups[NSlider.value]], {
                 fillColor: 'red',
-                fixed: true,
                 strokeColor: 'red',
                 withLabel: false
             });
@@ -69,8 +66,8 @@
         // Set board to update when the N slider is updated
         NSlider.oninput = function () {
             NOutput.innerHTML = this.value; // Output value for student to see
-            liminf.fullUpdate();
-            limsup.fullUpdate();
+            liminf.moveTo([NSlider.value, infs[NSlider.value]]);
+            limsup.moveTo([NSlider.value, sups[NSlider.value]]);
         }
     </script>
 </body>
