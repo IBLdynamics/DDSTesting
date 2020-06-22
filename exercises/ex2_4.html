@@ -125,7 +125,7 @@
                     <a class="nav-link" href="../index.html">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../chapters/ch1.html">Return to Chapter Overview</a>
+                    <a class="nav-link" href="../chapters/ch2.html">Return to Chapter Overview</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../about.html">About the Authors</a>
@@ -138,142 +138,86 @@
           </div>
         </nav>
     <div>    
-        <h1>Chapter 1, Exercise 10</h1>
-        <p>Select the values of \(k\) and \(x_0\) from exercise 10 in chapter 1 of the textbook. Analyze the given starstep diagrams and recreate them on paper. Close the sidebar menu to ensure the iterated points and the graph are side-by-side.</p>
-    <!-- Create a slider to determine the value of x0 -->
+        <h1>Chapter 2, Exercise 4</h1>
+        <p>The tool on the website for this exercise shows the elements of the sequence \(x_n = 1 - \frac{1}{n}\),
+        the limit value \(L = 1\), and the \(\epsilon\)-band \((L−\epsilon,L+\epsilon)\) about \(L = 1\). The slider
+        allows you to change \(\epsilon\). Doing this causes the image to zoom in vertically
+        (by changing the limits on the vertical axis) and zoom out horizontally (by
+        hanging the limits on the horizontal axis). Use the tool to estimate the value
+        of \(N\) needed to ensure that all further elements of the sequence are in the \(\epsilon-\)
+        band for 5 different values of \(\epsilon\). Do you see a relationship between your chosen
+        value of \(\epsilon\) and \(N\)?.</p>
+    <!-- Create a slider to determine the value of e -->
     <div id="rangeslider" style="width: 500px; height: 40px;">
-        <p style="display: inline;">Initial Condition</p>
-        <input id="x0Slider" type="range" min="-1" max="2" value="0.5" step="0.01" style="width: 50%;">
-        <p style="display: inline;">\(x_0\): <span id="x0Out"></span></p>
+        <p style="display: inline;">\(\epsilon\):</p>
+        <input id="eSlider" type="range" min="0.01" max="0.1" value="0.1" step="0.0001" style="width: 50%;">
+        <p style="display: inline;"><span id="eOut"></span></p>
         <script>
-            // Get the value of x0 from the slider
-            var x0Slider = document.getElementById("x0Slider");
-            var x0Output = document.getElementById("x0Out");
-            x0Output.innerHTML = x0Slider.value; // Output value for student to see
+            // Get the value of e from the slider
+            var eSlider = document.getElementById("eSlider");
+            var eOutput = document.getElementById("eOut");
+            eOutput.innerHTML = eSlider.value; // Output value for student to see
         </script>
     </div>
-    <!-- Create checkboxes to determine the value of c -->
-    <div id="checkboxes" style="width: 500px; height: 40px;">
-        <!-- Check "a" by default -->
-        <label>0.5<input class="cValueCheckbox" type="radio" name="c" value="0.5" onclick="updateC(this);"
-                checked></label>
-        <label>0.25<input class="cValueCheckbox" type="radio" name="c" value="0.25" onclick="updateC(this);"></label>
-        <label>0.1<input class="cValueCheckbox" type="radio" name="c" value="0.1" onclick="updateC(this);"></label>
-        <label>-0.5<input class="cValueCheckbox" type="radio" name="c" value="-0.5" onclick="updateC(this);"></label>
-        <p style="display: inline; padding-left: 5px;">k: <span id="cOut"></span></p>
-        <script>
-            // Get the value of c from the checkboxes
-            var cValue = document.querySelector('.cValueCheckbox:checked').value;
-            var cOutput = document.getElementById("cOut");
-            cOutput.innerHTML = cValue; // Output value for student to see
-        </script>
-    </div>
-    <!-- Define functions that both boards share -->
-    <script>
-        // Graph function for both boards
-        function graphFunc(x) {
-            return x * x + Number(cValue);
-        }
-        // Function to calculate the attracting and repelling points
-        function generatePoints() {
-            var i, xcors, ycors, xi;
-            xcors = [x0Slider.value]; // Populate xcors with the first value = x0
-            ycors = [graphFunc(x0Slider.value)]; // Populate ycors with the first value = x1
-            for (i = 0; i < 10; i++) {
-                xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
-                // Add new point (xi, xi)
-                xcors.push(xi);
-                ycors.push(xi);
-                // Add new point (xi, xi+1)
-                xcors.push(xi);
-                ycors.push(graphFunc(xi));
-            }
-            return {
-                'xcors': xcors,
-                'ycors': ycors
-            };
-        }
-    </script>
     <!-- Create board with plotted points -->
-    <div id="box1" class="jxgbox" style="width:500px; height:500px; float: left;">
+    <div id="box" class="jxgbox" style="width:500px; height:500px; float: left;">
         <script type="text/javascript">
-            var board1;
-            // Function to create board and plot the x-coordinates from generatePoints
-            function createBoard1() {
-                board1 = JXG.JSXGraph.initBoard('box1', {
-                    boundingbox: [-1, 6, 12, -3],
+            var board;
+            // Function to create board, lines, and plot points
+            function createBoard() {
+                var e = eSlider.value
+                // Create board
+                board = JXG.JSXGraph.initBoard('box', {
+                    boundingbox: [-1, 6 * e, Math.floor(2 / e), -6 * e],
                     axis: true,
                     grid: true
                 });
-                // Plot points with value (i, xi)
-                var i, xcors;
-                xcors = generatePoints()['xcors'];
-                for (i = 0; i < xcors.length; i++) {
-                    board1.create('point',
-                        [i + 1, xcors[i]], {
-                            fixed: true
-                        });
+                // Create limit line
+                board.create('line',
+                    [
+                        [0, 0],
+                        [Math.floor(2 / e), 0]
+                    ], {
+                        fixed: true,
+                        strokeColor: 'red'
+                    });
+                // Create e-band lines
+                board.create('line',
+                    [
+                        [0, -e],
+                        [Math.floor(2 / e), -e]
+                    ], {
+                        fixed: true,
+                        strokeColor: 'green'
+                    });
+                board.create('line',
+                    [
+                        [0, e],
+                        [Math.floor(2 / e), e]
+                    ], {
+                        fixed: true,
+                        strokeColor: 'green'
+                    });
+                // Plot points
+                var n;
+                for (n = 1; n < Math.floor(2 / e); n++) {
+                    board.create('point', [n, Math.pow(-1, n) / n], {
+                        size: 1,
+                        fillColor: 'blue',
+                        strokeColor: 'blue',
+                        withLabel: false
+                    });
                 }
             }
-            createBoard1();
+            createBoard();
         </script>
     </div>
-    <!-- Create board with curve and line graphs -->
-    <div id="box2" class="jxgbox" style="width:500px; height:500px;">
-        <script type="text/javascript">
-            // Create board
-            var board2 = JXG.JSXGraph.initBoard('box2', {
-                boundingbox: [-3, 5, 3, -3],
-                axis: true,
-                grid: true
-            });
-            // Create line graph
-            var lineGraph = board2.create('functiongraph',
-                [function (x) {
-                    return x
-                }, -2, 2], {
-                    strokeColor: 'green'
-                }
-            );
-            // Create curve graph
-            var curveGraph = board2.create('functiongraph',
-                [graphFunc, -2, 2]
-            );
-            // Create a step function that will be updated each time a or x0 changes
-            var stepGraph = board2.create('stepfunction', [
-                [0], // Use as filler for now. It will be replaced on board update
-                [0]
-            ], {
-                strokeColor: 'red'
-            });
-        </script>
-    </div>
-    <!-- Setup boards so they both change when either x0 or c changes-->
     <script>
-        // Function to re-calculate the attracting and repelling points and graph them
-        function reCalculate() {
-            var points = generatePoints();
-            // Update board1
-            JXG.JSXGraph.freeBoard(board1); // Have to free the whole board to get rid of all the points
-            createBoard1();
-            // Update board2
-            stepGraph.xterm = points['xcors'];
-            stepGraph.yterm = points['ycors'];
-        }
-        // Set both boards to update when the "x0" slider is updated
-        x0Slider.oninput = function () {
-            x0Output.innerHTML = this.value; // Output value for student to see
-            reCalculate();
-            board1.fullUpdate();
-            board2.fullUpdate();
-        }
-        // Set both boards to update when the "c" value checkbox is changed
-        function updateC(checkbox) {
-            cValue = checkbox.value;
-            cOutput.innerHTML = cValue; // Output value for student to see
-            reCalculate();
-            board1.fullUpdate();
-            board2.fullUpdate();
+        // Set board to update when the "e" slider is updated
+        eSlider.oninput = function () {
+            eOutput.innerHTML = this.value; // Output value for student to see
+            JXG.JSXGraph.freeBoard(board);
+            createBoard();
         }
     </script>
     </div>

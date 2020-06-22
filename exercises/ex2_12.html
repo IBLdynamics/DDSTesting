@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Discovering Dynamical Systems Through Experiment and Inquiry</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="p-4 pt-5">
+		  		<a href="#" class="img logo rounded mx-auto" style="background-image: url(../images/Henon.png);"></a>
+	        <ul class="list-unstyled components mb-5">
+	          <li class="active">
+	            <!--<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+	            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="#">Home 1</a>
+                </li>
+                <li>
+                    <a href="#">Home 2</a>
+                </li>
+                <li>
+                    <a href="#">Home 3</a>
+                </li>
+	            </ul>
+	          </li>-->
+	          <li>
+	              <a href="../index.html">Home</a>
+	          </li>
+	          <li>
+              <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Chapters</a>
+              <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                    <a href="../chapters/ch1.html">Chapter 1</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch2.html">Chapter 2</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch3.html">Chapter 3</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch4.html">Chapter 4</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch5.html">Chapter 5</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch6.html">Chapter 6</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch7.html">Chapter 7</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch8.html">Chapter 8</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch9.html">Chapter 9</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch10.html">Chapter 10</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch11.html">Chapter 11</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch12.html">Chapter 12</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch13.html">Chapter 13</a>
+                </li>
+              </ul>
+	          </li>
+	          <!--<li>
+              <a href="#">Portfolio</a>
+	          </li>-->
+	          <li>
+              <a href="../about.html">About the Authors</a>
+	          </li>
+              <li>
+              <a href="../contact.html">Contact</a>
+              </li>
+	        </ul>
+
+	        <div class="footer">
+	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
+						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+	        </div>
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+              <i class="fa fa-bars"></i>
+              <span class="sr-only">Toggle Menu</span>
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../chapters/ch2.html">Return to Chapter Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../about.html">About the Authors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../contact.html">Contact</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    <div>    
+        <h1>Chapter 2, Exercise 12</h1>
+        <p>Click the button below to generate a random number. Construct two different sequences \(\{a_n\}\) and \(\{b_n\}\) that each converge to that value.
+        </p>
+
+        <script>
+        // Function to generate a random integer between min and max
+        function randomInteger(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        // Function to parse a function from what the student entered in the textbox
+        function parseFunction(funcStr) {
+            eval("var func = function (n) { return " + funcStr + "; };");
+            return func;
+        }
+    </script>
+    <!-- First graph -->
+    <div>
+        <!-- Create button to display random limit value -->
+        <div style="padding: 10px;">
+            <button onclick="generateRandomLimit();">Click here to generate a random number</button>
+            <p style="display: inline;">Limit: <span id="lOut"></span></p>
+            <script>
+                // Function to generate a random limit and display it
+                function generateRandomLimit() {
+                    var limitOutput = document.getElementById("lOut");
+                    limitOutput.innerHTML = randomInteger(-5, 5);
+                }
+            </script>
+        </div>
+        <p> Enter the two sequences \(\{a_n\}\) and \(\{b_n\}\) that you created into the boxes below. Use \(n\) for your variables. Visually confirm they converge as intended </p>
+        <!-- Create textboxes for sequences to enter -->
+        <div style="padding: 10px;">
+            <label>\(a_n\): <input id="aTextbox1" type="text"></label>
+            <label>b\(b_n\)</sub>: <input id="bTextbox1" type="text"></label>
+            <button onclick="plotSequences1();">Plot Sequences</button>
+        </div>
+        <!-- Create first board to display entered sequences -->
+        <div id="box1" class="jxgbox" style="width: 500px; height: 500px;">
+            <script>
+                // Initialize the board
+                var board1 = JXG.JSXGraph.initBoard("box1", {
+                    boundingbox: [-2, 10, 50, -10],
+                    axis: true,
+                    grid: true
+                });
+                // Function to plot the an and bn sequences the student entered
+                function plotSequences1() {
+                    // Free current board and recreate it
+                    JXG.JSXGraph.freeBoard(board1);
+                    board1 = JXG.JSXGraph.initBoard("box1", {
+                        boundingbox: [-2, 10, 50, -10],
+                        axis: true,
+                        grid: true
+                    });
+                    // Plot sequences
+                    var aSequence = document.getElementById("aTextbox1");
+                    var bSequence = document.getElementById("bTextbox1");
+                    var aFunction = parseFunction(aSequence.value);
+                    var bFunction = parseFunction(bSequence.value);
+                    board1.create('functiongraph', [aFunction, 0, 50]);
+                    board1.create('functiongraph', [bFunction, 0, 50], {
+                        strokeColor: "red"
+                    });
+                }
+            </script>
+        </div>
+    </div>
+    <p> Don't forget to write down your limit and your two sequences. You'll need them in the next two exercises.</p>
+    
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
