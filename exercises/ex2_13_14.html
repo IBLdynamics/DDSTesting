@@ -138,8 +138,10 @@
           </div>
         </nav>
     <div>    
-        <h1>Chapter 2, Exercises 13 and 15</h1>
-        <p>Click the button below to generate a random weight. Enter the sequences \(\{a_n\}\) and \(\{b_n\}\) from the previous exercise. The new sequence \(c_n\) will be automatically generated, and all three sequences graphed below.
+        <h1>Chapter 2, Exercises 13 and 14</h1>
+        <p>Click the button below to generate a random weight \(w\). Using \(\{a_n\}\) and \(\{b_n\}\) from the previous exercise, write the function \(c_n = wa_n + (1-w)b_n\). Use this to complete exercise 13.</p>
+
+         <p> Enter the sequences \(\{a_n\}\) and \(\{b_n\}\). The new sequence \(c_n\) will be automatically generated, and all three sequences graphed below. Does this agree with your answer to exercise 13?
         </p>
 
         <script>
@@ -196,10 +198,12 @@
                     // Plot sequences
                     var aSequence = document.getElementById("aTextbox2");
                     var bSequence = document.getElementById("bTextbox2");
-                    var cSequence = weightValue*(aSequence.value);
                     var aFunction = parseFunction(aSequence.value);
                     var bFunction = parseFunction(bSequence.value);
-                    var cFunction = weightValue;
+                    // Combines functions for c_n
+                    function cFunction(x) {
+                        return weightValue*aFunction(x) + (1-weightValue)*bFunction(x);
+                    }
                     board2.create('functiongraph', [aFunction, 0, 50]);
                     board2.create('functiongraph', [bFunction, 0, 50], {
                         strokeColor: "red"
@@ -208,7 +212,9 @@
                         strokeColor: "green"
                     });
                 }
+
             </script>
+
         </div>
     </div>
     
