@@ -138,162 +138,95 @@
           </div>
         </nav>
 
-    <h1>Chapter 3, Exploration 2</h1>
-    <p>This is referenced in the text as the first linear iteration tool. Explore the dynamics of the linear system \(x_{n+1} = mx_n +b\) when \(b = 0\). You should pay particular attention to how the value of \(m\) affects the fixed point and/or its stability. The initial condition for this tool is \(x=2\). Describe what you see.</p>
-    <!-- Create a slider to determine the value of m -->
-    <div id="rangeslider" style="width: 500px; height: 40px;">
-        <p style="display: inline;">m:</p>
-        <input id="mSlider" type="range" min="-2" max="2" value="0.1" step="0.01" style="width: 50%;">
-        <span id="mOut" style="display: inline;"></span>
-        <script>
-            // Get the value of m from the slider
-            var mSlider = document.getElementById("mSlider");
-            var mOutput = document.getElementById("mOut");
-            mOutput.innerHTML = mSlider.value; // Output value for student to see
-        </script>
+    <h1>Chapter 3, Exploration 18</h1>
+    <p>This is referenced in the text as the logistic iteration tool. Explore the dynamics of the linear system \(x_{n+1} = f_a(x) = ax_n(1-x_n)\). Use the slider to change the initial condition. Determine the values of \(a\) for which the fixed point at \(x = 0\) is attracting, repelling, or neither.</p>
+<!-- Create a dropdown menu to determine the value of "a" -->
+    <div id="dropdown" style="width: 500px; height: 50px;">
+        <p style="display: inline;">a:</p>
+        <select id="aSelection">
+            <option value=0.2>0.2</option>
+            <option value=0.4>0.4</option>
+            <option value=0.6>0.6</option>
+            <option value=0.8>0.8</option>
+            <option value=1.0>1.0</option>
+            <option value=1.2>1.2</option>
+            <option value=1.4>1.4</option>
+            <option value=1.6>1.6</option>
+            <option value=1.8>1.8</option>
+            <option value=2.0>2.0</option>
+        </select>
     </div>
-    <!-- Create buttons to determine whether to display table, sequence, or stair plot -->
-    <div id="buttons" style="width: 500px; height: 40px;">
-        <button onclick="toggleView('table')">Table</button>
-        <button onclick="toggleView('sequence')">Sequence</button>
-        <button onclick="toggleView('stair')">Stair</button>
-    </div>
-    <table id="table" style="display: block;">
-        <!-- Will be filled in later -->
-    </table>
-    <div id="sequence" class="jxgbox" style="width: 500px; height: 500px; display: none;">
-        <script>
-            // Initialize the sequenceBoard
-            var sequenceBoard = JXG.JSXGraph.initBoard("sequence", {
-                boundingbox: [-0.5, 10, 11, -10],
+    <!-- Create the rest -->
+    <div id="box" class="jxgbox" style="width: 500px; height: 500px;">
+        <script type="text/javascript">
+            // Get the "a" dropdown for later use
+            var aSelection = document.getElementById("aSelection");
+            // Create board and "x0" slider
+            var board = JXG.JSXGraph.initBoard('box', {
+                boundingbox: [-0.1, 1.1, 1.1, -0.1],
                 axis: true,
                 grid: true
             });
-        </script>
-    </div>
-    <div id="stair" class="jxgbox" style="width: 500px; height: 500px; display: none;">
-        <script>
-            // Initialize the stairBoard
-            var stairBoard = JXG.JSXGraph.initBoard("stair", {
-                boundingbox: [-10, 10, 10, -10],
-                axis: true,
-                grid: true
+            var x0 = board.create('slider', [
+                [0, 0],
+                [1, 0],
+                [0, 0.5, 1]
+            ], {
+                suffixLabel: 'x0 = '
             });
-            // Initialize line graphs
-            var basicLineGraph = stairBoard.create('functiongraph',
+            // Create graphs
+            var lineGraph = board.create('functiongraph',
                 [function (x) {
                     return x
-                }, -10, 10]
-            );
-            // Function used for graphing the function f(x) = mx
-            function graphFunction(x) {
-                return mSlider.value * x;
-            }
-            var stairLineGraph = stairBoard.create('functiongraph',
-                [graphFunction, -10, 10], {
-                    strokeColor: 'orange'
+                }, -0.5, 1.5], {
+                    strokeColor: 'green'
                 }
             );
-            // Create a step function that will be updated each time m changes
-            var stepGraph = stairBoard.create('stepfunction', [
+            // Function used for graphing the function f(x) = ax(1-x)
+            function graphFunc(x) {
+                return aSelection.value * x * (1 - x);
+            }
+            var curveGraph = board.create('functiongraph',
+                [graphFunc, -0.5, 1.5]
+            );
+            // Create a step function that will be updated each time a or x0 changes
+            var stepGraph = board.create('stepfunction', [
                 [0], // Use as filler for now. It will be replaced on board update
                 [0]
             ], {
                 strokeColor: 'red'
             });
+            // Function to calculate and plot the attracting and repelling points
+            function plotPoints() {
+                var i, xcors, ycors, xi;
+                xcors = [x0.Value()]; // Populate xcors with the first value = x0
+                ycors = [graphFunc(x0.Value())]; // Populate ycors with the first value = x1
+                for (i = 0; i < 10; i++) {
+                    xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
+                    // Add new point (xi, xi)
+                    xcors.push(xi);
+                    ycors.push(xi);
+                    // Add new point (xi, xi+1)
+                    xcors.push(xi);
+                    ycors.push(graphFunc(xi));
+                }
+                // Plot points
+                stepGraph.xterm = xcors;
+                stepGraph.yterm = ycors;
+            }
+            // Set the whole board to update when the "a" dropdown is updated
+            aSelection.onchange = function () {
+                plotPoints();
+                board.fullUpdate();
+            }
+            // Re-calculate the attracting and repelling points each time the board is updated
+            board.on('update', function () {
+                plotPoints();
+            });
+            // Update the board right away to replace (0,0) filler from stepGraph
+            board.fullUpdate();
         </script>
     </div>
-    <script>
-        // Store table, sequence, and stair elements for use within functions
-        let table = document.getElementById("table");
-        let sequence = document.getElementById("sequence");
-        // Function to change views
-        function toggleView(view) {
-            if (view == "table") {
-                table.style.display = "block";
-                sequence.style.display = "none";
-                stair.style.display = "none";
-            } else if (view == "sequence") {
-                table.style.display = "none";
-                sequence.style.display = "block";
-                stair.style.display = "none";
-            } else if (view == "stair") {
-                table.style.display = "none";
-                sequence.style.display = "none";
-                stair.style.display = "block";
-            } else {
-                console.error("Invalid 'view' string");
-            }
-        }
-        // Function to create or update all views
-        function updateViews() {
-            // Generate points
-            var points, previous, i;
-            points = [2]; // Initalize with 2
-            for (i = 1; i < 11; i++) {
-                points.push(points[i - 1] * mSlider.value); // Start with 2. Multiply n-1 term by m to get n term
-            }
-            /*
-             * Update table
-             */
-            // Clear previous table
-            table.innerHTML = "";
-            // Create table data
-            for (let point of points) {
-                let row = table.insertRow();
-                let cell = row.insertCell();
-                let text = document.createTextNode(point);
-                cell.appendChild(text);
-            }
-            /*
-             * Update sequence
-             */
-            // Free and recreate sequenceBoard
-            JXG.JSXGraph.freeBoard(sequenceBoard);
-            sequenceBoard = JXG.JSXGraph.initBoard("sequence", {
-                boundingbox: [-0.5, 10, 11, -10],
-                axis: true,
-                grid: true
-            });
-            // Plot points
-            var i;
-            for (i = 0; i < points.length; i++) {
-                sequenceBoard.create('point', [i, points[i]], {
-                    size: 1,
-                    withLabel: false
-                });
-            }
-            /*
-             * Update stair 
-             */
-            // Update line graph
-            stairLineGraph.fullUpdate();
-            // Calculate and plot the attracting and repelling points
-            var i, xcors, ycors, xi;
-            xcors = [2]; // Populate xcors with the first value = 2
-            ycors = [graphFunction(2)]; // Populate ycors with the first value = x1
-            for (i = 0; i < 10; i++) {
-                xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
-                // Add new point (xi, xi)
-                xcors.push(xi);
-                ycors.push(xi);
-                // Add new point (xi, xi+1)
-                xcors.push(xi);
-                ycors.push(graphFunction(xi));
-            }
-            // Plot points
-            stepGraph.xterm = xcors;
-            stepGraph.yterm = ycors;
-            // Update step graph
-            stepGraph.fullUpdate();
-        }
-        // Function to update the views and display new value when m is changed
-        mSlider.oninput = function () {
-            mOutput.innerHTML = this.value; // Output value of m for student to see
-            updateViews(); // Update views
-        }
-        updateViews(); // Update views right away
-    </script>
 
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.js"></script>
