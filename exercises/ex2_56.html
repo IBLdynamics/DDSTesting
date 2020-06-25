@@ -160,15 +160,15 @@
                 axis: true,
                 grid: true
             });
-            // Generate and graph points of the sequence
+            // Generate points in the sequence and graph points of the sequence
             var i;
             var s = [null];
             for (i = 1; i <= 20; i++) {
                 s.push(1 + Math.pow(-1, i) / i);
                 board.create('point', [i, s[i]], {
-                    fillColor: 'blue',
+                    fillColor: 'yellow',
                     fixed: true,
-                    strokeColor: 'blue',
+                    strokeColor: 'yellow',
                     withLabel: false
                 });
             }
@@ -180,26 +180,32 @@
                 sups.push(Math.max.apply(null, s.slice(i + 1)));
             }
             // Graph liminf and limsup points
-            var liminf = board.create('point', [NSlider.value, infs[NSlider.value]], {
-                fillColor: 'green',
-                strokeColor: 'green',
+            var liminf = board.create('point', [
+            function() { return NSlider.value; },
+            function() { return infs[NSlider.value]; }], {
+                fillColor: 'blue',
+                strokeColor: 'blue',
                 withLabel: false
             });
-            var limsup = board.create('point', [NSlider.value, sups[NSlider.value]], {
-                fillColor: 'red',
-                strokeColor: 'red',
+            var limsup = board.create('point', [
+            function() { return NSlider.value; },
+            function() { return sups[NSlider.value]; }], {
+                fillColor: 'orange',
+                strokeColor: 'orange',
                 withLabel: false
             });
+     
+            board.update()
         </script>
     </div>
-    <script>
-        // Set board to update when the N slider is updated
-        NSlider.oninput = function () {
+        <script>
+            // Set board to update when the N slider is updated
+            NSlider.oninput = function () {
             NOutput.innerHTML = this.value; // Output value for student to see
-            liminf.moveTo([NSlider.value, infs[NSlider.value]]);
-            limsup.moveTo([NSlider.value, sups[NSlider.value]]);
-        }
-    </script>
+                liminf.moveTo([NSlider.value, infs[NSlider.value]]);
+                limsup.moveTo([NSlider.value, sups[NSlider.value]]);
+            }
+        </script>
     
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.js"></script>
