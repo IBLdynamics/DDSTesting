@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Discovering Dynamical Systems Through Experiment and Inquiry</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="p-4 pt-5">
+		  		<a href="#" class="img logo rounded mx-auto" style="background-image: url(../images/Henon.png);"></a>
+	        <ul class="list-unstyled components mb-5">
+	          <li class="active">
+	            <!--<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+	            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="#">Home 1</a>
+                </li>
+                <li>
+                    <a href="#">Home 2</a>
+                </li>
+                <li>
+                    <a href="#">Home 3</a>
+                </li>
+	            </ul>
+	          </li>-->
+	          <li>
+	              <a href="../index.html">Home</a>
+	          </li>
+	          <li>
+              <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Chapters</a>
+              <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                    <a href="../chapters/ch1.html">Chapter 1</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch2.html">Chapter 2</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch3.html">Chapter 3</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch4.html">Chapter 4</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch5.html">Chapter 5</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch6.html">Chapter 6</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch7.html">Chapter 7</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch8.html">Chapter 8</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch9.html">Chapter 9</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch10.html">Chapter 10</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch11.html">Chapter 11</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch12.html">Chapter 12</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch13.html">Chapter 13</a>
+                </li>
+              </ul>
+	          </li>
+	          <!--<li>
+              <a href="#">Portfolio</a>
+	          </li>-->
+	          <li>
+              <a href="../about.html">About the Authors</a>
+	          </li>
+              <li>
+              <a href="../contact.html">Contact</a>
+              </li>
+	        </ul>
+
+	        <div class="footer">
+	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
+						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+	        </div>
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+              <i class="fa fa-bars"></i>
+              <span class="sr-only">Toggle Menu</span>
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../chapters/ch3.html">Return to Chapter Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../about.html">About the Authors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../contact.html">Contact</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+    <h1>Chapter 3, Exploration 2</h1>
+    <p>This is referenced in the text as the first linear iteration tool. Explore the dynamics of the linear system \(x_{n+1} = mx_n +b\) when \(b = 0\). You should pay particular attention to how the value of \(m\) affects the fixed point and/or its stability. Describe what you see.</p>
+    <!-- Create a slider to determine the value of m -->
+    <div id="rangeslider" style="width: 500px; height: 40px;">
+        <p style="display: inline;">m:</p>
+        <input id="mSlider" type="range" min="-2" max="2" value="0.1" step="0.01" style="width: 50%;">
+        <span id="mOut" style="display: inline;"></span>
+        <script>
+            // Get the value of m from the slider
+            var mSlider = document.getElementById("mSlider");
+            var mOutput = document.getElementById("mOut");
+            mOutput.innerHTML = mSlider.value; // Output value for student to see
+        </script>
+    </div>
+    <!-- Create buttons to determine whether to display table, sequence, or stair plot -->
+    <div id="buttons" style="width: 500px; height: 40px;">
+        <button onclick="toggleView('table')">Table</button>
+        <button onclick="toggleView('sequence')">Sequence</button>
+        <button onclick="toggleView('stair')">Stair</button>
+    </div>
+    <table id="table" style="display: block;">
+        <!-- Will be filled in later -->
+    </table>
+    <div id="sequence" class="jxgbox" style="width: 500px; height: 500px; display: none;">
+        <script>
+            // Initialize the sequenceBoard
+            var sequenceBoard = JXG.JSXGraph.initBoard("sequence", {
+                boundingbox: [-0.5, 10, 11, -10],
+                axis: true,
+                grid: true
+            });
+        </script>
+    </div>
+    <div id="stair" class="jxgbox" style="width: 500px; height: 500px; display: none;">
+        <script>
+            // Initialize the stairBoard
+            var stairBoard = JXG.JSXGraph.initBoard("stair", {
+                boundingbox: [-10, 10, 10, -10],
+                axis: true,
+                grid: true
+            });
+            // Initialize line graphs
+            var basicLineGraph = stairBoard.create('functiongraph',
+                [function (x) {
+                    return x
+                }, -10, 10]
+            );
+            // Function used for graphing the function f(x) = mx
+            function graphFunction(x) {
+                return mSlider.value * x;
+            }
+            var stairLineGraph = stairBoard.create('functiongraph',
+                [graphFunction, -10, 10], {
+                    strokeColor: 'orange'
+                }
+            );
+            // Create a step function that will be updated each time m changes
+            var stepGraph = stairBoard.create('stepfunction', [
+                [0], // Use as filler for now. It will be replaced on board update
+                [0]
+            ], {
+                strokeColor: 'red'
+            });
+        </script>
+    </div>
+    <script>
+        // Store table, sequence, and stair elements for use within functions
+        let table = document.getElementById("table");
+        let sequence = document.getElementById("sequence");
+        // Function to change views
+        function toggleView(view) {
+            if (view == "table") {
+                table.style.display = "block";
+                sequence.style.display = "none";
+                stair.style.display = "none";
+            } else if (view == "sequence") {
+                table.style.display = "none";
+                sequence.style.display = "block";
+                stair.style.display = "none";
+            } else if (view == "stair") {
+                table.style.display = "none";
+                sequence.style.display = "none";
+                stair.style.display = "block";
+            } else {
+                console.error("Invalid 'view' string");
+            }
+        }
+        // Function to create or update all views
+        function updateViews() {
+            // Generate points
+            var points, previous, i;
+            points = [2]; // Initalize with 2
+            for (i = 1; i < 11; i++) {
+                points.push(points[i - 1] * mSlider.value); // Start with 2. Multiply n-1 term by m to get n term
+            }
+            /*
+             * Update table
+             */
+            // Clear previous table
+            table.innerHTML = "";
+            // Create table data
+            for (let point of points) {
+                let row = table.insertRow();
+                let cell = row.insertCell();
+                let text = document.createTextNode(point);
+                cell.appendChild(text);
+            }
+            /*
+             * Update sequence
+             */
+            // Free and recreate sequenceBoard
+            JXG.JSXGraph.freeBoard(sequenceBoard);
+            sequenceBoard = JXG.JSXGraph.initBoard("sequence", {
+                boundingbox: [-0.5, 10, 11, -10],
+                axis: true,
+                grid: true
+            });
+            // Plot points
+            var i;
+            for (i = 0; i < points.length; i++) {
+                sequenceBoard.create('point', [i, points[i]], {
+                    size: 1,
+                    withLabel: false
+                });
+            }
+            /*
+             * Update stair 
+             */
+            // Update line graph
+            stairLineGraph.fullUpdate();
+            // Calculate and plot the attracting and repelling points
+            var i, xcors, ycors, xi;
+            xcors = [2]; // Populate xcors with the first value = 2
+            ycors = [graphFunction(2)]; // Populate ycors with the first value = x1
+            for (i = 0; i < 10; i++) {
+                xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
+                // Add new point (xi, xi)
+                xcors.push(xi);
+                ycors.push(xi);
+                // Add new point (xi, xi+1)
+                xcors.push(xi);
+                ycors.push(graphFunction(xi));
+            }
+            // Plot points
+            stepGraph.xterm = xcors;
+            stepGraph.yterm = ycors;
+            // Update step graph
+            stepGraph.fullUpdate();
+        }
+        // Function to update the views and display new value when m is changed
+        mSlider.oninput = function () {
+            mOutput.innerHTML = this.value; // Output value of m for student to see
+            updateViews(); // Update views
+        }
+        updateViews(); // Update views right away
+    </script>
+  </body>
+</html>
