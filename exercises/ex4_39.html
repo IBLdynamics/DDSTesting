@@ -9,6 +9,13 @@
 		
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
   </head>
   <body>
 		
@@ -38,43 +45,43 @@
               <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Chapters</a>
               <ul class="collapse list-unstyled" id="pageSubmenu">
                 <li>
-                    <a href="ch1.html">Chapter 1</a>
+                    <a href="../chapters/ch1.html">Chapter 1</a>
                 </li>
                 <li>
-                    <a href="ch2.html">Chapter 2</a>
+                    <a href="../chapters/ch2.html">Chapter 2</a>
                 </li>
                 <li>
-                    <a href="ch3.html">Chapter 3</a>
+                    <a href="../chapters/ch3.html">Chapter 3</a>
                 </li>
                 <li>
-                    <a href="ch4.html">Chapter 4</a>
+                    <a href="../chapters/ch4.html">Chapter 4</a>
                 </li>
                 <li>
-                    <a href="ch5.html">Chapter 5</a>
+                    <a href="../chapters/ch5.html">Chapter 5</a>
                 </li>
                 <li>
-                    <a href="ch6.html">Chapter 6</a>
+                    <a href="../chapters/ch6.html">Chapter 6</a>
                 </li>
                 <li>
-                    <a href="ch7.html">Chapter 7</a>
+                    <a href="../chapters/ch7.html">Chapter 7</a>
                 </li>
                 <li>
-                    <a href="ch8.html">Chapter 8</a>
+                    <a href="../chapters/ch8.html">Chapter 8</a>
                 </li>
                 <li>
-                    <a href="ch9.html">Chapter 9</a>
+                    <a href="../chapters/ch9.html">Chapter 9</a>
                 </li>
                 <li>
-                    <a href="ch10.html">Chapter 10</a>
+                    <a href="../chapters/ch10.html">Chapter 10</a>
                 </li>
                 <li>
-                    <a href="ch11.html">Chapter 11</a>
+                    <a href="../chapters/ch11.html">Chapter 11</a>
                 </li>
                 <li>
-                    <a href="ch12.html">Chapter 12</a>
+                    <a href="../chapters/ch12.html">Chapter 12</a>
                 </li>
                 <li>
-                    <a href="ch13.html">Chapter 13</a>
+                    <a href="../chapters/ch13.html">Chapter 13</a>
                 </li>
               </ul>
 	          </li>
@@ -117,12 +124,9 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="../index.html">Home</a>
                 </li>
-                <!--<li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Portfolio</a>
-                </li>-->
+                    <a class="nav-link" href="../chapters/ch4.html">Return to Chapter Overview</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../about.html">About the Authors</a>
                 </li>
@@ -134,19 +138,49 @@
           </div>
         </nav>
 
-        <h2 class="mb-4">Chapter 4</h2>
-        <p>Select the exercise you are working on from the list below.</p>
-        <ul>
-            <li>
-                <a href="../exercises/ex4_39.html"> Chapter 4, Exploration 39</a>
-            </li>
-            <li>
-                <a href="../exercises/ex4_40.html"> Chapter 4, Exploration 40</a>
-            </li>
-        </ul>
-        
-      </div>
-        </div>
+    <h1>Chapter 4, Exploration 39</h1>
+    <p> Before moving either of the bulls-eyes, estimate the value of the fixed point of this function and the value of the derivative of the function at the fixed point.
+    <ul>
+        <li>Is the fixed point of this function hyperbolic
+        or non-hyperbolic? </li>
+        <li>Now move either one of the bulls-eyes just a little bit. Does the
+        fixed point move? Do any new fixed points appear? Is this new
+        fixed point(s) hyperbolic or non-hyperbolic? </li>
+        <li>Is this system structurally stable? </li>
+        <li>Can you move the bulls-eyes in such a way that there are? </li>
+    </ul>
+</p>
+    <div id="box" class="jxgbox" style="width: 500px; height: 500px;">
+        <script type="text/javascript">
+            // Create board
+            var board = JXG.JSXGraph.initBoard('box', {
+                boundingbox: [-2, 5, 2, -5],
+                axis: true,
+                grid: true
+            });
+            // Create points that will be moved around
+            var pA = board.create('point', [-1, -3]);
+            var pB = board.create('point', [1, 3]);
+            // Create graphs
+            var lineGraph = board.create('functiongraph',
+                [function (x) {
+                    return x;
+                }, -2, 2], {
+                    strokeColor: 'green'
+                }
+            );
+            var curveGraph = board.create('functiongraph',
+                [function (x) {
+                    return x ** 2 + (pB.Y() - pA.Y() + pA.X() ** 2 - pB.X() ** 2) / (pB.X() - pA.X()) * x + (pB
+                        .X() * pA.Y() - pA.X() * pB.Y() + pA.X() * pB.X() ** 2 - pB.X() * pA.X() ** 2) / (pB
+                        .X() - pA.X());
+                }, -2, 2, {
+                    fixed: false
+                }]
+            );
+            curveGraph.addParents([pA, pB]);
+        </script>
+    </div>
 
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.js"></script>
