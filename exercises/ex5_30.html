@@ -164,9 +164,8 @@
                 aOutput.innerHTML = aSlider.value; // Output value for student to see
             </script>
         </div>
-        <div>
-            <!-- Create the zoomed graph of f(f(x)) -->
-            <div id="box2" class="jxgbox" style="width: 500px; height: 500px;">
+        <div style="float: left; padding-right: 10px;">
+            <div id="box2" class="jxgbox" style="width: 500px; height: 500px;float: left;">
                 <script type="text/javascript">
                     // Create board
                     var board2 = JXG.JSXGraph.initBoard('box2', {
@@ -188,6 +187,14 @@
                             return x;
                         }, 0, 1]
                     );
+                    // Function for the first graph
+                    function f(x) {
+                        return aSlider.value * x * (1 - x);
+                    }
+                    // Function for the second graph
+                    function fSquared(x) {
+                        return f(aSlider.value * x * (1 - x));
+                    }
                     var fSquaredGraphZoomed = board2.create('functiongraph',
                         [fSquared, 0, 1], {
                             strokeColor: 'green'
@@ -195,13 +202,13 @@
                 </script>
             </div>
         </div>
-    
+    </div>
     <script>
         // Set all functiongraps to update when the "a" slider is updated
         aSlider.oninput = function () {
             aOutput.innerHTML = this.value; // Output value for student to see
-            fGraph.fullUpdate();
-            fSquaredGraph.fullUpdate();
+            //fGraph.fullUpdate();
+            //fSquaredGraph.fullUpdate();
             fSquaredGraphZoomed.fullUpdate();
         }
     </script>

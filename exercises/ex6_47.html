@@ -138,13 +138,13 @@
           </div>
         </nav>
 
-    <h1>Chapter 6, Exploration 29</h1>
+    <h1>Chapter 6, Exploration 47</h1>
     <p> 
-        The doubling map tool below generates stair-step diagrams for \(D(x) = 2x \mbox{ mod } 1\). Do you see any of the periodic behavior that you described in the earlier explorations in section 6.3.1 of the text? Why the discrepancy?
+        The graph below is for the function \(x_{n+1} = f_{4.5}(x) = 4.5x(1-x)\). You can select the value of \(n\) to display \(f^n_{4.5}(x)\). 
     </p>
     
     <!-- Create a slider to determine the value of x0 -->
-    <div style="width: 500px; height: 40px;">
+    <!--<div style="width: 500px; height: 40px;">
         <p style="display: inline;">x0:</p>
         <input id="x0Slider" type="range" min="0" max="1" value="0.5" step="0.01">
         <span id="x0Out" style="display: inline;"></span>
@@ -154,69 +154,113 @@
             var x0Output = document.getElementById("x0Out");
             x0Output.innerHTML = x0Slider.value; // Output value for student to see
         </script>
-    </div>
-    <div id="stair" class="jxgbox" style="width: 500px; height: 500px;">
+    </div>-->
+    <!-- Create a slider to determine the value of "n" -->
+    <div id="nrangeslider" style="width: 500px; height: 50px;">
+        <p style="display: inline;">n:</p>
+        <input id="nSlider" type="range" min="1" max="5" value="1" step="1" style="width: 50%;">
+        <p style="display: inline;"><span id="nOut"></span></p>
         <script>
-            // Initialize the stairBoard
-            var stairBoard = JXG.JSXGraph.initBoard("stair", {
-                boundingbox: [-0.1, 1, 1, -0.1],
+            // Get the value of "n" from the slider
+            var nSlider = document.getElementById("nSlider");
+            var nOutput = document.getElementById("nOut");
+            nOutput.innerHTML = nSlider.value; // Output value for student to see
+        </script>
+        
+    </div>
+    <p>
+        <button onClick="board2.toFullscreen()">Fullscreen</button>
+    </p>
+    <!-- Create the board -->
+    <div id="box" class="jxgbox" style="width: 500px; height: 500px;">
+        <script type="text/javascript">
+            // Create board2
+            var board = JXG.JSXGraph.initBoard('box', {
+                boundingbox: [-0.1, 1.5, 1.1, -0.1],
                 axis: true,
-                grid: true
+                grid: true,
+                showFullscreen: true
             });
-            // Initialize line graph
-            var basicLineGraph = stairBoard.create('functiongraph',
+            // Create graph at y=1
+            var topBound = board.create('functiongraph',
                 [function (x) {
-                    return x
-                }, 0, 1]
-            );
-            // Function used for graphing the function d(x) = 2x(mod1)
-            function graphFunction(x) {
-                return (2 * x) % 1
-            }
-            var stairLineGraph = stairBoard.create('functiongraph',
-                [graphFunction, 0, 1], {
-                    strokeColor: 'orange'
+                    return 1
+                }, -0.1, 1.1], {
+                    strokeColor: 'green'
                 }
             );
-            // Create a step function that will be updated each time m changes
-            var stepGraph = stairBoard.create('stepfunction', [
-                [0], // Use as filler for now. It will be replaced on board update
-                [0]
-            ], {
-                strokeColor: 'red'
-            });
-        </script>
-    </div>
-    <script>
-        function updateStairGraph() {
-            // Update line graph
-            stairLineGraph.fullUpdate();
-            // Calculate and plot the attracting and repelling points
-            var i, xcors, ycors, xi;
-            xcors = [x0Slider.value]; // Populate xcors with the first value = x0
-            ycors = [graphFunction(x0Slider.value)]; // Populate ycors with the first value = x1
-            for (i = 0; i < 40; i++) {
-                xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
-                // Add new point (xi, xi)
-                xcors.push(xi);
-                ycors.push(xi);
-                // Add new point (xi, xi+1)
-                xcors.push(xi);
-                ycors.push(graphFunction(xi));
+            // Color the whole axis blue
+            function resetLine(){
+                g = []
+                var lineGraph = board.create('functiongraph',
+                [function (x) {
+                    return 0;
+                }, 0, 1], {
+                    strokeColor: 'blue',
+                    strokeWidth:3
+                }
+            );
             }
-            // Plot points
-            stepGraph.xterm = xcors;
-            stepGraph.yterm = ycors;
-            // Update step graph
-            stepGraph.fullUpdate();
+            //empty list for the middle third graphs
+            var g = [];
+            //Function that colors middle third of given interval
+            function colorThird(left, right){
+                g.push(board.create('functiongraph',
+                   [function (x) {
+                    return 0;
+                    }, left, right], {
+                    strokeColor: 'red',
+                    strokeWidth:3}
+                    ));
+                };
+            //Function that colors middle thirds as n changes
+            function cantorSet(start, stop, loops){
+                    var length = (stop-start)/3;
+                    var left= start + length;
+                    var right = start + 2*length;
+                    colorThird(left,right);
+                if (loops!=1){
+                    cantorSet(start,left,loops-1);
+                    cantorSet(right, right+length,loops-1);
+                }
+                                }; 
+
+            // Function used for graphing the function f(x) = ax(1-x)
+            function graphFunc(x) {
+                var i, n, returnVal;
+                // Use returnVal to hold the result between compositions
+                returnVal =  4.5 * x * (1 - x);
+                // Compose f on f n-1 times
+                for (i = 1; i < nSlider.value; i++) {
+                    returnVal = 4.5 * returnVal * (1 - returnVal);
+                }
+                return returnVal;
+            }
+            var curveGraph = board.create('functiongraph',
+                [graphFunc, -2, 4]
+            );
+            
+
+            // Color the initial middle third
+            resetLine();
+            cantorSet(0,1,1);
+            board.fullUpdate();
+        </script>
+
+    </div>
+    <!-- Set boards to be updated when the sliders for "a" and "n" are moved -->
+    <script>
+        // Set the second board to update when the "n" slider is updated
+        nSlider.oninput = function () {
+            nOutput.innerHTML = this.value; // Output value for student to see
+                resetLine();
+                cantorSet(0,1,nSlider.value);
+                board.fullUpdate();
         }
-        x0Slider.oninput = function () {
-            x0Output.innerHTML = this.value; // Output value of x0 for student to see
-            updateStairGraph();
-        }
-        updateStairGraph(); // Update the stair graph right away
     </script>
-    
+        
+
+
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.js"></script>
     <script src="../js/bootstrap.min.js"></script>
