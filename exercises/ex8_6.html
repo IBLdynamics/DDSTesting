@@ -4,14 +4,19 @@
   	<title>Discovering Dynamical Systems Through Experiment and Inquiry</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 		
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../css/style.css">
-
+    <!-- files for JSXgraph -->    
     <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
     <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <!-- files for Bootstrap Slider -->
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link href="../css/bootstrap-slider.css" rel="stylesheet" type="text/css">
+    <!-- files for MathJax -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
@@ -104,7 +109,6 @@
 
 	      </div>
     	</nav>
-
         <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5">
 
@@ -140,14 +144,36 @@
 
     <h1>Chapter 8, Explorations 6-7</h1>
     <p> 
-        
+        Choose the interval, look at where stuff goes
     </p>
+    <!--Slider for two endpoints-->
     
-    
-    
+    <div>
+    <b>0</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="[0.25,0.75]"/> <b>1</b>
+    <p>
+    <script>
+    var x0slider = new Slider("#ex2");
+    x0slider.on("slide", function(sliderValue)
+    {
+    var leftSliderValue = sliderValue[0];
+    var rightSliderValue = sliderValue[1];
+    }); 
+    console.log(leftSliderValue);
+
+    </script>
+    </p>
+
+    </div>
+
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap-slider.js"></script>
     <script src="../js/main.js"></script>
+    <!-- Define the function that makes the slider. It has to be down here for some reason.-->
+    <script>
+        $("#ex2").slider({});
+    </script>
+</div>
   </body>
 </html>

@@ -154,17 +154,15 @@
             x0Output.innerHTML = x0Slider.value; // Output value for student to see
         </script>
     </div>
-        <!-- Create textbox for epsilon -->
-        <div style="padding: 10px;">
-            <label>\(\epsilon\): <input id="epTextbox" type="text"></label>
-            <script> //Get epsilon value for later
-                var epValue = document.getElementById("epTextbox");
-            </script>
 
-        </div>
-    <p>
-        <button onClick="board2.fullUpdate()">Plot Orbit on Second Graph</button>
-    </p>
+    <div>
+        <label>\(\epsilon\): <input id="epInput" type="text"></label>
+        <script type="text/javascript">
+            var epValue = document.getElementById("epInput");
+        </script>
+        <button onclick="updateGraph();">Plot Sequences</button>
+    </div>
+        
     <!-- Create the first box -->
     <div id="box" class="jxgbox" style="width: 500px; height: 500px; float: left;">
         <script type="text/javascript">
@@ -183,26 +181,46 @@
                     strokeColor: 'green'
                 }
             );
+;
+             //Function to be sure one click updates both boards
+             function updateGraph(){
+                plotPoints();
+                board.fullUpdate();
+                board2.fullUpdate();
+             }
             // Function used for graphing the function f(x)
             function graphFunc(x) {
                 return 4*x*(1-x);
             }
             var curveGraph = board.create('functiongraph',
-                [graphFunc, -2.0, 2.0]
+                [graphFunc, -2.0, 2.0],{
+                    strokeColor: 'orange'
+                }
             );
             // Create a step function that will be updated each time a or x0 changes
             var stepGraph = board.create('stepfunction', [
                 [0], // Use as filler for now. It will be replaced on board update
                 [0]
             ], {
+                strokeColor: 'blue'
+            });
+            // Create a step function that will be updated each time a or x0 changes
+            var stepGraph2 = board.create('stepfunction', [
+                [0], // Use as filler for now. It will be replaced on board update
+                [0]
+            ], {
                 strokeColor: 'red'
             });
+            // Array to store distances
+            var distances = []
             // Function to calculate and plot the attracting and repelling points
             function plotPoints() {
-                var i, xcors, ycors, xi;
+                var i, xcors, ycors, xi, xcors2, ycors2, xi2;
                 xcors = [x0Slider.value]; // Populate xcors with the first value = x0
                 ycors = [graphFunc(x0Slider.value)]; // Populate ycors with the first value = x1
-                for (i = 0; i < 10; i++) {
+                xcors2 = [x0Slider.value + epValue.value]; // Populate xcors with the first value = x0
+                ycors2 = [graphFunc(x0Slider.value + epValue.value)]; // Populate ycors with the first value = x1
+                for (i = 0; i < 20; i++) {
                     xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
                     // Add new point (xi, xi)
                     xcors.push(xi);
@@ -210,11 +228,23 @@
                     // Add new point (xi, xi+1)
                     xcors.push(xi);
                     ycors.push(graphFunc(xi));
+                    xi2 = ycors2[ycors2.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
+                    // Add new point (xi, xi)
+                    xcors2.push(xi2);
+                    ycors2.push(xi2);
+                    // Add new point (xi, xi+1)
+                    xcors2.push(xi2);
+                    ycors2.push(graphFunc(xi2));
+                    distances.push(Math.abs(graphFunc(xi) - graphFunc(xi2)));
                 }
                 // Plot points
                 stepGraph.xterm = xcors;
                 stepGraph.yterm = ycors;
+                stepGraph2.xterm = xcors2;
+                stepGraph2.yterm = ycors2;
             }
+
+
             // Re-calculate the attracting and repelling points each time the board is updated
             board.on('update', function () {
                 plotPoints();
@@ -227,59 +257,32 @@
     <div id="box2" class="jxgbox" style="width: 500px; height: 500px;">
         <script type="text/javascript">
             var board2 = JXG.JSXGraph.initBoard('box2', {
-                boundingbox: [-0.1, 1.2, 1.1, -0.2],
+                boundingbox: [-0.1, 1, 20.1, -0.1],
                 axis: true,
                 grid: true,
                 showFullscreen: true
             });
-            // Create graphs
+
+            function plotSequence(){
+                var n;
+                for (n = 0; n < 20; n++) {
+                    board2.create('point', [n, distances[n]], {
+                        size: 1,
+                        fillColor: 'black',
+                        strokeColor: 'black',
+                        withLabel: false
+                    });
+                }
+                }
+            plotSequence();
             var lineGraph = board2.create('functiongraph',
                 [function (x) {
-                    return x
+                    return 0.5
                 }, -2.0, 2.0], {
-                    strokeColor: 'green'
+                    strokeColor: 'green',
+                    dash:2
                 }
             );
-            // Function used for graphing the function f(x) = asin(x)
-            function graphFunc2(x) {
-                return 4*x*(1-x);
-            }
-            var curveGraph2 = board2.create('functiongraph',
-                [graphFunc2, -2.0, 2.0]
-            );
-            // Create a step function that will be updated each time a or x0 changes
-            var stepGraph2 = board2.create('stepfunction', [
-                [0], // Use as filler for now. It will be replaced on board update
-                [0]
-            ], {
-                strokeColor: 'red'
-            });
-            // Function to calculate and plot the attracting and repelling points
-            function plotPoints2() {
-                var i, xcors2, ycors2, xi2;
-                xcors2 = [x0Slider.value + epValue.value]; // Populate xcors with the first value = x0
-                ycors2 = [graphFunc2(x0Slider.value + epValue.value)]; // Populate ycors with the first value = x1
-                for (i = 0; i < 10; i++) {
-                    xi2 = ycors2[ycors2.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
-                    // Add new point (xi, xi)
-                    xcors2.push(xi2);
-                    ycors2.push(xi2);
-                    // Add new point (xi, xi+1)
-                    xcors2.push(xi2);
-                    ycors2.push(graphFunc2(xi2));
-                }
-                // Plot points
-                stepGraph2.xterm = xcors2;
-                stepGraph2.yterm = ycors2;
-            }
-
- 
-            // Re-calculate the attracting and repelling points each time the board is updated
-            board2.on('update', function () {
-                plotPoints2();
-            });
-            // Update the board right away to replace (0,0) filler from stepGraph
-            board2.fullUpdate();
         </script>
     </div>
     <script>
@@ -287,7 +290,6 @@
             x0Slider.oninput = function () {
                 x0Output.innerHTML = this.value; // Output value for student to see
                 plotPoints();
-                plotPoints2();
                 board.fullUpdate();
                 board2.fullUpdate();
             }

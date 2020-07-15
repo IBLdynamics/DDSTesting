@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery Bootstrap Slider Plugin Examples</title>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap-slider.css" rel="stylesheet" type="text/css">
+<style>
+#slider5a .slider-track-high, #slider5c .slider-track-high {
+  background: green;
+}
+
+#slider5b .slider-track-low, #slider5c .slider-track-low {
+  background: red;
+}
+
+#slider5c .slider-selection {
+  background: yellow;
+}
+</style>
+</head>
+
+<body style=" background-color:#222; color:#fff;">
+<div class="container" style="margin:150px auto; max-width:640px;">
+<h1>jQuery Bootstrap Slider Plugin Examples</h1>
+<h2>Single value slider</h2>
+<input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+<h2>Range Slider</h2>
+<b>€ 10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>
+<h2>Slide event</h2>
+<input id="ex3" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="3">
+<span id="ex3CurrentSliderValLabel">Current Slider Value: <span id="ex3SliderVal">3</span></span>
+<h2>Custom tick marks.</h2>
+<input id="ex4" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["$0", "$100", "$200", "$300", "$400"]'/>
+<h2>Coloring the low and high track segments</h2>
+<!-- Single-value slider, high track: -->
+<input id="ex5a" type="text"/><br/>
+<br>
+
+<!-- Range slider, low track: -->
+<input id="ex5b" type="text"/><br/>
+<br>
+<!-- Range slider, low and high tracks, and selection: -->
+<input id="ex5c" type="text"/><br/><br>
+</div>
+<script src="../js/jquery.min.js"></script>
+
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/bootstrap-slider.js"></script>
+<script>
+$('#ex1').slider({
+  formatter: function(value) {
+    return 'Current value: ' + value;
+  }
+});
+$("#ex2").slider({});
+$("#ex3").slider();
+$("#ex3").on("slide", function(slideEvt) {
+  $("#ex3SliderVal").text(slideEvt.value);
+});
+$("#ex4").slider({
+    ticks: [0, 100, 200, 300, 400],
+    ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
+    ticks_snap_bounds: 30
+});
+$("#ex5a").slider({ id: "slider5a", min: 0, max: 10, value: 5 });
+$("#ex5b").slider({ id: "slider5b", min: 0, max: 10, range: true, value: [3, 7] });
+$("#ex5c").slider({ id: "slider5c", min: 0, max: 10, range: true, value: [3, 7] });
+</script>
+
+</body>
+</html>
