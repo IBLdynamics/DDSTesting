@@ -16,6 +16,50 @@
     <script id="MathJax-script" async
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
+    <style>
+        .custom-select {
+    position: relative;
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: 93%;
+    margin: 30px 50px;
+}
+
+.custom-select span {
+    display: inline-block;
+    min-width: 180px;
+    color: #FFF;
+    background-color: #333;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.custom-select ul {
+    position: absolute;
+    display: none;
+    border: 1px solid #333;
+    width: 99%;
+    max-height: 200px;
+    overflow: auto;
+    z-index: 10000;
+}
+
+.custom-select ul li {
+    padding: 5px;
+    border-bottom: 1px solid #333;
+    cursor: pointer;
+}
+
+.custom-select ul li:hover {
+    background-color: #666;
+    color: #FFF;
+}
+
+.custom-select ul li:last-child {
+    border-bottom: none;
+}
+
+</style>
   </head>
   <body>
 		
@@ -140,8 +184,71 @@
 
     <h1>Chapter 11, Exploration 30</h1>
     <p> 
-        
+        Matrix Rotation Tool
     </p>
+    <!-- Selection for phi -->
+    <div style="select_wrap">
+        <script>
+            var html=[];
+
+            $('#test_select option').each(function(i){
+               html.push('<li rel="'+$(this).val() +'">'+$(this).text()+'</li>');
+            });
+
+            $('.custom-select ul').html(html.join(''))
+
+            /* cache main list elements so each doc click isn't a DOM search*/
+            var $lists = $('.custom-select');
+
+            $lists.live('click',function(e) {
+                e.stopPropagation();
+                $lists.not(this).find('ul:visible').hide()
+                var $tgt = $(e.target);
+                $(this).find('ul').slideToggle('fast');
+                if ($tgt.is('li')) {
+                    $(this).find('span').html($tgt.html());
+                    var value=$tgt.attr('rel');
+                    $('#test_select').val( value);
+                }
+                
+                
+            })
+
+            $(document).click(function(e) {
+                $lists.find('ul:visible').hide();
+            });
+        </script>
+        <p style="display: inline;">\(\phi\):</p>
+        <select id="test_select">
+            <option value=0.78539815>\(\dfrac{\pi}{4}\)</option>
+            <option value=1.5707963>\(\dfrac{\pi}{2}\)</option>
+            <option value=0.31415926>\(\dfrac{\pi}{10}\)</option>
+            <option value=2.22144146908>\(\dfrac{\pi}{\sqrt{2}}\)</option>
+        </select>
+        <script>
+             // Get the "phi" dropdown for later use
+            var phiSelection = document.getElementById("test_select");
+        </script>
+    </div>
+    <p id="demo">Test Value: </p>
+    <!-- Create the first box -->
+    <div id="box" class="jxgbox" style="width: 500px; height: 500px; float: left;">
+        
+        <script type="text/javascript">
+            // Create board
+            var board = JXG.JSXGraph.initBoard('box', {
+                boundingbox: [-5,-5,5,5],
+                axis: true,
+                grid: true,
+                showFullscreen: true
+            });
+        //set number of loops to pi divided by phiSelection
+        var loops = 5;//3.1415926/phiSelection;
+        document.getElementById("demo").innerHTML = loops;
+        //Add a dragable point, change to polar coordinates
+        //On move, loop to draw the rest of the orbit (not movable)
+        </script>
+    </div>
     
     
     
