@@ -125,7 +125,7 @@
                     <a class="nav-link" href="../index.html">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../chapters/ch4.html">Return to Chapter Overview</a>
+                    <a class="nav-link" href="../chapters/ch6.html">Return to Chapter Overview</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../about.html">About the Authors</a>
@@ -138,49 +138,36 @@
           </div>
         </nav>
 
-    <h1>Chapter 4, Exploration 40</h1>
-    <p> Holding the mouse over the points \(A\) and \(B\) gives their coordinates. Either of these points can be clicked and dragged to change the graph. Begin by estimating the value of the fixed point of this function and the value of the derivative of the function at the fixed point.
-    <ul>
-        <li>Is the fixed point of this function hyperbolic
-        or non-hyperbolic? </li>
-        <li>Now adjust either one of the movable points just a little bit. Does the
-        fixed point move? Do any new fixed points appear? Is this new
-        fixed point(s) hyperbolic or non-hyperbolic? </li>
-        <li>Is this system structurally stable? </li>
-        <li>Can you move \(A\) and \(B\) in such a way that there are multiple fixed points?  Do you have to move them a little or a lot?? </li>
-    </ul>
-</p>
-    <div id="box" class="jxgbox" style="width: 500px; height: 500px;">
-        <script type="text/javascript">
-            // Create board
-            var board = JXG.JSXGraph.initBoard('box', {
-                boundingbox: [-2, 5, 2, -5],
-                axis: true,
-                grid: true
-            });
-            // Create points that will be moved around
-            var pA = board.create('point', [-1, 0]);
-            var pB = board.create('point', [1, 2]);
-            // Create graphs
-            var lineGraph = board.create('functiongraph',
-                [function (x) {
-                    return x;
-                }, -2, 2], {
-                    strokeColor: 'green'
-                }
-            );
-            var curveGraph = board.create('functiongraph',
-                [function (x) {
-                    return x ** 2 + (pB.Y() - pA.Y() + pA.X() ** 2 - pB.X() ** 2) / (pB.X() - pA.X()) * x + (pB
-                        .X() * pA.Y() - pA.X() * pB.Y() + pA.X() * pB.X() ** 2 - pB.X() * pA.X() ** 2) / (pB
-                        .X() - pA.X());
-                }, -2, 2, {
-                    fixed: false
-                }]
-            );
-            curveGraph.addParents([pA, pB]);
+    <h1>Chapter 6, Exploration 35</h1>
+    <p> 
+        The binary expansion of the point \(s = .010101\ldots\) is given in the textbook. The slider below for \(n\) moves through the points in the expansion of \(s\), narrowing the intervals in which \(s\) can be found. \(s\) is always in the orange interval. Explore how this interval changes as you adjust the slider. Think carefully about what this means in terms of the coordiantes of \(s\).
+    </p>
+    
+    <!-- Create a slider to determine the value of "n" -->
+    <div id="nrangeslider" style="width: 500px; height: 50px;">
+        <p style="display: inline;">n:</p>
+        <input id="nSlider" type="range" min="1" max="5" value="1" step="1" style="width: 50%;">
+        <p style="display: inline;"><span id="nOut"></span></p>
+        <script>
+            // Get the value of "n" from the slider
+            var nSlider = document.getElementById("nSlider");
+            var nOutput = document.getElementById("nOut");
+            nOutput.innerHTML = nSlider.value; // Output value for student to see
         </script>
+        
     </div>
+    
+    <script>
+        // Set the second board to update when the "n" slider is updated
+        nSlider.oninput = function () {
+            nOutput.innerHTML = this.value; // Output value for student to see
+                resetLine();
+                cantorSet(0,1,nSlider.value);
+                board.fullUpdate();
+        }
+    </script>
+        
+
 
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.js"></script>
