@@ -12,6 +12,9 @@
 
     <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
     <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
   </head>
   <body>
 		
@@ -190,7 +193,7 @@
         <label>b<input class="rValueCheckbox" type="radio" name="r" value="1/2" onclick="updateR(this);"></label>
         <label>c<input class="rValueCheckbox" type="radio" name="r" value="Math.PI/5" onclick="updateR(this);"></label>
         <label>d<input class="rValueCheckbox" type="radio" name="r" value="4/7" onclick="updateR(this);"></label>
-        <!--<p style="display: inline; padding-left: 5px;">r: <span id="rOut"></span></p>-->
+        <p style="display: inline; padding-left: 5px;">r: <span id="rOut"></span></p>
         <script>
             // Get the value of r from the checkboxes
             var rValue = eval(document.querySelector('.rValueCheckbox:checked').value);
@@ -240,7 +243,7 @@
             for (i = 0; i < 11; i++) {
                 points.push({
                     n: i,
-                    xn: (0.5 + (rValue * i)) % 1 // Start with 0.5. Add rValue each time
+                    x_n: (0.5 + (rValue * i)) % 1 // Start with 0.5. Add rValue each time
                 });
             }
             /*
@@ -278,7 +281,8 @@
             });
             // Plot points
             for (let element of points) {
-                board.create('point', [element["n"], element["xn"]], {
+                board.create('point', [element["n"], element["x_n"]], {
+                    fixed: true,
                     size: 1,
                     withLabel: false
                 });

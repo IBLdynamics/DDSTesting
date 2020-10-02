@@ -139,7 +139,7 @@
         </nav>
     <div>    
         <h1>Chapter 1, Exercise 10</h1>
-        <p>Exercise 10 in section gives for \(k\) and \(x_0\). Use the checkboxes to select a value for \(k\) and the slider to choose an initial condition \(x_0\). Analyze the given starstep diagrams and recreate them on paper. Close the sidebar menu to ensure the iterated points and the graph are side-by-side.</p>
+        <p>Use the checkboxes to select a value for \(k\) and the slider to choose an initial condition \(x_0\). Analyze the given starstep diagrams and recreate them on paper. Close the sidebar menu to ensure the iterated points and the graph are side-by-side.</p>
     <!-- Create a slider to determine the value of x0 -->
     <div id="rangeslider" style="width: 500px; height: 40px;">
         <p style="display: inline;">Initial Condition</p>
@@ -160,7 +160,7 @@
         <label>0.25<input class="cValueCheckbox" type="radio" name="c" value="0.25" onclick="updateC(this);"></label>
         <label>0.1<input class="cValueCheckbox" type="radio" name="c" value="0.1" onclick="updateC(this);"></label>
         <label>-0.5<input class="cValueCheckbox" type="radio" name="c" value="-0.5" onclick="updateC(this);"></label>
-        <p style="display: inline; padding-left: 5px;">k: <span id="cOut"></span></p>
+        <!--<p style="display: inline; padding-left: 5px;">k: <span id="cOut"></span></p>-->
         <script>
             // Get the value of c from the checkboxes
             var cValue = document.querySelector('.cValueCheckbox:checked').value;
@@ -211,7 +211,7 @@
                 for (i = 0; i < xcors.length; i++) {
                     board1.create('point',
                         [i + 1, xcors[i]], {
-                            fixed: true
+                            fixed: true , withLabel: false
                         });
                 }
             }
@@ -270,7 +270,7 @@
         // Set both boards to update when the "c" value checkbox is changed
         function updateC(checkbox) {
             cValue = checkbox.value;
-            cOutput.innerHTML = cValue; // Output value for student to see
+            //cOutput.innerHTML = cValue; // Output value for student to see
             reCalculate();
             board1.fullUpdate();
             board2.fullUpdate();
