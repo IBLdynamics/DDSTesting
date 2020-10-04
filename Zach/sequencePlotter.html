@@ -125,7 +125,7 @@
                     <a class="nav-link" href="../index.html">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../chapters/ch2.html">Return to Chapter Overview</a>
+                    <a class="nav-link" href="../chapters/ch1.html">Return to Chapter Overview</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../about.html">About the Authors</a>
@@ -137,77 +137,68 @@
             </div>
           </div>
         </nav>
-
-    <h1>Chapter 2, Exercise 56</h1>
-    <p> The yellow points below show the sequence \(x_n = 1 + \frac{(-1)^n}{n}\). When you select a value for \(N\) on the slider, the point \(u_n\) is shown in blue and \(v_N\) is shown in orange. Move the slider to see how the sequences that define the limit infimum and limit supremum change. Does this agree with what you observed in answering the other parts of this exploration in the text?  
-    <!-- Create a slider to determine the value of N -->
-    <div style="width: 500px; height: 40px;">
-        <p style="display: inline;">N:</p>
-        <input id="NSlider" type="range" min="1" max="19" value="1" step="1" style="width: 50%;">
-        <p style="display: inline;"><span id="NOut"></span></p>
-        <script>
-            // Get the value of N from the slider
-            var NSlider = document.getElementById("NSlider");
-            var NOutput = document.getElementById("NOut");
-            NOutput.innerHTML = NSlider.value; // Output value for student to see
-        </script>
-    </div>
-    <!-- Create board with points -->
-    <div id="box" class="jxgbox" style="width:500px; height:500px;">
+    <div>    
+        <h1>Testing</h1>
+        <!-- Create textboxes for sequences to enter -->
+        <div style="padding: 10px;">
+            <label>\(a_n\): <input id="aTextbox1" type="text"></label>
+            <button onclick="plotSequences1();">Plot Sequences</button>
+        </div>
+   
+    <!-- Define functions that both boards share -->
+    <div id="box1" class="jxgbox" style="width:500px; height:500px; float: left;">
         <script type="text/javascript">
-            // Create board
-            var board = JXG.JSXGraph.initBoard('box', {
-                boundingbox: [-1, 2, 21, -0.2],
-                axis: true,
-                grid: true
-            });
-            // Generate points in the sequence and graph points of the sequence
-            var i;
-            var s = [null];
-            for (i = 1; i <= 20; i++) {
-                s.push(1 + Math.pow(-1, i) / i);
-                board.create('point', [i, s[i]], {
-                    fillColor: 'yellow',
-                    fixed: true,
-                    strokeColor: 'yellow',
-                    withLabel: false
-                });
+        var aSequence = document.getElementById("aTextbox1");
+        var aFunction = parseFunction(aSequence.value);
+
+        // Function to calculate the attracting and repelling points
+        function generatePoints() {
+            var i, xcors, ycors, xi;
+            xcors = [x0Slider.value]; // Populate xcors with the first value = x0
+            ycors = [graphFunc(x0Slider.value)]; // Populate ycors with the first value = x1
+            for (i = 0; i < 10; i++) {
+                xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
+                // Add new point (xi, xi)
+                xcors.push(xi);
+                ycors.push(xi);
+                // Add new point (xi, xi+1)
+                xcors.push(xi);
+                ycors.push(graphFunc(xi));
             }
-            // Genereate liminfs and limsups
-            var infs = [null],
-                sups = [null];
-            for (i = 1; i <= 20; i++) {
-                infs.push(Math.min.apply(null, s.slice(i + 1)));
-                sups.push(Math.max.apply(null, s.slice(i + 1)));
-            }
-            // Graph liminf and limsup points
-            var liminf = board.create('point', [
-            function() { return NSlider.value; },
-            function() { return infs[NSlider.value]; }], {
-                fillColor: 'blue',
-                strokeColor: 'blue',
-                withLabel: false
-            });
-            var limsup = board.create('point', [
-            function() { return NSlider.value; },
-            function() { return sups[NSlider.value]; }], {
-                fillColor: 'orange',
-                strokeColor: 'orange',
-                withLabel: false
-            });
-     
-            board.update()
-        </script>
-    </div>
-        <script>
-            // Set board to update when the N slider is updated
-            NSlider.oninput = function () {
-            NOutput.innerHTML = this.value; // Output value for student to see
-                liminf.moveTo([NSlider.value, infs[NSlider.value]]);
-                limsup.moveTo([NSlider.value, sups[NSlider.value]]);
-            }
-        </script>
+            return {
+                'xcors': xcors,
+                'ycors': ycors
+            };
+        }
+
     
+            var board1;
+            // Function to create board and plot the x-coordinates from generatePoints
+            function createBoard1() {
+                board1 = JXG.JSXGraph.initBoard('box1', {
+                    boundingbox: [-1, 6, 12, -3],
+                    axis: true,
+                    grid: true
+                });
+                // Plot points with value (i, xi)
+                var i, xcors;
+                xcors = generatePoints()['xcors'];
+                for (i = 0; i < xcors.length; i++) {
+                    board1.create('point',
+                        [i + 1, xcors[i]], {
+                            fixed: true , withLabel: false
+                        });
+                }
+            }
+            createBoard1();
+        </script>
+    <script> function plotSequences1() {
+             board1.update()
+    </script>
+    </div>
+    <!-- Setup boards so they both change when either x0 or c changes-->
+
+    </div>
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.js"></script>
     <script src="../js/bootstrap.min.js"></script>

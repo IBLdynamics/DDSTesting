@@ -183,6 +183,25 @@
                     axis: true,
                     grid: true
                 });
+            // Function to calculate the attracting and repelling points
+            function generatePointsA() {
+                var i, xcors, ycors, xi;
+                xcors = [x0Slider.value]; // Populate xcors with the first value = x0
+                ycors = [graphFunc(x0Slider.value)]; // Populate ycors with the first value = x1
+                for (i = 0; i < 10; i++) {
+                    xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
+                    // Add new point (xi, xi)
+                    xcors.push(xi);
+                    ycors.push(xi);
+                    // Add new point (xi, xi+1)
+                    xcors.push(xi);
+                    ycors.push(graphFunc(xi));
+                }
+                return {
+                    'xcors': xcors,
+                    'ycors': ycors
+                    };
+                }
                 // Function to plot the an and bn sequences the student entered
                 function plotSequences1() {
                     // Free current board and recreate it
@@ -192,7 +211,7 @@
                         axis: true,
                         grid: true
                     });
-                    // Plot sequences
+                    // Turns the sequences into useable functions
                     var aSequence = document.getElementById("aTextbox1");
                     var bSequence = document.getElementById("bTextbox1");
                     var aFunction = parseFunction(aSequence.value);
@@ -205,7 +224,7 @@
             </script>
         </div>
     </div>
-    <p> Don't forget to write down your limit and your two sequences. You'll need them in the next two exercises.</p>
+    <p> <b>Don't forget to write down your limit and your two sequences. You'll need them in the next <a href="../exercises/ex2_13_14.html"> two exercises</a>.</b></p>
     
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.js"></script>
