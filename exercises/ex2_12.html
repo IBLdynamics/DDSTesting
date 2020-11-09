@@ -147,11 +147,6 @@
         function randomInteger(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
-        // Function to parse a function from what the student entered in the textbox
-        function parseFunction(funcStr) {
-            eval("var func = function (n) { return " + funcStr + "; };");
-            return func;
-        }
     </script>
     <!-- First graph -->
     <div>
@@ -172,60 +167,58 @@
         <div style="padding: 10px;">
             <label>\(a_n\): <input id="aTextbox1" type="text"></label>
             <label>\(b_n\)</sub>: <input id="bTextbox1" type="text"></label>
-            <button onclick="plotSequences1();">Plot Sequences</button>
+            <button onclick="plotSequences();">Plot Sequences</button>
         </div>
-        <!-- Create first board to display entered sequences -->
-        <div id="box1" class="jxgbox" style="width: 500px; height: 500px;">
-            <script>
-                // Initialize the board
-                var board1 = JXG.JSXGraph.initBoard("box1", {
-                    boundingbox: [-2, 10, 50, -10],
+   
+    <!-- Define functions that both boards share -->
+    <div id="box1" class="jxgbox" style="width:500px; height:500px; float: left;">
+        <script type="text/javascript">
+        // Function to parse a function from what the student entered in the textbox
+        function parseFunction(funcStr) {
+            eval("var func = function (n) { return " + funcStr + "; };");
+            return func;
+        }
+        
+
+        //Generates the board
+        var board1;
+        board1 = JXG.JSXGraph.initBoard('box1', {
+                    boundingbox: [-1, 6, 12, -3],
                     axis: true,
                     grid: true
                 });
-            // Function to calculate the attracting and repelling points
-            function generatePointsA() {
-                var i, xcors, ycors, xi;
-                xcors = [x0Slider.value]; // Populate xcors with the first value = x0
-                ycors = [graphFunc(x0Slider.value)]; // Populate ycors with the first value = x1
-                for (i = 0; i < 10; i++) {
-                    xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
-                    // Add new point (xi, xi)
-                    xcors.push(xi);
-                    ycors.push(xi);
-                    // Add new point (xi, xi+1)
-                    xcors.push(xi);
-                    ycors.push(graphFunc(xi));
-                }
-                return {
-                    'xcors': xcors,
-                    'ycors': ycors
-                    };
-                }
-                // Function to plot the an and bn sequences the student entered
-                function plotSequences1() {
-                    // Free current board and recreate it
-                    JXG.JSXGraph.freeBoard(board1);
+
+
+        function plotSequences() {
+            JXG.JSXGraph.freeBoard(board1);
                     board1 = JXG.JSXGraph.initBoard("box1", {
-                        boundingbox: [-2, 10, 50, -10],
+                        boundingbox: [-1, 6, 12, -3],
                         axis: true,
                         grid: true
                     });
-                    // Turns the sequences into useable functions
-                    var aSequence = document.getElementById("aTextbox1");
-                    var bSequence = document.getElementById("bTextbox1");
-                    var aFunction = parseFunction(aSequence.value);
-                    var bFunction = parseFunction(bSequence.value);
-                    board1.create('functiongraph', [aFunction, 0, 50]);
-                    board1.create('functiongraph', [bFunction, 0, 50], {
-                        strokeColor: "red"
-                    });
+            // Gets the sequence form the textbox and parses it into a function
+            var aSequence = document.getElementById("aTextbox1");
+            var aFunction = parseFunction(aSequence.value);
+            var bSequence = document.getElementById("bTextbox1");
+            var bFunction = parseFunction(bSequence.value);
+            //ycors = generatePoints()['ycors'];
+            for (i = 0; i < 10; i++) {
+                board1.create('point',
+                    [i,aFunction(i)], {
+                    fixed: true , withLabel: false, color: "green"
+                });
+                board1.create('point',
+                    [i,bFunction(i)], {
+                    fixed: true , withLabel: false, color: "blue"
+                });
                 }
-            </script>
+         }
+    </script>
         </div>
     </div>
+    <div>
     <p> <b>Don't forget to write down your limit and your two sequences. You'll need them in the next <a href="../exercises/ex2_13_14.html"> two exercises</a>.</b></p>
-    
+    </div>
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.js"></script>
     <script src="../js/bootstrap.min.js"></script>

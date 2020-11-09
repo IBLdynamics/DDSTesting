@@ -204,13 +204,21 @@
                     function cFunction(x) {
                         return weightValue*aFunction(x) + (1-weightValue)*bFunction(x);
                     }
-                    board2.create('functiongraph', [aFunction, 0, 50]);
-                    board2.create('functiongraph', [bFunction, 0, 50], {
-                        strokeColor: "red"
+                    for (i = 0; i < 10; i++) {
+                    board1.create('point',
+                        [i,aFunction(i)], {
+                        fixed: true , withLabel: false, color: "green"
                     });
-                    board2.create('functiongraph', [cFunction, 0, 50], {
-                        strokeColor: "green"
+                    board1.create('point',
+                        [i,bFunction(i)], {
+                        fixed: true , withLabel: false, color: "blue"
                     });
+                    board1.create('point',
+                        [i,cFunction(i)], {
+                        fixed: true , withLabel: false, color: "orange"
+                    });
+                    }
+                   
                 }
 
             </script>

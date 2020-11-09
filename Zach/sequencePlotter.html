@@ -142,58 +142,53 @@
         <!-- Create textboxes for sequences to enter -->
         <div style="padding: 10px;">
             <label>\(a_n\): <input id="aTextbox1" type="text"></label>
-            <button onclick="plotSequences1();">Plot Sequences</button>
+            <label>\(b_n\)</sub>: <input id="bTextbox1" type="text"></label>
+            <button onclick="plotSequences();">Plot Sequences</button>
         </div>
    
     <!-- Define functions that both boards share -->
     <div id="box1" class="jxgbox" style="width:500px; height:500px; float: left;">
         <script type="text/javascript">
-        var aSequence = document.getElementById("aTextbox1");
-        var aFunction = parseFunction(aSequence.value);
-
-        // Function to calculate the attracting and repelling points
-        function generatePoints() {
-            var i, xcors, ycors, xi;
-            xcors = [x0Slider.value]; // Populate xcors with the first value = x0
-            ycors = [graphFunc(x0Slider.value)]; // Populate ycors with the first value = x1
-            for (i = 0; i < 10; i++) {
-                xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
-                // Add new point (xi, xi)
-                xcors.push(xi);
-                ycors.push(xi);
-                // Add new point (xi, xi+1)
-                xcors.push(xi);
-                ycors.push(graphFunc(xi));
-            }
-            return {
-                'xcors': xcors,
-                'ycors': ycors
-            };
+        // Function to parse a function from what the student entered in the textbox
+        function parseFunction(funcStr) {
+            eval("var func = function (n) { return " + funcStr + "; };");
+            return func;
         }
+        
 
-    
-            var board1;
-            // Function to create board and plot the x-coordinates from generatePoints
-            function createBoard1() {
-                board1 = JXG.JSXGraph.initBoard('box1', {
+        //Generates the board
+        var board1;
+        board1 = JXG.JSXGraph.initBoard('box1', {
                     boundingbox: [-1, 6, 12, -3],
                     axis: true,
                     grid: true
                 });
-                // Plot points with value (i, xi)
-                var i, xcors;
-                xcors = generatePoints()['xcors'];
-                for (i = 0; i < xcors.length; i++) {
-                    board1.create('point',
-                        [i + 1, xcors[i]], {
-                            fixed: true , withLabel: false
-                        });
+
+
+        function plotSequences() {
+            JXG.JSXGraph.freeBoard(board1);
+                    board1 = JXG.JSXGraph.initBoard("box1", {
+                        boundingbox: [-1, 6, 12, -3],
+                        axis: true,
+                        grid: true
+                    });
+            // Gets the sequence form the textbox and parses it into a function
+            var aSequence = document.getElementById("aTextbox1");
+            var aFunction = parseFunction(aSequence.value);
+            var bSequence = document.getElementById("bTextbox1");
+            var bFunction = parseFunction(bSequence.value);
+            //ycors = generatePoints()['ycors'];
+            for (i = 0; i < 10; i++) {
+                board1.create('point',
+                    [i,aFunction(i)], {
+                    fixed: true , withLabel: false, color: "green"
+                });
+                board1.create('point',
+                    [i,bFunction(i)], {
+                    fixed: true , withLabel: false, color: "blue"
+                });
                 }
-            }
-            createBoard1();
-        </script>
-    <script> function plotSequences1() {
-             board1.update()
+         }
     </script>
     </div>
     <!-- Setup boards so they both change when either x0 or c changes-->
