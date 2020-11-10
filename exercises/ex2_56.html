@@ -167,9 +167,8 @@
             for (i = 1; i <= 20; i++) {
                 s.push(1 + Math.pow(-1, i) / i);
                 board.create('point', [i, s[i]], {
-                    fillColor: 'yellow',
+                    color: 'yellow',
                     fixed: true,
-                    strokeColor: 'yellow',
                     withLabel: false
                 });
             }
@@ -184,15 +183,13 @@
             var liminf = board.create('point', [
             function() { return NSlider.value; },
             function() { return infs[NSlider.value]; }], {
-                fillColor: 'blue',
-                strokeColor: 'blue',
+                color: 'blue',
                 withLabel: false
             });
             var limsup = board.create('point', [
             function() { return NSlider.value; },
             function() { return sups[NSlider.value]; }], {
-                fillColor: 'orange',
-                strokeColor: 'orange',
+                color: 'orange',
                 withLabel: false
             });
      

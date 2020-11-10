@@ -139,7 +139,7 @@
         </nav>
 
     <h1>Chapter 2, Exercise 57</h1>
-    <p> The yellow points below show the sequence \(x_n = (-1)^n(1+\frac{1}{n})\). When you select a value for \(N\) on the slider, the point \(u_n\) is shown in blue and \(v_N\) is shown in orange. Move the slider to see how the sequences that define the limit infimum and limit supremum change. Does this agree with what you observed in answering the other parts of this exploration in the text?  
+    <p> The yellow points below show the sequence \(x_n = (-1)^n(1+\frac{1}{n})\). When you select a value for \(N\) on the slider, the point \(u_N\) is shown in blue and \(v_N\) is shown in orange. Move the slider to see how the sequences that define the limit infimum and limit supremum change. Does this agree with what you observed in answering the other parts of this exploration in the text?  
     <!-- Create a slider to determine the value of N -->
     <div style="width: 500px; height: 40px;">
         <p style="display: inline;">N:</p>
@@ -152,12 +152,12 @@
             NOutput.innerHTML = NSlider.value; // Output value for student to see
         </script>
     </div>
-    <!-- Create board with points -->
+     <!-- Create board with points -->
     <div id="box" class="jxgbox" style="width:500px; height:500px;">
         <script type="text/javascript">
             // Create board
             var board = JXG.JSXGraph.initBoard('box', {
-                boundingbox: [-1, 2, 21, -0.2],
+                boundingbox: [-1, 2, 21, -2],
                 axis: true,
                 grid: true
             });
@@ -165,11 +165,10 @@
             var i;
             var s = [null];
             for (i = 1; i <= 20; i++) {
-                s.push(Math.pow(-1, i)*(1+ 1 / i));
+                s.push((-1)**i*(1 + (1 / i)));
                 board.create('point', [i, s[i]], {
-                    fillColor: 'yellow',
+                    color: 'yellow',
                     fixed: true,
-                    strokeColor: 'yellow',
                     withLabel: false
                 });
             }
@@ -184,15 +183,13 @@
             var liminf = board.create('point', [
             function() { return NSlider.value; },
             function() { return infs[NSlider.value]; }], {
-                fillColor: 'blue',
-                strokeColor: 'blue',
+                color: 'blue',
                 withLabel: false
             });
             var limsup = board.create('point', [
             function() { return NSlider.value; },
             function() { return sups[NSlider.value]; }], {
-                fillColor: 'orange',
-                strokeColor: 'orange',
+                color: 'orange',
                 withLabel: false
             });
      
@@ -212,5 +209,6 @@
     <script src="../js/popper.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/main.js"></script>
+
   </body>
 </html>
