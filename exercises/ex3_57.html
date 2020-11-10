@@ -144,7 +144,7 @@
     set using a slider.</p>
 
     <p>Exploration 57 - For each of the \(a\)-values given in your text, the logistic equation has an attracting
-    periodic orbit. Adjust the slider to the appropriate value and determine its period. How many periodic points are there of
+    periodic orbit. Select the appropriate value and determine its period. How many periodic points are there of
     this period? How many periodic orbits are there of this period?</p>
 
     <p>Exploration 58 - For each parameter value use the
@@ -153,16 +153,22 @@
     \(n\) equal to 2 using the slider. What can you say about the derivative of the
     right graph at the attracting periodic points? What about the repelling ones? </p>
 
-    <!-- Create a slider to determine the value of "a" -->
+    <!-- Create a dropdown to determine the value of "a" -->
     <div id="arangeslider" style="width: 500px; height: 50px;">
         <p style="display: inline;">a:</p>
-        <input id="aSlider" type="range" min="0" max="4" value="3" step="0.01" style="width: 50%;">
+        <select name="aSlider" id="aSlider">
+          <option value="1.75">1.75</option>
+          <option value="3.25">3.25</option>
+          <option value="3.46">3.46</option>
+          <option value="3.63">3.63</option>
+          <option value="3.84">3.84</option>
+        </select>
         <p style="display: inline;"><span id="aOut"></span></p>
         <script>
-            // Get the value of "a" from the slider
+            // Get the value of "a" from the dropdown
             var aSlider = document.getElementById("aSlider");
-            var aOutput = document.getElementById("aOut");
-            aOutput.innerHTML = aSlider.value; // Output value for student to see
+            //var aOutput = document.getElementById("aOut");
+            //aOutput.innerHTML = aSlider.value; // Output value for student to see
         </script>
     </div>
     <!-- Create a slider to determine the value of "n" -->
@@ -302,7 +308,7 @@
     <script>
         // Set the whole board to update when the "a" slider is updated
         aSlider.oninput = function () {
-            aOutput.innerHTML = this.value; // Output value for student to see
+            //aOutput.innerHTML = this.value; // Output value for student to see
             plotPoints1();
             plotPoints2();
             board1.fullUpdate();
