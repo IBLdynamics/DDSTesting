@@ -139,7 +139,7 @@
         </nav>
 
     <h1>Chapter 2, Exercise 57</h1>
-    <p> The yellow points below show the sequence \(x_n = (-1)^n(1+\frac{1}{n})\). When you select a value for \(N\) on the slider, the point \(u_N\) is shown in blue and \(v_N\) is shown in orange. Move the slider to see how the sequences that define the limit infimum and limit supremum change. Does this agree with what you observed in answering the other parts of this exploration in the text?  
+    <p> The yellow points below show the sequence \(x_n = (-1)^n(1+\frac{1}{n})\). When you select a value for \(N\) on the slider, the point \(u_N\) is shown in blue and \(v_N\) is shown in orange. Move the slider to see how the sequences that define the limit infimum and limit supremum change. Does this agree with what you observed in answering the other parts of this exploration in the text?  </p>
     <!-- Create a slider to determine the value of N -->
     <div style="width: 500px; height: 40px;">
         <p style="display: inline;">N:</p>
@@ -149,7 +149,7 @@
             // Get the value of N from the slider
             var NSlider = document.getElementById("NSlider");
             var NOutput = document.getElementById("NOut");
-            NOutput.innerHTML = NSlider.value; // Output value for student to see
+            NOutput.innerHTML = parseInt(NSlider.value); // Output value for student to see
         </script>
     </div>
      <!-- Create board with points -->
@@ -169,7 +169,7 @@
                 board.create('point', [i, s[i]], {
                     color: 'yellow',
                     fixed: true,
-                    withLabel: false
+                    withLabel: false,
                 });
             }
             // Genereate liminfs and limsups
@@ -181,14 +181,14 @@
             }
             // Graph liminf and limsup points
             var liminf = board.create('point', [
-            function() { return NSlider.value; },
-            function() { return infs[NSlider.value]; }], {
+            function() { return parseInt(NSlider.value); },
+            function() { return infs[parseInt(NSlider.value)]; }], {
                 color: 'blue',
-                withLabel: false
+                withLabel: false,
             });
             var limsup = board.create('point', [
-            function() { return NSlider.value; },
-            function() { return sups[NSlider.value]; }], {
+            function() { return parseInt(NSlider.value); },
+            function() { return sups[parseInt(NSlider.value)]; }], {
                 color: 'orange',
                 withLabel: false
             });
@@ -200,8 +200,8 @@
             // Set board to update when the N slider is updated
             NSlider.oninput = function () {
             NOutput.innerHTML = this.value; // Output value for student to see
-                liminf.moveTo([NSlider.value, infs[NSlider.value]]);
-                limsup.moveTo([NSlider.value, sups[NSlider.value]]);
+                liminf.moveTo([parseInt(NSlider.value), infs[parseInt(NSlider.value)]]);
+                limsup.moveTo([parseInt(NSlider.value), sups[parseInt(NSlider.value)]]);
             }
         </script>
     

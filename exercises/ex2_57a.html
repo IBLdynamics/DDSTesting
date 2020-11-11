@@ -138,8 +138,8 @@
           </div>
         </nav>
 
-    <h1>Chapter 2, Exercise 58</h1>
-    <p> The yellow points below show a random sequence \(\{x_n\}\). When you select a value for \(N\) on the slider, the point \(u_N\) is shown in blue and \(v_N\) is shown in orange. Move the slider to see how the sequences that define the limit infimum and limit supremum change. What do these dots (i.e., sequences) do as you scroll through?
+    <h1>Chapter 2, Exercise 57</h1>
+    <p> The yellow points below show the sequence \(x_n = (-1)^n(1+\frac{1}{n})\). When you select a value for \(N\) on the slider, the point \(u_N\) is shown in blue and \(v_N\) is shown in orange. Move the slider to see how the sequences that define the limit infimum and limit supremum change. Does this agree with what you observed in answering the other parts of this exploration in the text?  </p>  
     <!-- Create a slider to determine the value of N -->
     <div style="width: 500px; height: 40px;">
         <p style="display: inline;">N:</p>
@@ -149,19 +149,15 @@
             // Get the value of N from the slider
             var NSlider = document.getElementById("NSlider");
             var NOutput = document.getElementById("NOut");
-            NOutput.innerHTML = parseInt(NSlider.value); // Output value for student to see
-            // Generates a random integer between max and min
-            function getRndInteger(min, max) {
-                return Math.floor(Math.random() * (max - min + 1) ) + min;
-                }
+            NOutput.innerHTML = NSlider.value; // Output value for student to see
         </script>
     </div>
-     <!-- Create board with points -->
-    <div id="box" class="jxgbox" style="width:500px; height:500px;">
+    <!-- Create board with points -->
+    <div id="box" class="jxgbox" style="width:500px; height:500px;visibility: true;">
         <script type="text/javascript">
             // Create board
             var board = JXG.JSXGraph.initBoard('box', {
-                boundingbox: [-1, 1.2, 21, -1.2],
+                boundingbox: [-1, 2, 21, -2],
                 axis: true,
                 grid: true
             });
@@ -169,12 +165,11 @@
             var i;
             var s = [null];
             for (i = 1; i <= 20; i++) {
-                //scales a random integers to be between -1 and 1
-                s.push(0.01*getRndInteger(-100,100)); 
+                s.push(-1+ (-1)**i / i);
                 board.create('point', [i, s[i]], {
                     color: 'yellow',
                     fixed: true,
-                    withLabel: false
+                    withLabel: false,
                 });
             }
             // Genereate liminfs and limsups
@@ -186,34 +181,38 @@
             }
             // Graph liminf and limsup points
             var liminf = board.create('point', [
-            function() { return parseInt(NSlider.value); },
-            function() { return infs[parseInt(NSlider.value)]; }], {
+            function() { return NSlider.value; },
+            function() { return infs[NSlider.value]; }], {
                 color: 'blue',
-                withLabel: false
+                withLabel: false,
             });
             var limsup = board.create('point', [
-            function() { return parseInt(NSlider.value); },
-            function() { return sups[parseInt(NSlider.value)]; }], {
+            function() { return NSlider.value; },
+            function() { return sups[NSlider.value]; }], {
                 color: 'orange',
-                withLabel: false
+                withLabel: false,
             });
+
      
             board.update()
         </script>
     </div>
+    <div style=" display: unset; visibility: true;">
         <script>
             // Set board to update when the N slider is updated
             NSlider.oninput = function () {
             NOutput.innerHTML = this.value; // Output value for student to see
-                liminf.moveTo([parseInt(NSlider.value), infs[parseInt(NSlider.value)]]);
-                limsup.moveTo([parseInt(NSlider.value), sups[parseInt(NSlider.value)]]);
-            }
+                liminf.moveTo([NSlider.value, infs[NSlider.value]]);
+                limsup.moveTo([NSlider.value, sups[NSlider.value]]);
+                document.getElementById("demo").innerHTML = infs;
+                }
         </script>
-    
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/main.js"></script>
 
+    <p id="demo"></p>
+</div>
   </body>
 </html>
