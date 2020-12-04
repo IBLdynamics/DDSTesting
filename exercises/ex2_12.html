@@ -175,6 +175,8 @@
         <script type="text/javascript">
         // Function to parse a function from what the student entered in the textbox
         function parseFunction(funcStr) {
+            if (funcStr[0]=='-'){
+                funcStr = '-1*'+funcStr.slice(1)}
             eval("var func = function (n) { return " + funcStr + "; };");
             return func;
         }

@@ -139,41 +139,43 @@
         </nav>
 
     <h1>Chapter 8, Explorations 1-5</h1>
-    <p> 
-       The slider can be used to set an initial condition $x_0$.  Its orbit is shown in blue in the lefthand plot.  The second initial condition is $x_0 + \eps,$ where the value of $\eps$ can be specified in the dialog box.  The orbit of this second initial condition is shown in red.  A light blue line connects the corresponding iterates of these points.  The righthand plot shows the distance between corresponding orbit points.  In other words, the black dots represent the sequence
+    <!-- <p> 
+       The slider can be used to set an initial condition \(x_0\).  Its orbit is shown in blue in the lefthand plot.  The second initial condition is \(x_0 + \epsilon\), where the value of \(\epsilon\) can be specified in the dialog box.  The orbit of this second initial condition is shown in red.  A light blue line connects the corresponding iterates of these points.  The righthand plot shows the distance between corresponding orbit points.  In other words, the black dots represent the sequence
 
-\[ \left\{ \left\lvert f_4^n\left(x_0\right) - f_4^n\left(x_0+\eps\right)\right\rvert \right\}. \]
+<p style="text-align:center"> \( \left\{ \left\lvert f_4^n\left(x_0\right) - f_4^n\left(x_0+\epsilon\right)\right\rvert \right\}. \) </p>
 
-The green, dashed horizontal line in both plots is at height $\rfrac{1}{2}$.  In the left plot, that is because $\rfrac{1}{2}$ is the critical point of the logistic function.  In the right plot, it is because $\rfrac{1}{2}$ is the value of $b$ for this particular function.
-\begin{Ex-web}\mylabel{ex:SDIC}
-Using the tool on the website, set $\eps = 0.0001.$  Try to find an initial condition where the distance between iterates remains less than $\rfrac{1}{2}$  for all iterates displayed on the tool.   Repeat this with $\eps = 0.00001.$
-\end{Ex-web}
+The green, dashed horizontal line in both plots is at height \(\frac{1}{2}\).  In the left plot, that is because \(\frac{1}{2}\) is the critical point of the logistic function.  In the right plot, it is because \(\frac{1}{2}\) is the value of \(b\) for this particular function.
+<ul>
+<li>
+    Using the tool on the website, set \(\epsilon = 0.0001.\)  Try to find an initial condition where the distance between iterates remains less than \(\frac{1}{2}\)  for all iterates displayed on the tool.   Repeat this with \(\epsilon = 0.00001.\)
+</li>
 
-\begin{Ex-web}
-Try to find a value of $\eps > 0$ where the distance between orbits is always less than $\rfrac{1}{2}$ for the 20 iterates shown?
-\end{Ex-web}
+<li>
+    Try to find a value of $\eps > 0$ where the distance between orbits is always less than $\rfrac{1}{2}$ for the 20 iterates shown?
+</li>
 
-\begin{Ex-web}
-If the distance between orbits ever becomes greater than $\rfrac{1}{2}$, does this distance remain so for all iterates thereafter?
-\end{Ex-web}
+<li>
+    If the distance between orbits ever becomes greater than $\rfrac{1}{2}$, does this distance remain so for all iterates thereafter?
+</li>
 
-\begin{Ex-web}\label{ex:findN}
-Let $x_0=0.2$ and $\eps = 0.0001$.  Track the orbits by making a list of L's and R's.  Write an L (for left) every time an iterate is less than $\rfrac{1}{2}$ and write an R (right) every time an iterate is greater than $\rfrac{1}{2}.$  This is why the green dashed line is shown.  Since the blue orbit starts at $0.2$, the first letter in its list is L.  Similarly for the red orbit that starts at $0.2001$.  {\bf Note:}  If two points are very, very close, then you only see the red point on the display.
-\begin{enumerate}
-\item How do these lists relate to one another, if at all?
-\item What is the first entry where one list has an L but the other list has an R?  Call this value $N$ for future reference.
-\end{enumerate}
-\end{Ex-web}
+<li>
+    Let $x_0=0.2$ and $\eps = 0.0001$.  Track the orbits by making a list of L's and R's.  Write an L (for left) every time an iterate is less than $\rfrac{1}{2}$ and write an R (right) every time an iterate is greater than $\rfrac{1}{2}.$  This is why the green dashed line is shown.  Since the blue orbit starts at $0.2$, the first letter in its list is L.  Similarly for the red orbit that starts at $0.2001$.  {\bf Note:}  If two points are very, very close, then you only see the red point on the display.
+<ul>
+<li> How do these lists relate to one another, if at all? </li>
+<li> What is the first entry where one list has an L but the other list has an R?  Call this value $N$ for future reference.</li>
+</ul>
+</li>
 
-\begin{Ex-web}\mylabel{ex:SDIClast}
+<li>
 Convert your sequences of L's and R's to $0$'s and $1$'s by replacing each L with $0$ and each R with $1$.  Call these sequences $s$ and $t$ respectively.
-\begin{enumerate}
-\item Find an upper bound for $d(s,t)$ in $\Sigma_2$ using the metric given in equation~\ref{eq:sigma2metric}.  This is an estimate on how {\bf close} the points are together initially.
-\item Use the value of $N$ that you found in exploration~\ref{ex:findN} to find a {\bf lower bound} on $d(\sigma^N(s),\sigma^N(t)).$  This is an estimate on how far apart these iterates are after $N$ iterates.
-\item How do you think this relates to sensitive dependence from definition~\ref{def:SDIC}?
-\end{enumerate}
-\end{Ex-web} 
-    </p>
+<ul>
+<li>Find an upper bound for $d(s,t)$ in $\Sigma_2$ using the metric given in equation~\ref{eq:sigma2metric}.  This is an estimate on how {\bf close} the points are together initially. </li>
+<li> Use the value of $N$ that you found in exploration~\ref{ex:findN} to find a {\bf lower bound} on $d(\sigma^N(s),\sigma^N(t)).$  This is an estimate on how far apart these iterates are after $N$ iterates. </li>
+<li> How do you think this relates to sensitive dependence from definition~\ref{def:SDIC}? </li>
+</li>
+</ul>
+</ul>
+    </p> -->
     <!-- Create a slider to determine the value of x0 -->
     <div id="rangeslider" style="width: 500px; height: 40px;">
         <p style="display: inline;">x0:</p>
@@ -192,7 +194,6 @@ Convert your sequences of L's and R's to $0$'s and $1$'s by replacing each L wit
         <script type="text/javascript">
             var epValue = document.getElementById("epInput");
         </script>
-        <button onclick="updateGraph();">Plot Sequences</button>
     </div>
         
     <!-- Create the first box -->
@@ -208,18 +209,12 @@ Convert your sequences of L's and R's to $0$'s and $1$'s by replacing each L wit
             // Create graphs
             var lineGraph = board.create('functiongraph',
                 [function (x) {
-                    return x
+                    return 0.5
                 }, -2.0, 2.0], {
-                    strokeColor: 'green'
+                    strokeColor: 'green', dash:2
                 }
             );
 ;
-             //Function to be sure one click updates both boards
-             function updateGraph(){
-                plotPoints();
-                board.fullUpdate();
-                board2.fullUpdate();
-             }
             // Function used for graphing the function f(x)
             function graphFunc(x) {
                 return 4*x*(1-x);

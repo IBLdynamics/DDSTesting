@@ -144,6 +144,7 @@
     <div style="width: 500px; height: 40px;">
         <p style="display: inline;">N:</p>
         <input id="NSlider" type="range" min="1" max="19" value="1" step="1" style="width: 50%;">
+        
         <p style="display: inline;"><span id="NOut"></span></p>
         <script>
             // Get the value of N from the slider
@@ -154,9 +155,15 @@
             function getRndInteger(min, max) {
                 return Math.floor(Math.random() * (max - min + 1) ) + min;
                 }
+
         </script>
+
     </div>
      <!-- Create board with points -->
+     <p> 
+        <button onClick="board.update()">Click to get new points</button>
+     </p>
+    
     <div id="box" class="jxgbox" style="width:500px; height:500px;">
         <script type="text/javascript">
             // Create board
@@ -165,6 +172,7 @@
                 axis: true,
                 grid: true
             });
+
             // Generate points in the sequence and graph points of the sequence
             var i;
             var s = [null];
@@ -199,6 +207,7 @@
             });
      
             board.update()
+
         </script>
     </div>
         <script>
@@ -207,6 +216,9 @@
             NOutput.innerHTML = this.value; // Output value for student to see
                 liminf.moveTo([parseInt(NSlider.value), infs[parseInt(NSlider.value)]]);
                 limsup.moveTo([parseInt(NSlider.value), sups[parseInt(NSlider.value)]]);
+            }
+            function newPoints(){
+                board.update()
             }
         </script>
     
