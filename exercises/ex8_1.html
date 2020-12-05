@@ -219,56 +219,44 @@ Convert your sequences of L's and R's to $0$'s and $1$'s by replacing each L wit
             function graphFunc(x) {
                 return 4*x*(1-x);
             }
-            var curveGraph = board.create('functiongraph',
-                [graphFunc, -2.0, 2.0],{
-                    strokeColor: 'orange'
-                }
-            );
-            // Create a step function that will be updated each time a or x0 changes
-            var stepGraph = board.create('stepfunction', [
-                [0], // Use as filler for now. It will be replaced on board update
-                [0]
-            ], {
-                strokeColor: 'blue'
-            });
-            // Create a step function that will be updated each time a or x0 changes
-            var stepGraph2 = board.create('stepfunction', [
-                [0], // Use as filler for now. It will be replaced on board update
-                [0]
-            ], {
-                strokeColor: 'red'
-            });
+            // Generate points in the sequence and graph points of the sequence
+            var i;
+            var s = [null];
+            for (i = 1; i <= 20; i++) {
+                s.push(1 + Math.pow(-1, i) / i);
+                board.create('point', [i, s[i]], {
+                    color: 'yellow',
+                    fixed: true,
+                    withLabel: false
+                });
+            }
             // Array to store distances
             var distances = []
             // Function to calculate and plot the attracting and repelling points
             function plotPoints() {
                 var i, xcors, ycors, xi, xcors2, ycors2, xi2;
-                xcors = [x0Slider.value]; // Populate xcors with the first value = x0
-                ycors = [graphFunc(x0Slider.value)]; // Populate ycors with the first value = x1
-                xcors2 = [x0Slider.value + epValue.value]; // Populate xcors with the first value = x0
-                ycors2 = [graphFunc(x0Slider.value + epValue.value)]; // Populate ycors with the first value = x1
+                xcors = x0Slider.value; // Populate xcors with the first value = x0
+                ycors = graphFunc(x0Slider.value); // Populate ycors with the first value = x1
+                xcors2 = x0Slider.value + epValue.value; // Populate xcors with the first value = x0
+                ycors2 = graphFunc(x0Slider.value + epValue.value); // Populate ycors with the first value = x1
                 for (i = 0; i < 20; i++) {
-                    xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
-                    // Add new point (xi, xi)
-                    xcors.push(xi);
-                    ycors.push(xi);
-                    // Add new point (xi, xi+1)
-                    xcors.push(xi);
-                    ycors.push(graphFunc(xi));
-                    xi2 = ycors2[ycors2.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
-                    // Add new point (xi, xi)
-                    xcors2.push(xi2);
-                    ycors2.push(xi2);
-                    // Add new point (xi, xi+1)
-                    xcors2.push(xi2);
-                    ycors2.push(graphFunc(xi2));
-                    distances.push(Math.abs(graphFunc(xi) - graphFunc(xi2)));
+                    board.create('point', [i,xcors], {
+                    color: 'red',
+                    fixed: true,
+                    withLabel: false
+                    });
+                    board.create('point', [i,xcors2], {
+                    color: 'blue',
+                    fixed: true,
+                    withLabel: false
+                    });
+                    xcors = ycors;
+                    ycors = graphFunc(xcors);
+                    xcors2 = ycors2;
+                    ycors2 = graphFunc(xcors2);
+                    distances.push(Math.abs(xcors-xcors2));
                 }
-                // Plot points
-                stepGraph.xterm = xcors;
-                stepGraph.yterm = ycors;
-                stepGraph2.xterm = xcors2;
-                stepGraph2.yterm = ycors2;
+                
             }
 
 
