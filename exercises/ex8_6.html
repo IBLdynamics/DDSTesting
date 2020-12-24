@@ -164,23 +164,106 @@ Now take ${\tt xmin} < \rfrac{1}{2} < {\tt xmax}$  and again use the tool on the
 </li>
 </ul>
     </p>
-    <!--Slider for two endpoints-->
-    
+        <div style="width: 500px; height: 40px;">
+        <p style="display: inline;">xmax:</p>
+        <input id="xmaxSlider" type="range" min="0" max="1" value="0.6" step="0.01">
+        <span id="xmaxOut" style="display: inline;"></span>
+        <script>
+            // Get the value of m from the slider
+            var xmaxSlider = document.getElementById("xmaxSlider");
+            var xmaxOutput = document.getElementById("xmaxOut");
+            xmaxOutput.innerHTML = xmaxSlider.value; // Output value for student to see
+        </script>
+    </div>
+    <!-- Create a slider to determine the value of b -->
+    <div style="width: 500px; height: 40px;">
+        <p style="display: inline;">xmin:</p>
+        <input id="xminSlider" type="range" min="0" max="1" value="0.2" step="0.01">
+        <span id="xminOut" style="display: inline;"></span>
+        <script>
+            // Get the value of b from the slider
+            var xminSlider = document.getElementById("xminSlider");
+            var xminOutput = document.getElementById("xminOut");
+            xminOutput.innerHTML = xminSlider.value; // Output value for student to see
+        </script>
+    </div>
+
+    <div id="board" class="jxgbox" style="width: 500px; height: 500px; float: left;">
+        <script>
+            var board;
+            function graphFunction(x) {
+                return 4*x*(1-x);
+            };
+
+            function createBoard(){
+            // Initialize the sequenceBoard
+                board = JXG.JSXGraph.initBoard("board", {
+                boundingbox: [-0.1, 1.1, 1.1, -0.1],
+                axis: true,
+                grid: true
+            });
+            
+            
+            var lineGraph = board.create('functiongraph',
+              [function(x) {
+                return x
+              }, -0.1, 1.1], {
+                strokeColor: 'orange',
+              }
+                );
+            var logisticGraph = board.create('functiongraph',
+              [function(x) {
+                return 4*x*(1-x)
+              }, -0.1, 1.1], {
+                strokeColor: 'blue',
+              }
+                );
+
+            function findMax(p1,p2){ //takes two points, and finds the max value the logistic function takes on that interval
+                var start = Math.min(p1,p2);
+                var end = Math.max(p1,p2);
+                if (start <= 0.5 && end >=0.5){
+                    return 1;
+                }
+                else{
+                    return Math.max(graphFunction(start), graphFunction(end));
+                }
+            };
+            function findMin(p1,p2){ //takes two points, and finds the max value the logistic function takes on that interval
+                var start = Math.min(p1,p2);
+                var end = Math.max(p1,p2);
+                return Math.min(graphFunction(start), graphFunction(end));
+            };
+
+            var p1 = board.create('point',[xmaxSlider.value,0],{withLabel: false, color:"blue"});  
+            var p2 = board.create('point',[xminSlider.value,0],{withLabel: false, color:"blue"});
+            var fp1 = board.create('point',[findMax(xmaxSlider.value, xminSlider.value),0.01],{withLabel: false, color:"red"});  
+            var fp2 = board.create('point',[findMin(xmaxSlider.value, xminSlider.value),0.01],{withLabel: false, color:"red"});
+            var interval = board.create('segment',[p1,p2],{strokeColor: "blue", strokewidth:4});    
+            var fInterval = board.create('segment',[fp1,fp2],{strokeColor: "red", strokewidth:4});    
+  
+            }
+
+            createBoard();
+        </script>
+    </div>
     <div>
-    <b>0</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="[0.25,0.75]"/> <b>1</b>
-    <p>
-    <script>
-    var x0slider = new Slider("#ex2");
-    x0slider.on("slide", function(sliderValue)
-    {
-    var leftSliderValue = sliderValue[0];
-    var rightSliderValue = sliderValue[1];
-    }); 
-    console.log(leftSliderValue);
-
-    </script>
-    </p>
-
+        <script>
+        function update(){
+            JXG.JSXGraph.freeBoard(board); // Have to free the whole board to get rid of all the points
+            createBoard();
+        }
+        xmaxSlider.oninput = function () {
+                xmaxOutput.innerHTML = this.value; // Output value for student to see
+                update();
+                board.fullUpdate();
+            }
+        xminSlider.oninput = function () {
+                xminOutput.innerHTML = this.value; // Output value for student to see
+                update();
+                board.fullUpdate();
+            }
+        </script>
     </div>
 
     <script src="../js/jquery.min.js"></script>
