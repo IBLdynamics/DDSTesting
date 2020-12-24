@@ -164,7 +164,7 @@ Now take ${\tt xmin} < \rfrac{1}{2} < {\tt xmax}$  and again use the tool on the
 </li>
 </ul>
     </p>
-        <div style="width: 500px; height: 40px;">
+    <div style="width: 500px; height: 40px;">
         <p style="display: inline;">xmax:</p>
         <input id="xmaxSlider" type="range" min="0" max="1" value="0.6" step="0.01">
         <span id="xmaxOut" style="display: inline;"></span>
@@ -191,8 +191,24 @@ Now take ${\tt xmin} < \rfrac{1}{2} < {\tt xmax}$  and again use the tool on the
     <div id="board" class="jxgbox" style="width: 500px; height: 500px; float: left;">
         <script>
             var board;
-            function graphFunction(x) {
+            function graphFunction(x) { //logistic function for the iterations
                 return 4*x*(1-x);
+            };
+
+            function findMax(p1,p2){ //takes two points, and finds the max value the logistic function takes on that interval
+                var start = Math.min(p1,p2);
+                var end = Math.max(p1,p2);
+                if (start <= 0.5 && end >=0.5){
+                    return 1;
+                }
+                else{
+                    return Math.max(graphFunction(start), graphFunction(end));
+                }
+            };
+            function findMin(p1,p2){ //takes two points, and finds the max value the logistic function takes on that interval
+                var start = Math.min(p1,p2);
+                var end = Math.max(p1,p2);
+                return Math.min(graphFunction(start), graphFunction(end));
             };
 
             function createBoard(){
@@ -219,21 +235,6 @@ Now take ${\tt xmin} < \rfrac{1}{2} < {\tt xmax}$  and again use the tool on the
               }
                 );
 
-            function findMax(p1,p2){ //takes two points, and finds the max value the logistic function takes on that interval
-                var start = Math.min(p1,p2);
-                var end = Math.max(p1,p2);
-                if (start <= 0.5 && end >=0.5){
-                    return 1;
-                }
-                else{
-                    return Math.max(graphFunction(start), graphFunction(end));
-                }
-            };
-            function findMin(p1,p2){ //takes two points, and finds the max value the logistic function takes on that interval
-                var start = Math.min(p1,p2);
-                var end = Math.max(p1,p2);
-                return Math.min(graphFunction(start), graphFunction(end));
-            };
 
             var p1 = board.create('point',[xmaxSlider.value,0],{withLabel: false, color:"blue"});  
             var p2 = board.create('point',[xminSlider.value,0],{withLabel: false, color:"blue"});

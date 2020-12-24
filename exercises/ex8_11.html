@@ -146,8 +146,176 @@
 <li>The sliders {\tt y0} and {\tt y1} determine the endpoints of the target interval.  This interval is fixed and not iterated.  It is shown in green on each vertical line.</li>
 </ul>
     </p>
-    
-    
+    <!-- Slider for xmax -->
+  <div style="width: 500px; height: 40px;"> 
+        <p style="display: inline;">xmax:</p>
+        <input id="xmaxSlider" type="range" min="0" max="1" value="0.6" step="0.01">
+        <span id="xmaxOut" style="display: inline;"></span>
+        <script>
+            // Get the value of m from the slider
+            var xmaxSlider = document.getElementById("xmaxSlider");
+            var xmaxOutput = document.getElementById("xmaxOut");
+            xmaxOutput.innerHTML = xmaxSlider.value; // Output value for student to see
+        </script>
+    </div>
+    <!-- Slider for xmin -->
+    <div style="width: 500px; height: 40px;">
+        <p style="display: inline;">xmin:</p>
+        <input id="xminSlider" type="range" min="0" max="1" value="0.2" step="0.01">
+        <span id="xminOut" style="display: inline;"></span>
+        <script>
+            // Get the value of b from the slider
+            var xminSlider = document.getElementById("xminSlider");
+            var xminOutput = document.getElementById("xminOut");
+            xminOutput.innerHTML = xminSlider.value; // Output value for student to see
+        </script>
+    </div>  
+    <!-- Slider for y0 -->
+    <div style="width: 500px; height: 40px;">
+        <p style="display: inline;">y0:</p>
+        <input id="y0Slider" type="range" min="0" max="1" value="0.7" step="0.01">
+        <span id="y0Out" style="display: inline;"></span>
+        <script>
+            // Get the value of b from the slider
+            var y0Slider = document.getElementById("y0Slider");
+            var y0Output = document.getElementById("y0Out");
+            y0Output.innerHTML = y0Slider.value; // Output value for student to see
+        </script>
+    </div>  
+    <!-- Slider for y1 -->
+    <div style="width: 500px; height: 40px;">
+        <p style="display: inline;">y1:</p>
+        <input id="y1Slider" type="range" min="0" max="1" value="0.8" step="0.01">
+        <span id="y1Out" style="display: inline;"></span>
+        <script>
+            // Get the value of b from the slider
+            var y1Slider = document.getElementById("y1Slider");
+            var y1Output = document.getElementById("y1Out");
+            y1Output.innerHTML = y1Slider.value; // Output value for student to see
+        </script>
+    </div>  
+    <div id="board" class="jxgbox" style="width: 500px; height: 500px; float: left;">
+        <script>
+            var board;
+
+            function graphFunction(x) { //logistic function for the iterations
+                return 4*x*(1-x);
+            };
+
+            function findMax(p1,p2){ //takes two points, and finds the max value the logistic function takes on that interval
+                var start = Math.min(p1,p2);
+                var end = Math.max(p1,p2);
+                if (start <= 0.5 && end >=0.5){
+                    return 1;
+                }
+                else{
+                    return Math.max(graphFunction(start), graphFunction(end));
+                }
+            };
+            function findMin(p1,p2){ //takes two points, and finds the max value the logistic function takes on that interval
+                var start = Math.min(p1,p2);
+                var end = Math.max(p1,p2);
+                return Math.min(graphFunction(start), graphFunction(end));
+            };
+
+            function createBoard(){
+            // Initialize the board
+                board = JXG.JSXGraph.initBoard("board", {
+                boundingbox: [-0.5, 1.1, 6.5, -0.1],
+                axis: true,
+                grid: true
+            });
+
+              var x1 = board.create('point',
+                        [1 , parseFloat(xminSlider.value)], {
+                            fixed: true , withLabel: false, visible:false
+                        });
+              var x2 = board.create('point',
+                        [1 , parseFloat(xmaxSlider.value)], {
+                            fixed: true , withLabel: false, visible:false
+                        });
+              board.create('segment',
+                        [x1,x2], {
+                            color: "blue",strokeWidth:2
+                        }); 
+
+              var i,p1,p2;
+              p1 = [];
+              p2 = [];
+              for (i=1;i<7;i++){
+                //Vertical green lines
+                var p1 = board.create('point',
+                        [i+0.05 , parseFloat(y0Slider.value)], {
+                            fixed: true , withLabel: false, visible: false
+                        });
+                var p2 = board.create('point',
+                        [i+0.05 , parseFloat(y1Slider.value)], {
+                            fixed: true , withLabel: false, visible: false
+                        });
+                board.create('segment',
+                        [p1,p2], {
+                            color: "orange",strokeWidth:3
+                        });
+
+              }
+
+              var start = parseFloat(xminSlider.value);
+              var end = parseFloat(xmaxSlider.value);
+
+              for (i=2;i<7;i++){
+
+                //Vertical blue lines
+                var x1 = board.create('point',
+                        [i , findMin(start,end)], {
+                            fixed: true , withLabel: false, visible: false
+                        });
+                var x2 = board.create('point',
+                        [i , findMax(start,end)], {
+                            fixed: true , withLabel: false, visible: false
+                        });
+                board.create('segment',
+                        [x1,x2], {
+                            color: "blue",strokeWidth:3
+                        });
+                var Tstart = findMin(start,end);
+                var Tend = findMax(start,end);
+                start = Tstart;
+                end = Tend;              
+
+              }
+
+          }
+          createBoard();
+        </script>
+      </div>
+      <div>
+        <script>
+        function update(){
+            JXG.JSXGraph.freeBoard(board); // Have to free the whole board to get rid of all the points
+            createBoard();
+        }
+        xmaxSlider.oninput = function () {
+                xmaxOutput.innerHTML = this.value; // Output value for student to see
+                update();
+                board.fullUpdate();
+            }
+        xminSlider.oninput = function () {
+                xminOutput.innerHTML = this.value; // Output value for student to see
+                update();
+                board.fullUpdate();
+            }
+            y0Slider.oninput = function () {
+                y0Output.innerHTML = this.value; // Output value for student to see
+                update();
+                board.fullUpdate();
+            }
+            y1Slider.oninput = function () {
+                y1Output.innerHTML = this.value; // Output value for student to see
+                update();
+                board.fullUpdate();
+            }
+        </script>
+    </div>
     
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.js"></script>
