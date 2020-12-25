@@ -140,12 +140,92 @@
 
     <h1>Chapter 9, Explorations 10-15, 17-19</h1>
     <p> 
-Use the tool on the website to zoom in on the bifurcation diagram for the logistic function. Use the parameter range \(3.5<\a<3.6\)  What is the highest periodic orbit you can find?  You should keep zooming in on this region to explore what is happening here.
-
+Use the tool on the website to zoom in on the bifurcation diagram for the logistic function. Use the parameter range \(3.5 < a < 3.6\)  What is the highest periodic orbit you can find?  You should keep zooming in on this region to explore what is happening here.
     </p>
-    
-    
-    
+     <!-- Create textboxes for sequences to enter -->
+        <div style="padding: 10px;">
+            <label>Minimum value for \(a\): <input id="aTextbox1" type="text" value=0></label>
+            <label>Maximum value for \(a\): <input id="aTextbox2" type="text" value=4></label>
+            <!--<label>c<sub>n</sub>: <input id="cTextbox" type="text"></label>-->
+            <button onclick="ZoomGraph();">Zoom Graph</button>
+            <script>
+                    var start = document.getElementById("aTextbox1");
+                    var end = document.getElementById("aTextbox2");
+                    var amin = parseFloat(start.value);
+                    var amax = parseFloat(end.value);
+                    var spacing = (amax-amin)/130;
+            </script>
+        </div>
+    <script>
+        function f(x,r){
+            return r*x*(1-x);
+        };
+        function iter(x,r,n){
+            var i;
+            for (i=0;i<n;i++){
+                x = f(x,r);
+            }
+            return x
+        };
+        function attractors(x,r){
+            var x = iter(x,r,100);
+            var x0 = Number(x.toFixed(4));
+            var ts = [x0];
+            var c;
+            for (c=0;c<1000;c++){
+                x = f(x,r);
+                xr = Number(x.toFixed(4));
+                if (ts.includes(xr)) {
+                    return ts;}
+                else{
+                    ts.push(xr);
+                };
+                };
+            };
+    </script>
+    <div id="board" class="jxgbox" style="width: 500px; height: 500px; float: left;">
+        <script>
+            var board;
+
+            function createBoard(){
+            // Initialize the Board
+                board = JXG.JSXGraph.initBoard("board", {
+                boundingbox: [amin-spacing, 1.1, amax+spacing, -0.1],
+                axis: true,
+                grid: true
+            });
+            var i,j;
+            for (j=amin;j<=amax;j+=spacing){
+                var points = attractors(0.5,j);
+                for (i=0;i<points.length;i++){
+                    board.create('point',[j,points[i]],{size:1,color:"black",fixed:true, withLabel:false})
+                    }
+                }
+            }
+            createBoard();
+            function ZoomGraph(){
+                    var start = document.getElementById("aTextbox1");
+                    var end = document.getElementById("aTextbox2");
+                    var amin = parseFloat(start.value);
+                    var amax = parseFloat(end.value);
+                    var spacing = (amax-amin)/130;
+                //Free up the board and change the bounds
+                JXG.JSXGraph.freeBoard(board);
+                board = JXG.JSXGraph.initBoard("board", {
+                boundingbox: [amin-spacing, 1.1, amax+spacing, -0.1],
+                axis: true,
+                grid: true
+                });
+            for (j=amin;j<=amax;j+=spacing){
+                var points = attractors(0.5,j);
+                for (i=0;i<points.length;i++){
+                    board.create('point',[j,points[i]],{size:0.5,color:"black",fixed:true, withLabel:false})
+                    }
+                }
+            }
+        </script>
+    </div>    
+
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.js"></script>
     <script src="../js/bootstrap.min.js"></script>
