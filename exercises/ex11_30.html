@@ -185,48 +185,33 @@
     <h1>Chapter 11, Exploration 30</h1>
     <p> 
         Matrix Rotation Tool
-        ~\ref{eq:MatrixRotation} with 
+with 
 \[ \phi = \pi/4, \hspace{.05in} \phi = \pi/2, \hspace{.05in} \phi = \pi, \hspace{.05in} \phi = \pi/10, \hspace{.05in} \phi = \pi / \sqrt 2 \]
 and answer the following questions for each.
-\begin{enumerate}
-\item Do the dynamics that you see depend on the initial condition?
-\item Is the fixed point $(0,0)$ a sink, a source, a saddle, or none of these?
-\item Are the dynamics periodic or not?  If they are what is the period and how does this relate to $\phi$?
-\end{enumerate}
-\end{Ex-web}
+<ul>
+<li> Do the dynamics that you see depend on the initial condition?
+</li><li> Is the fixed point $(0,0)$ a sink, a source, a saddle, or none of these?
+</li><li> Are the dynamics periodic or not?  If they are what is the period and how does this relate to $\phi$?
+</li></ul>
     </p>
     <!-- Selection for phi -->
-    <div style="select_wrap">
+    <div id="checkboxes" style="width: 500px; height: 40px;">
+        <label>\(\dfrac{\pi}{4}\)<input class="rValueCheckbox" type="radio" name="r" value=0.78539815 onclick="updateR(this);"
+            checked></label>
+        <label>\(\dfrac{\pi}{2}\)<input class="rValueCheckbox" type="radio" name="r" value=1.5707963 onclick="updateR(this);"></label>
+        <label>\(\dfrac{\pi}{10}\)<input class="rValueCheckbox" type="radio" name="r" value=0.31415926 onclick="updateR(this);"></label>
+        <label>\(\dfrac{\pi}{\sqrt{2}}\)<input class="rValueCheckbox" type="radio" name="r" value=2.22144146908 onclick="updateR(this);"></label>
+        <p style="display: inline; padding-left: 5px;">\(\phi\): <span id="rOut"></span></p>
+
         <script>
-            var html=[];
-
-            $('#test_select option').each(function(i){
-               html.push('<li rel="'+$(this).val() +'">'+$(this).text()+'</li>');
-            });
-
-            $('.custom-select ul').html(html.join(''))
-
-            /* cache main list elements so each doc click isn't a DOM search*/
-            var $lists = $('.custom-select');
-
-            $lists.live('click',function(e) {
-                e.stopPropagation();
-                $lists.not(this).find('ul:visible').hide()
-                var $tgt = $(e.target);
-                $(this).find('ul').slideToggle('fast');
-                if ($tgt.is('li')) {
-                    $(this).find('span').html($tgt.html());
-                    var value=$tgt.attr('rel');
-                    $('#test_select').val( value);
-                }
-                
-                
-            })
-
-            $(document).click(function(e) {
-                $lists.find('ul:visible').hide();
-            });
+            // Get the value of r from the checkboxes
+            var phiSelection = eval(document.querySelector('.rValueCheckbox:checked').value);
+            var phiOutput = document.getElementById("rOut");
+            phiOutput.innerHTML = phiSelection; // Output value for student to see
         </script>
+    </div>
+    <!--<div>
+
         <p style="display: inline;">\(\phi\):</p>
         <select id="test_select">
             <option value=0.78539815>\(\dfrac{\pi}{4}\)</option>
@@ -238,26 +223,52 @@ and answer the following questions for each.
              // Get the "phi" dropdown for later use
             var phiSelection = document.getElementById("test_select");
         </script>
-    </div>
-    <p id="demo">Test Value: </p>
+    </div>-->
     <!-- Create the first box -->
     <div id="box" class="jxgbox" style="width: 500px; height: 500px; float: left;">
-        
-        <script type="text/javascript">
+        <script>
             // Create board
-            var board = JXG.JSXGraph.initBoard('box', {
-                boundingbox: [-5,-5,5,5],
+                var board = JXG.JSXGraph.initBoard('box', {
+                boundingbox: [-5,5,5,-5],
                 axis: true,
                 grid: true,
                 showFullscreen: true
             });
-        //set number of loops to pi divided by phiSelection
-        var loops = 5;//3.1415926/phiSelection;
-        document.getElementById("demo").innerHTML = loops;
-        //Add a dragable point, change to polar coordinates
-        //On move, loop to draw the rest of the orbit (not movable)
         </script>
     </div>
+        <script type="text/javascript">
+            function CreateBoard(){
+            // Create board
+                JXG.JSXGraph.freeBoard(board);
+                board = JXG.JSXGraph.initBoard('box', {
+                boundingbox: [-5,5,5,-5],
+                axis: true,
+                grid: true,
+                showFullscreen: true
+            });
+            var p1 = board.create('point', [2, 0]),
+                p2 = board.create('point', [0,0], {visible:false, fixed: true}),
+
+                // angle, rotation center:
+                t = board.create('transform', [phiSelection, p2], {type: 'rotate'});
+                
+            var i, pts, loops;
+            loops = 2*3.1415926/phiSelection.value;
+            pts = [p1];
+            for (i=1;i<100;i++){
+                var tmpPt = board.create('point', [pts[i-1], t], {color: 'blue', withLabel:false, opacity:0.5});
+                pts.push(tmpPt);
+            };
+        };
+        CreateBoard();
+        //Add a dragable point, change to polar coordinates
+        //On move, loop to draw the rest of the orbit (not movable)
+        function updateR(checkbox) {
+            phiSelection = eval(checkbox.value);
+            phiOutput.innerHTML = phiSelection; // Output value of r for student to see
+            CreateBoard(); // Update table and plot
+        }
+        </script>
     
     
     
