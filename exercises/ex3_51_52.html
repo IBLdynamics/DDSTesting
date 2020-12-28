@@ -139,7 +139,9 @@
         </nav>
 
     <h1>Chapter 3, Applications 51 and 52</h1>
-    <p>The graph below give the function \(f(x) = ax(1-x)\). Manipulate the value of \(a\) with the slider bar, and find where the two fixed points are neutral. As per the text, you should also conduct this work by hand.</p>
+    <p>The graph below gives the function</p>
+     <p style="text-align:center;">\(f_a(x) = ax(1-x) \).</p>
+     <p> Manipulate the value of \(a\) with the slider bar, and determine the value of \(a\) where the two fixed points are neutral. As per the text, you should also conduct this work by hand.</p>
 
     <!-- Create a slider to determine the value of "a" -->
     <div id="rangeslider" style="width: 500px; height: 50px;">
@@ -188,7 +190,7 @@
                 var i, xcors, ycors, xi;
                 xcors = [x0.Value()]; // Populate xcors with the first value = x0
                 ycors = [graphFunc(x0.Value())]; // Populate ycors with the first value = x1
-                for (i = 0; i < 10; i++) {
+                for (i = 0; i < 20; i++) {
                     xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
                     // Add new point (xi, xi)
                     xcors.push(xi);

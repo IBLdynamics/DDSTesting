@@ -159,9 +159,9 @@
         </script>
 
     </div>
-     <!-- Create board with points -->
+          <!-- Create board with points -->
      <p> 
-        <button onClick="board.update()">Click to get new points</button>
+        <button onClick="newPoints();">Click to get new points</button>
      </p>
     
     <div id="box" class="jxgbox" style="width:500px; height:500px;">
@@ -172,53 +172,68 @@
                 axis: true,
                 grid: true
             });
+            var infs = [null],
+                sups = [null],
+                s = [null],
+                liminf, limsup;
 
+            function updateBoard(){
+                JXG.JSXGraph.freeBoard(board);
+                board = JXG.JSXGraph.initBoard('box', {
+                boundingbox: [-1, 1.2, 21, -1.2],
+                axis: true,
+                grid: true
+            });
             // Generate points in the sequence and graph points of the sequence
             var i;
-            var s = [null];
             for (i = 1; i <= 20; i++) {
                 //scales a random integers to be between -1 and 1
                 s.push(0.01*getRndInteger(-100,100)); 
                 board.create('point', [i, s[i]], {
-                    color: 'yellow',
+                    color: 'green',
                     fixed: true,
                     withLabel: false
                 });
             }
+
             // Genereate liminfs and limsups
-            var infs = [null],
-                sups = [null];
+
             for (i = 1; i <= 20; i++) {
                 infs.push(Math.min.apply(null, s.slice(i + 1)));
                 sups.push(Math.max.apply(null, s.slice(i + 1)));
             }
             // Graph liminf and limsup points
-            var liminf = board.create('point', [
+            liminf = board.create('point', [
             function() { return parseInt(NSlider.value); },
             function() { return infs[parseInt(NSlider.value)]; }], {
                 color: 'blue',
                 withLabel: false
             });
-            var limsup = board.create('point', [
+            limsup = board.create('point', [
             function() { return parseInt(NSlider.value); },
             function() { return sups[parseInt(NSlider.value)]; }], {
                 color: 'orange',
                 withLabel: false
             });
-     
-            board.update()
-
+            }
+            updateBoard();
         </script>
     </div>
-        <script>
+        <script>            
             // Set board to update when the N slider is updated
             NSlider.oninput = function () {
             NOutput.innerHTML = this.value; // Output value for student to see
                 liminf.moveTo([parseInt(NSlider.value), infs[parseInt(NSlider.value)]]);
                 limsup.moveTo([parseInt(NSlider.value), sups[parseInt(NSlider.value)]]);
+
             }
+            //Updates points when the button is clicked
             function newPoints(){
-                board.update()
+                infs = [null];
+                sups = [null];
+                s = [null];
+                updateBoard();
+                console.log(s);
             }
         </script>
     

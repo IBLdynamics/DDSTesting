@@ -125,7 +125,7 @@
                     <a class="nav-link" href="../index.html">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../chapters/ch5.html">Return to Chapter Overview</a>
+                    <a class="nav-link" href="../chapters/ch6.html">Return to Chapter Overview</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../about.html">About the Authors</a>
@@ -138,19 +138,31 @@
           </div>
         </nav>
 
-    <h1>Chapter 5, Exploration 12</h1>
-    <p> The animation below is <b> not </b> a tangent bifurcation. Animate the graph by dragging the slider from left to right to increase \(c\). Use the graph to answer the following questions.
-        <ol>
-            <li>Identify the value of the parameter \(c\) where the graph is tangent to the line \(y=x.\)
-            <li>How many fixed points are there prior to this value of \(c\)?  How many fixed points are there after this value of \(c\)?  What are their stabilities?
-            <li>Draw the bifurcation diagram.
-            <li>Explain what the difference is between this graph and the graph for exploration 11.  Can you use a single mathematical computation to explain why this animation is not a tangent bifurcation?
-        </ol>
-    </p>
-    <!-- Create a slider to determine the value of "c" -->
-    <div id="rangeslider" style="width: 500px; height: 50px;">
-        <p style="display: inline;">c:</p>
-        <input id="cSlider" type="range" min="-0.5" max="0.5" value="-0.5" step="0.01" style="width: 50%;">
+    <h1>Introducing the JSXGraph Board</h1>
+    <h3> 
+    We have several JSXGraph boards on this page. Each illustrates different features of the software.
+    </h3>
+    <p> This board illustrates points and graphs. Some are fixed and some are not. Click the points in the graph and see which you are able to move. Do the same thing with the two graphs. Note that holding the mouse over a point gives it's coordinates.</p>
+     <div id="box1" class="jxgbox" style="width: 500px; height: 500px;">
+        <script type="text/javascript">
+            // Create board and "x0" slider
+            var board = JXG.JSXGraph.initBoard('box1', {
+                boundingbox: [-3, 3, 3, -3],
+                axis: true,
+                grid: true
+            });
+            var A = board.create('point',[1.5,1]);
+            var B = board.create('point',[-2,1],{fixed:true});
+            var f = board.create('functiongraph',[function(x){return x**2},-3,3]);
+            var l1 = board.create('line', [1.0, -2.0, 3.0]);
+        </script>
+    </div>
+    <p> This board has two different types of sliders. We will use sliders both inside and outside the board, depending on the Exploration. Try moving both sliders and see how the image changes.</p>
+
+    <!-- Create a slider to determine the value of "a" -->
+  <div id="rangeslider" style="width: 500px; height: 50px;">
+        <p style="display: inline;">a:</p>
+        <input id="cSlider" type="range" min="-2" max="2" value="1" step="0.01" style="width: 50%;">
         <p style="display: inline;"><span id="cOut"></span></p>
         <script>
             // Get the value of "c" from the slider
@@ -159,63 +171,59 @@
             cOutput.innerHTML = cSlider.value; // Output value for student to see
         </script>
     </div>
-    <!-- Create the first board -->
-    <div id="box1" class="jxgbox" style="width: 500px; height: 500px; float: left;">
+    <!-- Create the rest -->
+    <div id="box2" class="jxgbox" style="width: 500px; height: 500px;">
         <script type="text/javascript">
-            // Create board
-            var board1 = JXG.JSXGraph.initBoard('box1', {
-                boundingbox: [-0.1, 1, 1, -0.1],
+            // Create board and "x0" slider
+            var board2 = JXG.JSXGraph.initBoard('box2', {
+                boundingbox: [-3, 3, 3, -3],
                 axis: true,
                 grid: true
             });
-            // Create graphs
-            var lineGraph1 = board1.create('functiongraph',
-                [function (x) {
-                    return x;
-                }, -1, 1], {
-                    strokeColor: 'green'
-                }
-            );
-            var curveGraph1 = board1.create('functiongraph',
-                [function (x) {
-                    return x * x + 0.25 + Math.pow(parseFloat(cSlider.value), 2);
-                }, -1, 1]
-            );
+
+            var c = board2.create('slider', [
+                [-1, 2],
+                [1, 2],
+                [-1, 0, 1]
+            ], {
+                suffixLabel: 'c = '
+            });
+
+            var S = board2.create('functiongraph',[function(x){return parseFloat(cSlider.value)*Math.sin(x)+c.Value()},-3,3])
+
+            
         </script>
     </div>
-    <!-- Create the second board -->
-    <!--<div id="box2" class="jxgbox" style="width: 500px; height: 500px;">
+    <div>
+        <script>
+        // Set both curve graphs to update when the "c" slider is updated
+            cSlider.oninput = function () {
+            cOutput.innerHTML = this.value; // Output value for student to see
+            //curveGraph1.fullUpdate();
+            S.fullUpdate();
+        }
+    </script>
+    </div>
+    <p> This board has a static graph, but we can move around using the board controls. The icons in the lower right corner of the board perform these actions. \(+\) and \(-\) zoom the board in and out respectively. The arrows scroll the board in the indicated direction The \(o\) icon will return the board to it's original level of zoom, but does not recenter the board.</p>
+    <p>Try using each of the different controls, then return to the original board.
+    </p>
+    <!-- Create the rest -->
+    <div id="box3" class="jxgbox" style="width: 500px; height: 500px;">
         <script type="text/javascript">
-            // Create board
-            var board2 = JXG.JSXGraph.initBoard('box2', {
-                boundingbox: [-0.1, 1, 1, -0.1],
+            // Create board and "x0" slider
+            var board3 = JXG.JSXGraph.initBoard('box3', {
+                boundingbox: [-2, 2, 2, -2],
                 axis: true,
                 grid: true
             });
-            // Create graphs
-            var lineGraph2 = board2.create('functiongraph',
-                [function (x) {
-                    return x;
-                }, -1, 1], {
-                    strokeColor: 'green'
-                }
-            );
-            var curveGraph2 = board2.create('functiongraph',
-                [function (x) {
-                    return x * x + 0.25 - Math.pow(parseFloat(cSlider.value), 2);
-                }, -1, 1]
-            );
+          var g = board3.create('curve',[
+          function(t){return 3*Math.sin(3*t+1.6);},
+          function(t){return 2*Math.sin(2*t);},
+          0, 2*Math.PI],{strokeColor:'#aa2233',strokeWidth:3});
         </script>
-    </div>-->
-    <script>
-        // Set both curve graphs to update when the "c" slider is updated
-        cSlider.oninput = function () {
-            cOutput.innerHTML = this.value; // Output value for student to see
-            curveGraph1.fullUpdate();
-            //curveGraph2.fullUpdate();
-        }
-    </script>
-    <div> <p> A second exploration that illustrates this principle is located <a href="ex5_12a.html">here</a></p></div>
+    </div>
+    
+    
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.js"></script>
     <script src="../js/bootstrap.min.js"></script>

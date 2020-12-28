@@ -138,7 +138,7 @@
           </div>
         </nav>
 
-    <h1>Chapter 5, Exploration 12</h1>
+    <h1>Chapter 5, Exploration 12 Continued</h1>
     <p> The animation below is <b> not </b> a tangent bifurcation. Animate the graph by dragging the slider from left to right to increase \(c\). Use the graph to answer the following questions.
         <ol>
             <li>Identify the value of the parameter \(c\) where the graph is tangent to the line \(y=x.\)
@@ -160,7 +160,7 @@
         </script>
     </div>
     <!-- Create the first board -->
-    <div id="box1" class="jxgbox" style="width: 500px; height: 500px; float: left;">
+    <!--<div id="box1" class="jxgbox" style="width: 500px; height: 500px; float: left;">
         <script type="text/javascript">
             // Create board
             var board1 = JXG.JSXGraph.initBoard('box1', {
@@ -182,9 +182,9 @@
                 }, -1, 1]
             );
         </script>
-    </div>
+    </div>-->
     <!-- Create the second board -->
-    <!--<div id="box2" class="jxgbox" style="width: 500px; height: 500px;">
+    <div id="box2" class="jxgbox" style="width: 500px; height: 500px;">
         <script type="text/javascript">
             // Create board
             var board2 = JXG.JSXGraph.initBoard('box2', {
@@ -206,16 +206,18 @@
                 }, -1, 1]
             );
         </script>
-    </div>-->
+    </div>
     <script>
         // Set both curve graphs to update when the "c" slider is updated
         cSlider.oninput = function () {
             cOutput.innerHTML = this.value; // Output value for student to see
-            curveGraph1.fullUpdate();
-            //curveGraph2.fullUpdate();
+            //curveGraph1.fullUpdate();
+            curveGraph2.fullUpdate();
         }
     </script>
-    <div> <p> A second exploration that illustrates this principle is located <a href="ex5_12a.html">here</a></p></div>
+
+    <div> <p> A second exploration that illustrates this principle is located <a href="ex5_12.html">here</a></p></div>
+
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.js"></script>
     <script src="../js/bootstrap.min.js"></script>

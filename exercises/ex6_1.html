@@ -180,14 +180,14 @@
         <script type="text/javascript">
             // Create board and "x0" slider
             var board = JXG.JSXGraph.initBoard('box', {
-                boundingbox: [-1, 2, 2, -1],
+                boundingbox: [-3, 3, 3, -3],
                 axis: true,
                 grid: true
             });
             var x0 = board.create('slider', [
-                [-1, 0],
-                [2, 0],
-                [-1, 0.5, 2]
+                [-2.5, 0],
+                [2.5, 0],
+                [-2.5, 0.0, 2.5]
             ], {
                 suffixLabel: 'x0 = '
             });
@@ -195,7 +195,7 @@
             var lineGraph = board.create('functiongraph',
                 [function (x) {
                     return x
-                }, -1, 2], {
+                }, -3, 3], {
                     strokeColor: 'green'
                 }
             );
@@ -204,7 +204,7 @@
                 return aslider.value * x * (1 - x);
             }
             var curveGraph = board.create('functiongraph',
-                [graphFunc, -1, 2]
+                [graphFunc, -3, 3]
             );
             // Function to calculate the attracting and repelling points
             function generatePoints() {

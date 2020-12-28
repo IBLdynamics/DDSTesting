@@ -125,7 +125,7 @@
                     <a class="nav-link" href="../index.html">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../chapters/ch5.html">Return to Chapter Overview</a>
+                    <a class="nav-link" href="../chapters/ch2.html">Return to Chapter Overview</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../about.html">About the Authors</a>
@@ -138,87 +138,109 @@
           </div>
         </nav>
 
-    <h1>Chapter 5, Exploration 12</h1>
-    <p> The animation below is <b> not </b> a tangent bifurcation. Animate the graph by dragging the slider from left to right to increase \(c\). Use the graph to answer the following questions.
-        <ol>
-            <li>Identify the value of the parameter \(c\) where the graph is tangent to the line \(y=x.\)
-            <li>How many fixed points are there prior to this value of \(c\)?  How many fixed points are there after this value of \(c\)?  What are their stabilities?
-            <li>Draw the bifurcation diagram.
-            <li>Explain what the difference is between this graph and the graph for exploration 11.  Can you use a single mathematical computation to explain why this animation is not a tangent bifurcation?
-        </ol>
-    </p>
-    <!-- Create a slider to determine the value of "c" -->
-    <div id="rangeslider" style="width: 500px; height: 50px;">
-        <p style="display: inline;">c:</p>
-        <input id="cSlider" type="range" min="-0.5" max="0.5" value="-0.5" step="0.01" style="width: 50%;">
-        <p style="display: inline;"><span id="cOut"></span></p>
+    <h1>Chapter 2, Exercise 58</h1>
+    <p> The yellow points below show a random sequence \(\{x_n\}\). When you select a value for \(N\) on the slider, the point \(u_N\) is shown in blue and \(v_N\) is shown in orange. Move the slider to see how the sequences that define the limit infimum and limit supremum change. What do these dots (i.e., sequences) do as you scroll through?
+    <!-- Create a slider to determine the value of N -->
+    <div style="width: 500px; height: 40px;">
+        <p style="display: inline;">N:</p>
+        <input id="NSlider" type="range" min="1" max="19" value="1" step="1" style="width: 50%;">
+        
+        <p style="display: inline;"><span id="NOut"></span></p>
         <script>
-            // Get the value of "c" from the slider
-            var cSlider = document.getElementById("cSlider");
-            var cOutput = document.getElementById("cOut");
-            cOutput.innerHTML = cSlider.value; // Output value for student to see
+            // Get the value of N from the slider
+            var NSlider = document.getElementById("NSlider");
+            var NOutput = document.getElementById("NOut");
+            NOutput.innerHTML = parseInt(NSlider.value); // Output value for student to see
+            // Generates a random integer between max and min
+            function getRndInteger(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) ) + min;
+                }
+
         </script>
+
     </div>
-    <!-- Create the first board -->
-    <div id="box1" class="jxgbox" style="width: 500px; height: 500px; float: left;">
+     <!-- Create board with points -->
+     <p> 
+        <button onClick="newPoints();">Click to get new points</button>
+     </p>
+    
+    <div id="box" class="jxgbox" style="width:500px; height:500px;">
         <script type="text/javascript">
             // Create board
-            var board1 = JXG.JSXGraph.initBoard('box1', {
-                boundingbox: [-0.1, 1, 1, -0.1],
+            var board = JXG.JSXGraph.initBoard('box', {
+                boundingbox: [-1, 1.2, 21, -1.2],
                 axis: true,
                 grid: true
             });
-            // Create graphs
-            var lineGraph1 = board1.create('functiongraph',
-                [function (x) {
-                    return x;
-                }, -1, 1], {
-                    strokeColor: 'green'
-                }
-            );
-            var curveGraph1 = board1.create('functiongraph',
-                [function (x) {
-                    return x * x + 0.25 + Math.pow(parseFloat(cSlider.value), 2);
-                }, -1, 1]
-            );
-        </script>
-    </div>
-    <!-- Create the second board -->
-    <!--<div id="box2" class="jxgbox" style="width: 500px; height: 500px;">
-        <script type="text/javascript">
-            // Create board
-            var board2 = JXG.JSXGraph.initBoard('box2', {
-                boundingbox: [-0.1, 1, 1, -0.1],
+            var infs = [null],
+                sups = [null],
+                s = [null],
+                liminf, limsup;
+
+            function updateBoard(){
+                JXG.JSXGraph.freeBoard(board);
+                board = JXG.JSXGraph.initBoard('box', {
+                boundingbox: [-1, 1.2, 21, -1.2],
                 axis: true,
                 grid: true
             });
-            // Create graphs
-            var lineGraph2 = board2.create('functiongraph',
-                [function (x) {
-                    return x;
-                }, -1, 1], {
-                    strokeColor: 'green'
-                }
-            );
-            var curveGraph2 = board2.create('functiongraph',
-                [function (x) {
-                    return x * x + 0.25 - Math.pow(parseFloat(cSlider.value), 2);
-                }, -1, 1]
-            );
+            // Generate points in the sequence and graph points of the sequence
+            var i;
+            for (i = 1; i <= 20; i++) {
+                //scales a random integers to be between -1 and 1
+                s.push(0.01*getRndInteger(-100,100)); 
+                board.create('point', [i, s[i]], {
+                    color: 'green',
+                    fixed: true,
+                    withLabel: false
+                });
+            }
+
+            // Genereate liminfs and limsups
+
+            for (i = 1; i <= 20; i++) {
+                infs.push(Math.min.apply(null, s.slice(i + 1)));
+                sups.push(Math.max.apply(null, s.slice(i + 1)));
+            }
+            // Graph liminf and limsup points
+            liminf = board.create('point', [
+            function() { return parseInt(NSlider.value); },
+            function() { return infs[parseInt(NSlider.value)]; }], {
+                color: 'blue',
+                withLabel: false
+            });
+            limsup = board.create('point', [
+            function() { return parseInt(NSlider.value); },
+            function() { return sups[parseInt(NSlider.value)]; }], {
+                color: 'orange',
+                withLabel: false
+            });
+            }
+            updateBoard();
         </script>
-    </div>-->
-    <script>
-        // Set both curve graphs to update when the "c" slider is updated
-        cSlider.oninput = function () {
-            cOutput.innerHTML = this.value; // Output value for student to see
-            curveGraph1.fullUpdate();
-            //curveGraph2.fullUpdate();
-        }
-    </script>
-    <div> <p> A second exploration that illustrates this principle is located <a href="ex5_12a.html">here</a></p></div>
+    </div>
+        <script>            
+            // Set board to update when the N slider is updated
+            NSlider.oninput = function () {
+            NOutput.innerHTML = this.value; // Output value for student to see
+                liminf.moveTo([parseInt(NSlider.value), infs[parseInt(NSlider.value)]]);
+                limsup.moveTo([parseInt(NSlider.value), sups[parseInt(NSlider.value)]]);
+
+            }
+            //Updates points when the button is clicked
+            function newPoints(){
+                infs = [null];
+                sups = [null];
+                s = [null];
+                updateBoard();
+                console.log(s);
+            }
+        </script>
+    
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/main.js"></script>
+
   </body>
 </html>

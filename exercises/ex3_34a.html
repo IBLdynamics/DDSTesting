@@ -139,7 +139,9 @@
         </nav>
 
     <h1>Chapter 3, Exploration 34, Sine Funtion</h1>
-    <p>The graph below give the function \(f(x) = a\sin(x)\) from exploration 20. Find when each fixed point is repelling.</p>
+    <p>The graph below gives the function  </p>
+    <p style="text-align:center;">\(f(x) = a\sin(x)\).</p>
+    <p> from explorations <a href="..ex3_20.html">20</a> Find the values of \(a\) when each fixed point is repelling.</p>
 
     <!-- Create a dropdown menu to determine the value of "a" -->
     <div id="dropdown" style="width: 500px; height: 40px;">
@@ -158,7 +160,7 @@
         </select>
     </div>
     <!-- Create a slider to determine the value of x0 -->
-    <div id="rangeslider" style="width: 500px; height: 40px;">
+    <!--<div id="rangeslider" style="width: 500px; height: 40px;">
         <p style="display: inline;">x0:</p>
         <input id="x0Slider" type="range" min="-0.5" max="0.5" value="0" step="0.01" style="width: 50%;">
         <span id="x0Out" style="display: inline;"></span>
@@ -168,7 +170,7 @@
             var x0Output = document.getElementById("x0Out");
             x0Output.innerHTML = x0Slider.value; // Output value for student to see
         </script>
-    </div>
+    </div>-->
     <!-- Create the rest -->
     <div id="box" class="jxgbox" style="width: 500px; height: 500px;">
         <script type="text/javascript">
@@ -188,6 +190,14 @@
                     strokeColor: 'green'
                 }
             );
+            //In-board slider
+            var x0 = board.create('slider', [
+                [-1, 0],
+                [1, 0],
+                [-1, 0, 1]
+            ], {
+                suffixLabel: 'x0 = '
+            });
             // Function used for graphing the function f(x) = asin(x)
             function graphFunc(x) {
                 return aSelection.value * Math.sin(x);
@@ -205,8 +215,8 @@
             // Function to calculate and plot the attracting and repelling points
             function plotPoints() {
                 var i, xcors, ycors, xi;
-                xcors = [x0Slider.value]; // Populate xcors with the first value = x0
-                ycors = [graphFunc(x0Slider.value)]; // Populate ycors with the first value = x1
+                xcors = [x0.Value()]; // Populate xcors with the first value = x0
+                ycors = [graphFunc(x0.Value())]; // Populate ycors with the first value = x1
                 for (i = 0; i < 10; i++) {
                     xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
                     // Add new point (xi, xi)
@@ -226,11 +236,11 @@
                 board.fullUpdate();
             }
             // Set the whole board to update when the "x0" slider is updated
-            x0Slider.oninput = function () {
+            /*x0Slider.oninput = function () {
                 x0Output.innerHTML = this.value; // Output value for student to see
                 plotPoints();
                 board.fullUpdate();
-            }
+            }*/
             // Re-calculate the attracting and repelling points each time the board is updated
             board.on('update', function () {
                 plotPoints();

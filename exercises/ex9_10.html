@@ -153,7 +153,7 @@ Use the tool on the website to zoom in on the bifurcation diagram for the logist
                     var end = document.getElementById("aTextbox2");
                     var amin = parseFloat(start.value);
                     var amax = parseFloat(end.value);
-                    var spacing = (amax-amin)/130;
+                    var spacing = (amax-amin)/150;
             </script>
         </div>
     <script>
@@ -183,7 +183,7 @@ Use the tool on the website to zoom in on the bifurcation diagram for the logist
                 };
             };
     </script>
-    <div id="board" class="jxgbox" style="width: 500px; height: 500px; float: left;">
+    <div id="board" class="jxgbox" style="width: 750px; height: 500px; float: left;">
         <script>
             var board;
 
@@ -198,7 +198,7 @@ Use the tool on the website to zoom in on the bifurcation diagram for the logist
             for (j=amin;j<=amax;j+=spacing){
                 var points = attractors(0.5,j);
                 for (i=0;i<points.length;i++){
-                    board.create('point',[j,points[i]],{size:1,color:"black",fixed:true, withLabel:false})
+                    board.create('point',[j,points[i]],{size:0.2,color:"black",fixed:true, withLabel:false})
                     }
                 }
             }
@@ -208,7 +208,7 @@ Use the tool on the website to zoom in on the bifurcation diagram for the logist
                     var end = document.getElementById("aTextbox2");
                     var amin = parseFloat(start.value);
                     var amax = parseFloat(end.value);
-                    var spacing = (amax-amin)/130;
+                    var spacing = (amax-amin)/150;
                 //Free up the board and change the bounds
                 JXG.JSXGraph.freeBoard(board);
                 board = JXG.JSXGraph.initBoard("board", {
@@ -219,7 +219,7 @@ Use the tool on the website to zoom in on the bifurcation diagram for the logist
             for (j=amin;j<=amax;j+=spacing){
                 var points = attractors(0.5,j);
                 for (i=0;i<points.length;i++){
-                    board.create('point',[j,points[i]],{size:0.5,color:"black",fixed:true, withLabel:false})
+                    board.create('point',[j,points[i]],{size:0.2,color:"black",fixed:true, withLabel:false})
                     }
                 }
             }

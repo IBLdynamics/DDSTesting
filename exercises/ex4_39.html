@@ -147,13 +147,25 @@
         fixed point move? Do any new fixed points appear? Is this new
         fixed point(s) hyperbolic or non-hyperbolic? </li>
         <li>Is this system structurally stable? </li>
-        <li>Can you move \(A\) and \(B\) in such a way that there are multiple fixed points?  Do you have to move them a little or a lot?? </li>
+        <li>Can you move \(A\) and \(B\) in such a way that there are multiple fixed points?  Do you have to move them a little or a lot? </li>
     </ul>
 </p>
+<div>
+    <p> 
+        <button onClick="boardSetup();">Click to reset the board</button>
+     </p>
+ </div>
     <div id="box" class="jxgbox" style="width: 500px; height: 500px;">
         <script type="text/javascript">
             // Create board
             var board = JXG.JSXGraph.initBoard('box', {
+                boundingbox: [-2, 5, 2, -5],
+                axis: true,
+                grid: true
+            });
+            function boardSetup(){
+            JXG.JSXGraph.freeBoard(board);
+            board = JXG.JSXGraph.initBoard('box', {
                 boundingbox: [-2, 5, 2, -5],
                 axis: true,
                 grid: true
@@ -179,6 +191,8 @@
                 }]
             );
             curveGraph.addParents([pA, pB]);
+        };
+        boardSetup();
         </script>
     </div>
 
