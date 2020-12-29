@@ -138,7 +138,7 @@
           </div>
         </nav>
 
-    <h1>Chapter 8, Exploration 1</h1>
+    <h1>Chapter 8, Exploration 5</h1>
     <p> 
        The slider can be used to set an initial condition \(x_0\).  Its orbit is shown in blue in the lefthand plot.  The second initial condition is \(x_0 + \epsilon\), where the value of \(\epsilon\) can be specified in the dialog box.  The orbit of this second initial condition is shown in red.  A light blue line connects the corresponding iterates of these points.  The righthand plot shows the distance between corresponding orbit points.  In other words, the black dots represent the sequence
 
@@ -146,12 +146,17 @@
 
 The green, dashed horizontal line in both plots is at height \(\frac{1}{2}\).  In the left plot, that is because \(\frac{1}{2}\) is the critical point of the logistic function.  In the right plot, it is because \(\frac{1}{2}\) is the value of \(b\) for this particular function.
 <ul>
-<li>
-    Using the tool on the website, set \(\epsilon = 0.0001.\)  Try to find an initial condition where the distance between iterates remains less than \(\frac{1}{2}\)  for all iterates displayed on the tool.   Repeat this with \(\epsilon = 0.00001.\)
-</li>
 
+<li>
+Convert your sequences of L's and R's to 0's and 1's by replacing each L with 0 and each R with 1.  Call these sequences \(s\) and \(t\)respectively.
+<ul>
+<li>Find an upper bound for \(d(s,t)\) in \(\Sigma_2\) using the metric given in equation 7.4 in the text.  This is an estimate on how <b> close</b> the points are together initially. </li>
+<li> Use the value of \(N\) that you found in <a href="ex8_4.html">Exploration 4</a> to find a <b> lower bound</b> on \(d(\sigma^N(s),\sigma^N(t)).\)  This is an estimate on how far apart these iterates are after \(N\) iterates. </li>
+<li> How do you think this relates to sensitive dependence from Chapter 8, Definition 2 in the text? </li>
+</li>
 </ul>
-Explorations 1 through 5 use the same applet. Click <a href="ex8_2.html">here</a> to go to the next Exploration. 
+</ul>
+Explorations 1 through 5 use the same applet. Click <a href="ex8_4.html">here</a> to go to the previous Exploration.
     </p>
 <!-- Create a slider to determine the value of x0 -->
     <div style="width: 500px; height: 40px;">

@@ -142,13 +142,12 @@
     <p> 
         Use the graph below of the function \(x_{n+1} = f_4(x_n) = 4x_n(1 − x_n)\). Explore the graphical analysis for several initial conditions \(x_0 \in [0, 1]\). Do you observe any periodic behavior? Is there a pattern?
     </p>
-    
      <!-- Create the rest -->
     <div id="box" class="jxgbox" style="width: 500px; height: 500px;">
         <script type="text/javascript">
             // Create board and "x0" slider
             var board = JXG.JSXGraph.initBoard('box', {
-                boundingbox: [-0.1, 1.5, 1.1, -0.1],
+                boundingbox: [-0.1, 1.2, 1.1, -0.1],
                 axis: true,
                 grid: true
             });
@@ -159,6 +158,11 @@
             ], {
                 suffixLabel: 'x0 = '
             });
+            var graph = board.create('text',
+                       [0.34,1.1, function(){return "The value of x_0 is "+JXG.toFixed(x0.Value(), 2);}
+                       ]
+                    );
+
             // Create graphs
             var lineGraph = board.create('functiongraph',
                 [function (x) {
@@ -213,6 +217,7 @@
             });
             // Update the board right away to replace (0,0) filler from stepGraph
             board.fullUpdate();
+
         </script>
     </div>
     
