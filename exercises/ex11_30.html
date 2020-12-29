@@ -16,50 +16,6 @@
     <script id="MathJax-script" async
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
-    <style>
-        .custom-select {
-    position: relative;
-    display: inline-block;
-    font-family: sans-serif;
-    font-size: 93%;
-    margin: 30px 50px;
-}
-
-.custom-select span {
-    display: inline-block;
-    min-width: 180px;
-    color: #FFF;
-    background-color: #333;
-    padding: 5px;
-    cursor: pointer;
-}
-
-.custom-select ul {
-    position: absolute;
-    display: none;
-    border: 1px solid #333;
-    width: 99%;
-    max-height: 200px;
-    overflow: auto;
-    z-index: 10000;
-}
-
-.custom-select ul li {
-    padding: 5px;
-    border-bottom: 1px solid #333;
-    cursor: pointer;
-}
-
-.custom-select ul li:hover {
-    background-color: #666;
-    color: #FFF;
-}
-
-.custom-select ul li:last-child {
-    border-bottom: none;
-}
-
-</style>
   </head>
   <body>
 		
@@ -184,14 +140,12 @@
 
     <h1>Chapter 11, Exploration 30</h1>
     <p> 
-        Matrix Rotation Tool
-with 
+        The tool here plots the dynamics of equation 11.7 from the text. The inital condition is labelled \(A\), and may be dragged around the board. For each of the following values of \(phi\), answer the questions below.
 \[ \phi = \pi/4, \hspace{.05in} \phi = \pi/2, \hspace{.05in} \phi = \pi, \hspace{.05in} \phi = \pi/10, \hspace{.05in} \phi = \pi / \sqrt 2 \]
-and answer the following questions for each.
 <ul>
 <li> Do the dynamics that you see depend on the initial condition?
-</li><li> Is the fixed point $(0,0)$ a sink, a source, a saddle, or none of these?
-</li><li> Are the dynamics periodic or not?  If they are what is the period and how does this relate to $\phi$?
+</li><li> Is the fixed point (0,0) a sink, a source, a saddle, or none of these?
+</li><li> Are the dynamics periodic or not?  If they are what is the period and how does this relate to \(\phi\)?
 </li></ul>
     </p>
     <!-- Selection for phi -->
@@ -252,14 +206,17 @@ and answer the following questions for each.
                 // angle, rotation center:
                 t = board.create('transform', [phiSelection, p2], {type: 'rotate'});
                 
-            var i, pts, loops;
-            loops = 2*3.1415926/phiSelection.value;
+            var i, pts;
             pts = [p1];
             for (i=1;i<100;i++){
-                var tmpPt = board.create('point', [pts[i-1], t], {color: 'blue', withLabel:false, opacity:0.5});
+                var tmpPt = board.create('point', [pts[i-1], t], {color: 'blue', withLabel:false, opacity:0.2});
+                if (pts.includes(tmpPt)){
+                    break;
+                }
                 pts.push(tmpPt);
             };
         };
+        ;
         CreateBoard();
         //Add a dragable point, change to polar coordinates
         //On move, loop to draw the rest of the orbit (not movable)
@@ -267,6 +224,7 @@ and answer the following questions for each.
             phiSelection = eval(checkbox.value);
             phiOutput.innerHTML = phiSelection; // Output value of r for student to see
             CreateBoard(); // Update table and plot
+
         }
         </script>
     
