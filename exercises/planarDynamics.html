@@ -138,83 +138,81 @@
           </div>
         </nav>
 
-    <h1>Chapter 11, Exploration 44</h1>
-    <p> 
+    <h1>Chapter 11, Exploration 33</h1>
+    <p> The tool here plots the dynamics of equation 11.8 from the text. Use the textboxes to enter values for \(\phi\) and \(\rho\), and clicke the button to update the graph. You will probably want to zoom in and out to see the details.</p>
 
-The tool below models a predator-prey system. Use it to answer the following questions. The point that indicates the initial condition is labelled \(A\) and is colored red.
-<ul>
-<li> Move the point \(A\) around to choose a variety of initial conditions and describe what you see.  In particular, how would you characterize the fixed point at  \((\frac{2}{15}, \frac{22}{15})\) using the terminology of theorem 11.2? </li>
-<li> Choose an initial conditions near the fixed point at \((\frac{1}{2},0)\) and describe these orbits.   How would you characterize the fixed point at  \((\frac{1}{2},0)\) using the terminology of theorem 11.2? </li>
-<li> Choose an initial conditions very near the \(y\)-axis (especially with \(y \leq 1/2\) and describe these orbits.   How would you characterize the fixed point at (0,0) using the terminology of theorem 11.2? </li>
-</ul>
+    <p> Note that when \(\rho = 1\), this reduces to <a href="ex11_30.html">Exploration 30</a>.
+    <ul>
+<li> Describe the dynamics when \(0 < \rho < 1\)?  </li>
+<li> Is the fixed point (0,0) a sink, a source, a saddle, or none of the above?  </li>
+<li> Describe the dynamics when \(\rho>1\)? </li>
+<li> Is the fixed point (0,0) a sink, a source, a saddle, or none of the above?  </li>
+    </ul>
     </p>
-<div id="box" class="jxgbox" style="width: 500px; height: 500px; float: left;">
-        <script type="text/javascript">
-                        // Create board
+         <!-- Create textboxes for sequences to enter -->
+        <div style="padding: 10px;">
+            <label>\(\phi\): <input id="phiBox" type="text" value=0.1></label>
+            <label>\(\rho\): <input id="rhoBox" type="text" value=1></label>
+            <!--<label>c<sub>n</sub>: <input id="cTextbox" type="text"></label>-->
+            <button onclick="UpdateGraph();">Click to update the dynamics</button>
+            <script>
+                    var phi = document.getElementById("phiBox");
+                    var rho = document.getElementById("rhoBox");
+                    var phiValue = parseFloat(phi.value);
+                    var rhoValue = parseFloat(rho.value);
+            </script>
+        </div>
+
+    <div id="box" class="jxgbox" style="width: 500px; height: 500px; float: left;">
+        <script>
+            // Create board
                 var board = JXG.JSXGraph.initBoard('box', {
-                boundingbox: [-0.1,3,1,-0.1],
+                boundingbox: [-5,5,5,-5],
                 axis: true,
                 grid: true,
                 showFullscreen: true
             });
-            var p1 = board.create('point', [0.5, 0.5], {name: 'A'}); //Initial condition
-
-            function PredPrey(x,y){
-                return [2*x*(1-x)-0.5*x*y,4*y/5 + 1.5*x*y];
-            };
-            
-            var coords = board.create('text',
-                       [0.3,2.8, function(){return "Initial Condition: ("+JXG.toFixed(p1.X(), 2)+","+JXG.toFixed(p1.Y(), 2)+")";}
-                       ]
-                    );
-                var i, pts; //Adds the orbit of the initial condition under PredPrey
-                pts = [p1];
-                for (i=1;i<100;i++){
-                    var tmpPt = board.create('point', PredPrey(pts[i-1].X(), pts[i-1].Y()), {color: 'blue', withLabel:false, opacity:1, size:1, });
-                    pts.push(tmpPt);
-                };
-                    
-        p1.on('drag', console.log(PredPrey(p1.X(), p1.Y())));
-        
         </script>
-
-        
-           <!-- function CreateBoard(){
+    </div>
+        <script type="text/javascript">
+            function CreateBoard(){
             // Create board
                 JXG.JSXGraph.freeBoard(board);
                 board = JXG.JSXGraph.initBoard('box', {
-                boundingbox: [-0.1,3,1,-0.1],
+                boundingbox: [-5,5,5,-5],
                 axis: true,
                 grid: true,
                 showFullscreen: true
             });
-            var p1 = board.create('point', [0.5, 0.5], {name: 'A'});
+            var p1 = board.create('point', [2, 0], {name: 'A'}),
+                p2 = board.create('point', [0,0], {visible:false, fixed: true});
+                s = parseFloat(Math.sin(phiValue)),
+                c = parseFloat(Math.cos(phiValue));
 
-            function PredPrey(x,y){
-                return [2*x*(1-x) - 0.5*x*y, 0.8*y + 1.5*x*y]
-            }
-
+            var t = board.create('transform',[1,0,0,0, rhoValue*c, (-1)*rhoValue*s, 0, rhoValue*s, rhoValue*c], {type:'generic'});
   
             var i, pts;
             pts = [p1];
             for (i=1;i<100;i++){
-                var t = board.create('transform',[1,0,0,0, 2*(1-pts[i-1].X()), (-0.5)*pts[i-1].X(), 0, 1.5*pts[i-1].Y(), 0.8], {type:'generic'});
-                //var t = board.create('transform',[PredPrey(pts[i-1].X(), pts[i-1].Y())[0], PredPrey(pts[i-1].X(), pts[i-1].Y())[1]],{type:'translate'});
                 var tmpPt = board.create('point', [pts[i-1], t], {color: 'blue', withLabel:false, opacity:0.2});
                 pts.push(tmpPt);
             };
-
-            var coords = board.create('text',
-                [0.3,2.8, function(){return "Initial Condition: ("+JXG.toFixed(p1.X(), 2)+","+JXG.toFixed(p1.Y(), 2)+")";}
-                ]
-            );
         };
         ;
         CreateBoard();
-        </script>-->
+        //Add a dragable point, change to polar coordinates
+        //On move, loop to draw the rest of the orbit (not movable)
+        function UpdateGraph() {
+            phi = document.getElementById("phiBox");
+            rho = document.getElementById("rhoBox");
+            phiValue = parseFloat(phi.value);
+            rhoValue = parseFloat(rho.value);
+            CreateBoard(); // Update table and plot
+
+        }
+        </script>
     
     
-    </div>
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.js"></script>
     <script src="../js/bootstrap.min.js"></script>

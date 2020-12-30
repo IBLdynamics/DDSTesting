@@ -39,7 +39,7 @@
 *::after {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
-
+  
 html {
   font-family: sans-serif;
   line-height: 1.15;
@@ -8295,4 +8295,7 @@ a[data-toggle="collapse"] {
   margin-left: auto;
   margin-right: auto;
 }
+
+#jxgbox{max-width:500px;height: calc(100vh - 6em)}
+
 
