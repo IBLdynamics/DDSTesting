@@ -147,7 +147,41 @@
 <li> Compute \(DF\) and evaluate it at this new fixed point.  Find the eigenvalues.  How has the stability changed if at all? </li>
 </ul>
     </p>
-    
+<div id="box" class="jxgbox" style="width: 500px; height: 500px; float: left;">
+    <script>
+    var board = JXG.JSXGraph.initBoard('box', {
+    boundingbox: [-0.1, 3, 1, -0.1],
+    axis: true,
+    grid: true,
+    showFullscreen: true
+    });
+
+var p1 = board.create('point', [0.5, 0.5], {
+  name: 'A'
+});
+
+var coords = board.create('text',
+  [0.3, 2.8, function() {
+    return "Initial Condition: (" + JXG.toFixed(p1.X(), 2) + "," + JXG.toFixed(p1.Y(), 2) + ")";
+  }]
+);
+
+var i; //indexing variable
+var pts = [p1] //Put the initial condition in an array
+for (i=1;i<50;i++){
+    pts.push(board.create('point', [(function(j) {
+  return function() { return 2 * pts[j-1].X() * (1 - pts[j-1].X()) - 0.2 * pts[j-1].X() * pts[j-1].Y(); }
+})(i), (function(j) {
+  return function() { return 4 * pts[j-1].Y() / 5 + 0.6 * pts[j-1].X() * pts[j-1].Y() };
+})(i)], {
+  withLabel: false,
+  color: "blue",
+  opacity: 1,
+  size: 1
+}));
+}
+    </script>
+</div>
     
     
     <script src="../js/jquery.min.js"></script>

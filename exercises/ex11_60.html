@@ -140,20 +140,50 @@
 
     <h1>Chapter 11, Exploration 60</h1>
     <p> 
-        The H\'{e}non map is given by
-\begin{equation}\mylabel{eq:henon}
-\begin{array}{lcl}
+        The H&eacute;non map is given by
+\[\begin{array}{lcl}
 x_{n+1} &=& 1+y - ax^2\\
 y_{n+1} &=& bx.
 \end{array}
-\end{equation}
-We will take $a=1.4$ and $b = 0.3$.
+\]We will take \(a=1.4\) and \(b = 0.3\).
 
-\begin{Ex-web}\label{ex:henonSim}\index{H\'{e}non attractor}
-Use the tool on the website allows you to iterate the H\'{e}non map.  Describe in your own words what orbits are converging to.  This object is known as the H\'{e}non attractor.
-\end{Ex-web}
-    </p>
-    
+The tool here allows you to iterate the H&eacute;non map.  Describe in your own words what orbits are converging to.  This object is known as the H&eacute;non attractor.
+</p>
+<div id="box" class="jxgbox" style="width: 500px; height: 500px; float: left;">
+    <script>
+    var board = JXG.JSXGraph.initBoard('box', {
+    boundingbox: [-1.5, 0.6, 1.5, -0.6],
+    axis: true,
+    grid: true,
+    showFullscreen: true
+    });
+
+var p1 = board.create('point', [0.63, 0.19], {
+  name: 'A'
+});
+
+var coords = board.create('text',
+  [0.3, 2.8, function() {
+    return "Initial Condition: (" + JXG.toFixed(p1.X(), 2) + "," + JXG.toFixed(p1.Y(), 2) + ")";
+  }]
+);
+
+var i; //indexing variable
+var pts = [p1] //Put the initial condition in an array
+for (i=1;i<500;i++){
+    pts.push(board.create('point', [(function(j) {
+  return function() { return 1 + pts[j-1].Y() - 1.4*(pts[j-1].X())**2; }
+})(i), (function(j) {
+  return function() { return 0.3*pts[j-1].X(); };
+})(i)], {
+  withLabel: false,
+  color: "blue",
+  opacity: 1,
+  size: 1
+}));
+}
+    </script>
+</div>
     
     
     <script src="../js/jquery.min.js"></script>

@@ -146,7 +146,42 @@
 <li>Use the tool to explore the orbits of points inside the other hexagons (the ``limbs'' of the gingerbread man).  Describe these orbits.  You might try to prove some of this as well.  The dynamics inside the ``heart'' would be a good place to start.</li>
 </ul>    
     </p>
-    
+  <div id="box" class="jxgbox" style="width: 500px; height: 500px; float: left;">
+    <script>
+    var board = JXG.JSXGraph.initBoard('box', {
+    boundingbox: [-3, 8,8, -3],
+    axis: true,
+    grid: true,
+    showFullscreen: true
+    });
+
+
+var p1 = board.create('point', [0,0], {
+  name: 'A'
+});
+
+var coords = board.create('text',
+  [0.3, 7, function() {
+    return "Initial Condition: (" + JXG.toFixed(p1.X(), 2) + "," + JXG.toFixed(p1.Y(), 2) + ")";
+  }]
+);
+
+var i; //indexing variable
+var pts = [p1] //Put the initial condition in an array
+for (i=1;i<50;i++){
+    pts.push(board.create('point', [(function(j) {
+  return function() { return 1 - pts[j-1].Y()  + Math.abs(pts[j-1].X()); }
+})(i), (function(j) {
+  return function() { return pts[j-1].X(); };
+})(i)], {
+  withLabel: false,
+  color: "red",
+  opacity: 1,
+  size: 1
+}));
+}
+    </script>
+</div>  
     
     
     <script src="../js/jquery.min.js"></script>
