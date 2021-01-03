@@ -148,15 +148,38 @@
     </p>
   <div id="box" class="jxgbox" style="width: 500px; height: 500px; float: left;">
     <script>
-    var board = JXG.JSXGraph.initBoard('box', {
-    boundingbox: [-3, 8,8, -3],
-    axis: true,
-    grid: true,
-    showFullscreen: true
-    });
+var board = JXG.JSXGraph.initBoard('box', { //initialize the board
+  boundingbox: [-3, 8, 8, -3],
+  axis: true,
+  grid: true,
+  showFullscreen: true
+});
+
+var fixedPt = board.create('point', [2.9,2.6],{fixed: true, withLabel:false, color:'black', size:1, opacity:0.2}); //initial condition for the static image
+
+var i; //indexing variable
+var fixedPtArr = [fixedPt] //Put the initial condition in an array
+for (i = 1; i < 2000; i++) { //Makes a static image for the attractor
+  fixedPtArr.push(board.create('point', [(function(j) {
+    return function() {
+      return 1 - fixedPtArr[j - 1].Y() + Math.abs(fixedPtArr[j - 1].X());
+    }
+  })(i), (function(j) {
+    return function() {
+      return fixedPtArr[j - 1].X();
+    };
+  })(i)], {
+    withLabel: false,
+    color: "black",
+    opacity: 0.2,
+    size: 1,
+    fixed: true
+  }));
+  
+}
 
 
-var p1 = board.create('point', [0,0], {
+var p1 = board.create('point', [0, 0], { //Iniitial conditio for the movable points
   name: 'A'
 });
 
@@ -166,19 +189,23 @@ var coords = board.create('text',
   }]
 );
 
-var i; //indexing variable
 var pts = [p1] //Put the initial condition in an array
-for (i=1;i<50;i++){
-    pts.push(board.create('point', [(function(j) {
-  return function() { return 1 - pts[j-1].Y()  + Math.abs(pts[j-1].X()); }
-})(i), (function(j) {
-  return function() { return pts[j-1].X(); };
-})(i)], {
-  withLabel: false,
-  color: "red",
-  opacity: 1,
-  size: 1
-}));
+for (i = 1; i < 50; i++) { //Points that move as the initial condition A is dragged
+  pts.push(board.create('point', [(function(j) {
+    return function() {
+      return 1 - pts[j - 1].Y() + Math.abs(pts[j - 1].X());
+    }
+  })(i), (function(j) {
+    return function() {
+      return pts[j - 1].X();
+    };
+  })(i)], {
+    withLabel: false,
+    color: "red",
+    opacity: 1,
+    size: 2
+  }));
+  
 }
     </script>
 </div>  
