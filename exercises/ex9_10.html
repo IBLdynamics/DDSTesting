@@ -140,7 +140,7 @@
 
     <h1>Chapter 9, Exploration 10 </h1>
     <p> 
-Use the tool on the website to zoom in on the bifurcation diagram for the logistic function. Use the parameter range \(3.5 < a < 3.6\)  What is the highest periodic orbit you can find?  You should keep zooming in on this region to explore what is happening here.
+Use the tool to zoom in on the bifurcation diagram for the logistic function. Use the parameter range \(3.5 < a < 3.6\)  What is the highest periodic orbit you can find?  You should keep zooming in on this region to explore what is happening here.
     </p>
      <!-- Create textboxes for sequences to enter -->
      <div style="padding: 10px;">
@@ -205,8 +205,8 @@ function attractors(x, r) {
         fixed: true,
         withLabel: false
       }))
-    document.getElementById("jxgbox_"+ptArr[i].id).setAttribute("rx",1);
-    document.getElementById("jxgbox_"+ptArr[i].id).setAttribute("ry",1);      
+    document.getElementById("jxgbox_"+ptArr[i].id).setAttribute("rx",0.5);
+    document.getElementById("jxgbox_"+ptArr[i].id).setAttribute("ry",0.5);       
     } 
   }
 
@@ -232,8 +232,8 @@ function ZoomGraph() {
         fixed: true,
         withLabel: false
       }))
-    document.getElementById("jxgbox_"+ptArr[i].id).setAttribute("rx",1);
-    document.getElementById("jxgbox_"+ptArr[i].id).setAttribute("ry",1);      
+    document.getElementById("jxgbox_"+ptArr[i].id).setAttribute("rx",0.5);
+    document.getElementById("jxgbox_"+ptArr[i].id).setAttribute("ry",0.5);    
     }    
   }
 }
