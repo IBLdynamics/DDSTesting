@@ -10,8 +10,8 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../css/style.css">
 
-    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
-    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
     <script id="MathJax-script" async
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -193,7 +193,7 @@
         <label>b<input class="rValueCheckbox" type="radio" name="r" value="1/2" onclick="updateR(this);"></label>
         <label>c<input class="rValueCheckbox" type="radio" name="r" value="Math.PI/5" onclick="updateR(this);"></label>
         <label>d<input class="rValueCheckbox" type="radio" name="r" value="4/7" onclick="updateR(this);"></label>
-        <!--<p style="display: inline; padding-left: 5px;">r: <span id="rOut"></span></p>-->
+        <p style="display: inline; padding-left: 5px;">r: <span id="rOut"></span></p>
         <script>
             // Get the value of r from the checkboxes
             var rValue = eval(document.querySelector('.rValueCheckbox:checked').value);
@@ -206,18 +206,70 @@
         <button onclick="toggleView('table')">Table</button>
         <button onclick="toggleView('plot')">Plot</button>
     </div>
-    <div id="plot" class="jxgbox" style="width: 500px; height: 500px; display: none;">
+    <div id="box" class="jxgbox" style="width: 500px; height: 500px;">
         <script>
             // Initialize the board
-            var board = JXG.JSXGraph.initBoard("plot", {
+            var board = JXG.JSXGraph.initBoard("box", {
                 boundingbox: [-0.5, 1, 11, -0.1],
                 axis: true,
                 grid: true
             });
+            var status = 'table';
+            var points, i;
+            function updateTableAndPlot() {
+            // Generate points
+            points = [];
+            for (i = 0; i < 11; i++) {
+                points.push(
+                    (0.5 + (rValue * i))% 1)
+            }
+        }
+            function toggleView(view) {
+                updateTableAndPlot();
+            if (view == "table") {
+                JXG.JSXGraph.freeBoard(board);
+                board = JXG.JSXGraph.initBoard("box", {
+                boundingbox: [0, 6, 12, 0],
+                axis: false,
+                grid: false
+            });
+                //Make the table
+                board.create('text',[4, 5, function (){return 'n'}],{fontSize:20});
+                board.create('text',[8, 5, function (){return 'x_n'}],{fontSize:20});
+                for (i=0;i<11;i++){
+                    board.create('text',[4,4.75-(0.25*i),function(){return i}],{fontSize:20});
+                    board.create('text',[8,4.75-(0.25*i),function(){return JXG.toFixed(points[i],2)}],{fontSize:20});
+                }
+                status = 'table';
+
+            } else if (view == "plot") {
+
+                JXG.JSXGraph.freeBoard(board);
+                board = JXG.JSXGraph.initBoard("box", {
+                boundingbox: [-0.5, 1, 11, -0.1],
+                axis: true,
+                grid: true
+            });
+                for (i=0;i<11;i++){
+                    board.create('point',[i,points[i]],{withLabel:false, fixed:true});
+                    console.log(points[i]);
+                }
+                status = 'plot';
+            } else {
+                console.error("Invalid 'view' string");
+            }
+        }
+
+        toggleView('table');
+        // Function to update the table, plot and display new value when r is changed
+        function updateR(checkbox) {
+            rValue = eval(checkbox.value);
+            rOutput.innerHTML = rValue; // Output value of r for student to see
+            toggleView(status); // Update table and plot
+        }
         </script>
     </div>
-    <table id="table" style="display: block;" class="center">
-        <!-- Will be filled in later -->
+   <!-- <table id="table" style="display: block;" class="center">
     </table>
     <script>
         // Store table and plot elements for use within functions
@@ -287,15 +339,9 @@
                     withLabel: false
                 });
             }
-        }
-        // Function to update the table, plot and display new value when r is changed
-        function updateR(checkbox) {
-            rValue = eval(checkbox.value);
-            //rOutput.innerHTML = rValue; // Output value of r for student to see
-            updateTableAndPlot(); // Update table and plot
-        }
-        updateTableAndPlot(); // Update table and plot right away
-    </script>
+        }-->
+    
+
       </div>
 		</div>
     </div>
