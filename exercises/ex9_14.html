@@ -183,7 +183,7 @@ function attractors(x, r) {
   var end = document.getElementById("aTextbox2");
   var amin = parseFloat(start.value);
   var amax = parseFloat(end.value);
-  var spacing = (amax - amin) / 200;
+  var spacing = (amax - amin) / 600;
   
   // Initialize the Board
  var board = JXG.JSXGraph.initBoard("jxgbox", {
@@ -212,7 +212,7 @@ function attractors(x, r) {
 function ZoomGraph() {
   var amin = parseFloat(start.value);
   var amax = parseFloat(end.value);
-  var spacing = (amax - amin) / 200;
+  var spacing = (amax - amin) / 600;
   //Free up the board and change the bounds
   JXG.JSXGraph.freeBoard(board);
   board = JXG.JSXGraph.initBoard("jxgbox", {
