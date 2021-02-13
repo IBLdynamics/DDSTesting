@@ -8298,4 +8298,16 @@ a[data-toggle="collapse"] {
 
 #jxgbox{max-width:500px;height: calc(100vh - 6em)}
 
+.column {
+  float: right;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 

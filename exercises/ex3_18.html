@@ -163,7 +163,7 @@
             var aSelection = document.getElementById("aSelection");
             // Create board and "x0" slider
             var board = JXG.JSXGraph.initBoard('box', {
-                boundingbox: [-0.1, 1.1, 1.1, -0.1],
+                boundingbox: [-0.1, 0.6, 1.1, -0.1],
                 axis: true,
                 grid: true
             });
@@ -171,9 +171,12 @@
                 [0, 0],
                 [1, 0],
                 [0, 0.5, 1]
-            ], {
-                suffixLabel: 'x0 = '
-            });
+            ]);
+            // Prints the value of the initial condition
+            var graph = board.create('text',
+                       [0.1,0.55, function(){return "The value of x_0 is "+JXG.toFixed(x0.Value(), 2);}
+                       ]
+                    );
             // Create graphs
             var lineGraph = board.create('functiongraph',
                 [function (x) {

@@ -181,11 +181,10 @@
             });
             //Slider on x axis
             var x0 = board.create('slider', [
-                [-1, 0],
-                [1, 0],
-                [-1, 0, 1]
-            ], {
-                suffixLabel: 'x0 = '
+                [-2, 0],
+                [2, 0],
+                [-2, 0, 2]
+            ], {withLabel: false
             });
             // Create graphs
             var lineGraph = board.create('functiongraph',
@@ -195,6 +194,11 @@
                     strokeColor: 'green'
                 }
             );
+            // Prints the value of the initial condition
+            var graph = board.create('text',
+                       [-1.5,1.5, function(){return "The value of x_0 is "+JXG.toFixed(x0.Value(), 2);}
+                       ]
+                    );
             // Function used for graphing the function f(x) = asin(x)
             function graphFunc(x) {
                 return aSelection.value * Math.sin(x);

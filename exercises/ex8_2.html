@@ -172,6 +172,8 @@ Explorations 1 through 5 use the same applet. Click <a href="ex8_3.html">here</a
         <script type="text/javascript">
         var epValue = document.getElementById("epInput");
         </script>
+        <button onclick="updateViews()">Update \(\epsilon\) Value</button>
+
     </div>
     <div id="sequence" class="jxgbox" style="width: 500px; height: 500px; float: left;">
         <script>
@@ -230,22 +232,32 @@ Explorations 1 through 5 use the same applet. Click <a href="ex8_3.html">here</a
 
             // Plot points
             var j;
-            for (j = 0; j < 11; j++) {
+            for (j = 0; j < 21; j++) {
                 sequenceBoard.create('point', [j, points[j]], {
                     size: 2,
                     withLabel: false,
                     color: "blue"
                 });
+                sequenceBoard.create('point', [j, points2[j]], {
+                     size: 2,
+                     withLabel: false,
+                     color: "red"
+                 });
+                sequenceBoard.create('segment',[[j, points[j]],[j, points2[j]]], {
+                    color: "blue",
+                    opacity: 0.2
+                });
+                
 
             }
-            var j2;
-            for (j2 = 0; j2 < 21; j2++) {
-                sequenceBoard.create('point', [j2, points2[j2]], {
-                    size: 2,
-                    withLabel: false,
-                    color: "red"
-                });
-            }
+            // var j2;
+            // for (j2 = 0; j2 < 21; j2++) {
+            //     sequenceBoard.create('point', [j2, points2[j2]], {
+            //         size: 2,
+            //         withLabel: false,
+            //         color: "red"
+            //     });
+            // }
             //Initializes the second board
             JXG.JSXGraph.freeBoard(stairBoard);
             stairBoard = JXG.JSXGraph.initBoard("stair", {
@@ -282,6 +294,7 @@ Explorations 1 through 5 use the same applet. Click <a href="ex8_3.html">here</a
         }
         updateViews(); // Update views right away
     </script>
+
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.js"></script>
     <script src="../js/bootstrap.min.js"></script>

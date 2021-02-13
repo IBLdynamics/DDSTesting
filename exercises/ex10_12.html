@@ -214,7 +214,10 @@
             var x0 = board.create('slider', [
                 [0, 0],
                 [1, 0],
-                [0, 0, 1]
+                [0, 0, 1],
+                {
+                    withLabel: false
+                }
             ]);
             // Prints the value of the initial condition
             var graph = board.create('text',

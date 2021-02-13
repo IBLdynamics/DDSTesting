@@ -173,6 +173,8 @@ Explorations 1 through 5 use the same applet. Click <a href="ex8_5.html">here</a
         <script type="text/javascript">
         var epValue = document.getElementById("epInput");
         </script>
+        <button onclick="updateViews()">Update \(\epsilon\) Value</button>
+
     </div>
     <div id="sequence" class="jxgbox" style="width: 500px; height: 500px; float: left;">
         <script>
@@ -211,21 +213,7 @@ Explorations 1 through 5 use the same applet. Click <a href="ex8_5.html">here</a
                 points2.push(graphFunction(points2[i - 1]));
                 distances.push(Math.abs(parseFloat(points[i])-parseFloat(points2[i])));
             }
-            /* //Points with epsilon added
-            var points2, i2;
-            
-            for (i2 = 1; i2 < 11; i2++) {
-                
-            }
-            //Points for the distanes graph
-            var k;
-            for (k=1; k<11; k++){
-                distances.push(Math.abs(parseFloat(points[k])-parseFloat(points2[k])));
-            } */
-            console.log(distances[10]);
-            /*
-             * Update sequence
-             */
+
             // Free and recreate sequenceBoard
             JXG.JSXGraph.freeBoard(sequenceBoard);
             sequenceBoard = JXG.JSXGraph.initBoard("sequence", {
@@ -251,16 +239,26 @@ Explorations 1 through 5 use the same applet. Click <a href="ex8_5.html">here</a
                     withLabel: false,
                     color: "blue"
                 });
+                sequenceBoard.create('point', [j, points2[j]], {
+                     size: 2,
+                     withLabel: false,
+                     color: "red"
+                 });
+                sequenceBoard.create('segment',[[j, points[j]],[j, points2[j]]], {
+                    color: "blue",
+                    opacity: 0.2
+                });
+                
 
             }
-            var j2;
-            for (j2 = 0; j2 < 21; j2++) {
-                sequenceBoard.create('point', [j2, points2[j2]], {
-                    size: 2,
-                    withLabel: false,
-                    color: "red"
-                });
-            }
+            // var j2;
+            // for (j2 = 0; j2 < 21; j2++) {
+            //     sequenceBoard.create('point', [j2, points2[j2]], {
+            //         size: 2,
+            //         withLabel: false,
+            //         color: "red"
+            //     });
+            // }
             //Initializes the second board
             JXG.JSXGraph.freeBoard(stairBoard);
             stairBoard = JXG.JSXGraph.initBoard("stair", {

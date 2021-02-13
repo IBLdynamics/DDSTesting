@@ -170,10 +170,14 @@
             var x0 = board.create('slider', [
                 [0, 0],
                 [1, 0],
-                [0, 0.5, 1]
-            ], {
-                suffixLabel: 'x0 = '
-            });
+                [0, 0.5, 1]],
+                {withLabel: false}
+            );
+             // Prints the value of the initial condition
+            var graph = board.create('text',
+                       [1.05,0.1, function(){return "The value of x_0 is "+JXG.toFixed(x0.Value(), 2);}
+                       ]
+                    );
             // Create graphs
             var lineGraph = board.create('functiongraph',
                 [function (x) {
