@@ -171,7 +171,7 @@
          A total of 6 iterates are computed here and each is shown on a different vertical line.
 <ul>
 <li>The sliders <code>xmin</code> and <code>xmax</code> determine the endpoints of domain interval \(I\).  The iterates of this interval \((f_4(I), \, f_4^2(I), \dots, f_4^6(I))\) are shown in blue. </li>
-<li>The sliders <code>y0</code> and <code>y1</code> determine the endpoints of the target interval.  This interval is fixed and not iterated.  It is shown in orange on each vertical line.</li>
+<li>You can enter values for <code>y0</code> and <code>y1</code> to determine the endpoints of the target interval.  This interval is fixed and not iterated.  It is shown in orange on each vertical line.</li>
 </ul>
     </p>
     <!-- Slider for xmax -->
@@ -198,30 +198,17 @@
             xminOutput.innerHTML = xminSlider.value; // Output value for student to see
         </script>
     </div>  
-    <!-- Slider for y0 -->
-    <div style="width: 500px; height: 40px;">
-        <p style="display: inline;">y0:</p>
-        <input id="y0Slider" type="range" min="0" max="1" value="0.7" step="0.01">
-        <span id="y0Out" style="display: inline;"></span>
-        <script>
-            // Get the value of b from the slider
-            var y0Slider = document.getElementById("y0Slider");
-            var y0Output = document.getElementById("y0Out");
-            y0Output.innerHTML = y0Slider.value; // Output value for student to see
+    <!-- testboxesa for y0 and y1 -->
+        <div style="padding: 10px;">
+            <label>\(y_0\): <input id="y0Textbox" type="text" value=0.4></label>
+            <label>\(y_1\)</sub>: <input id="y1Textbox" type="text" value=0.6></label>
+        <script type="text/javascript">
+        var y0Value = document.getElementById("y0Textbox");
+        var y1Value = document.getElementById("y1Textbox");
         </script>
-    </div>  
-    <!-- Slider for y1 -->
-    <div style="width: 500px; height: 40px;">
-        <p style="display: inline;">y1:</p>
-        <input id="y1Slider" type="range" min="0" max="1" value="0.8" step="0.01">
-        <span id="y1Out" style="display: inline;"></span>
-        <script>
-            // Get the value of b from the slider
-            var y1Slider = document.getElementById("y1Slider");
-            var y1Output = document.getElementById("y1Out");
-            y1Output.innerHTML = y1Slider.value; // Output value for student to see
-        </script>
-    </div>  
+            <button onclick="update();">Update graphs</button>
+        </div>
+
     <div id="board" class="jxgbox" style="width: 500px; height: 500px; float: left;">
         <script>
             var board;
@@ -273,11 +260,11 @@
               for (i=1;i<7;i++){
                 //Vertical green lines
                 var p1 = board.create('point',
-                        [i+0.05 , parseFloat(y0Slider.value)], {
+                        [i+0.05 , parseFloat(y0Value.value)], {
                             fixed: true , withLabel: false, visible: false
                         });
                 var p2 = board.create('point',
-                        [i+0.05 , parseFloat(y1Slider.value)], {
+                        [i+0.05 , parseFloat(y1Value.value)], {
                             fixed: true , withLabel: false, visible: false
                         });
                 board.create('segment',
@@ -321,6 +308,8 @@
         function update(){
             JXG.JSXGraph.freeBoard(board); // Have to free the whole board to get rid of all the points
             createBoard();
+console.log(y0Value);
+
         }
         xmaxSlider.oninput = function () {
                 xmaxOutput.innerHTML = this.value; // Output value for student to see
@@ -329,16 +318,6 @@
             }
         xminSlider.oninput = function () {
                 xminOutput.innerHTML = this.value; // Output value for student to see
-                update();
-                board.fullUpdate();
-            }
-            y0Slider.oninput = function () {
-                y0Output.innerHTML = this.value; // Output value for student to see
-                update();
-                board.fullUpdate();
-            }
-            y1Slider.oninput = function () {
-                y1Output.innerHTML = this.value; // Output value for student to see
                 update();
                 board.fullUpdate();
             }
