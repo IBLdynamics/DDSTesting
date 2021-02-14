@@ -99,23 +99,36 @@
         <!-- Page Content  -->
       <div id="content" class="mx-auto">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="container-fluid">
 
             <button type="button" id="sidebarCollapse" class="btn btn-primary">
               <i class="fa fa-bars"></i>
               <span class="sr-only">Toggle Menu</span>
             </button>
+            <script> window.onload = function(){
+                document.getElementById('sidebarCollapse').click();
+                }
+            </script>
             <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../index.html">Home</a>
                 </li>
-                <li class="nav-item dropdown">
+               <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Chapter 10 Exercises
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="../exercises/ex10_12.html"> Chapter 10, Explorations 12-19</a>
+            <a class="dropdown-item" href="../exercises/ex10_36.html"> Chapter 10, Explorations 36-40</a>
+        </div>
+      </li>
+        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Chapters
         </a>
@@ -132,14 +145,11 @@
             <a class="dropdown-item" href="../chapters/ch11.html">Chapter 11</a>
         </div>
       </li>
-      <li class="nav-item">
-                    <a class="nav-link" href="../chapters/ch10.html">Return to Chapter Overview</a>
-                </li>
-                <li class="nav-item ">
+              <li>
+                <li class="nav-item">
                     <a class="nav-link" href="../contact.html">Contact</a>
                 </li>
               </ul>
-              
             </div>
           </div>
         </nav>
