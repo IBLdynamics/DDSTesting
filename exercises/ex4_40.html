@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Discovering Dynamical Systems Through Experiment and Inquiry</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="p-4 pt-5">
+		  		<a href="#" class="img logo rounded mx-auto" style="background-image: url(../images/Henon.png);"></a>
+	        <ul class="list-unstyled components mb-5">
+	          <li class="active">
+	            <!--<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+	            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="#">Home 1</a>
+                </li>
+                <li>
+                    <a href="#">Home 2</a>
+                </li>
+                <li>
+                    <a href="#">Home 3</a>
+                </li>
+	            </ul>
+	          </li>-->
+	          <li>
+	              <a href="../index.html">Home</a>
+	          </li>
+	          <li>
+              <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Chapters</a>
+              <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                    <a href="../chapters/ch1.html">Chapter 1</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch2.html">Chapter 2</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch3.html">Chapter 3</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch4.html">Chapter 4</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch5.html">Chapter 5</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch6.html">Chapter 6</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch7.html">Chapter 7</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch8.html">Chapter 8</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch9.html">Chapter 9</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch10.html">Chapter 10</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch11.html">Chapter 11</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch12.html">Chapter 12</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch13.html">Chapter 13</a>
+                </li>
+              </ul>
+	          </li>
+	          <!--<li>
+              <a href="#">Portfolio</a>
+	          </li>-->
+	          <li>
+              <a href="../about.html">About the Authors</a>
+	          </li>
+              <li>
+              <a href="../contact.html">Contact</a>
+              </li>
+	        </ul>
+
+	        <div class="footer">
+	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
+						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+	        </div>
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+
+              <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+              <i class="fa fa-bars"></i>
+              <span class="sr-only">Toggle Menu</span>
+            </button>
+            <script> window.onload = function(){
+                document.getElementById('sidebarCollapse').click();
+                }
+            </script>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+               <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Chapter 4 Exercises
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="../exercises/ex4_39.html"> Chapter 4, Exploration 39</a>
+            <a class="dropdown-item" href="../exercises/ex4_40.html"> Chapter 4, Exploration 40</a>                 
+        </div>
+      </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Chapters
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="../chapters/ch1.html">Chapter 1</a>
+            <a class="dropdown-item" href="../chapters/ch2.html">Chapter 2</a>
+            <a class="dropdown-item" href="../chapters/ch3.html">Chapter 3</a>
+            <a class="dropdown-item" href="../chapters/ch4.html">Chapter 4</a>
+            <a class="dropdown-item" href="../chapters/ch5.html">Chapter 5</a>
+            <a class="dropdown-item" href="../chapters/ch6.html">Chapter 6</a>
+            <a class="dropdown-item" href="../chapters/ch8.html">Chapter 8</a>
+            <a class="dropdown-item" href="../chapters/ch9.html">Chapter 9</a>
+            <a class="dropdown-item" href="../chapters/ch10.html">Chapter 10</a>
+            <a class="dropdown-item" href="../chapters/ch11.html">Chapter 11</a>
+        </div>
+      </li>
+              <li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../contact.html">Contact</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+    <h1>Chapter 4, Exploration 40</h1>
+    <p> Holding the mouse over the points \(A\) and \(B\) gives their coordinates. Either of these points can be clicked and dragged to change the graph. Begin by estimating the value of the fixed point of this function and the value of the derivative of the function at the fixed point.
+    <ul>
+        <li>Is the fixed point of this function hyperbolic
+        or non-hyperbolic? </li>
+        <li>Now adjust either one of the movable points just a little bit. Does the
+        fixed point move? Do any new fixed points appear? Is this new
+        fixed point(s) hyperbolic or non-hyperbolic? </li>
+        <li>Is this system structurally stable? </li>
+        <li>Can you move \(A\) and \(B\) in such a way that there are multiple fixed points?  Do you have to move them a little or a lot? </li>
+    </ul>
+</p>
+<div>
+    <p> 
+        <button onClick="boardSetup();">Click to reset the board</button>
+     </p>
+ </div>
+    <div id="box" class="jxgbox" style="width: 500px; height: 500px;">
+        <script type="text/javascript">
+            // Create board
+            var board = JXG.JSXGraph.initBoard('box', {
+                boundingbox: [-2, 5, 2, -5],
+                axis: true,
+                grid: true
+            });
+            function boardSetup(){
+            JXG.JSXGraph.freeBoard(board);
+            board = JXG.JSXGraph.initBoard('box', {
+                boundingbox: [-2, 5, 2, -5],
+                axis: true,
+                grid: true
+            });
+            // Create points that will be moved around
+            var pA = board.create('point', [-1, 0]);
+            var pB = board.create('point', [1, 2]);
+            // Create graphs
+            var lineGraph = board.create('functiongraph',
+                [function (x) {
+                    return x;
+                }, -2, 2], {
+                    strokeColor: 'green'
+                }
+            );
+            var curveGraph = board.create('functiongraph',
+                [function (x) {
+                    return x ** 2 + (pB.Y() - pA.Y() + pA.X() ** 2 - pB.X() ** 2) / (pB.X() - pA.X()) * x + (pB
+                        .X() * pA.Y() - pA.X() * pB.Y() + pA.X() * pB.X() ** 2 - pB.X() * pA.X() ** 2) / (pB
+                        .X() - pA.X());
+                }, -2, 2, {
+                    fixed: false
+                }]
+            );
+            curveGraph.addParents([pA, pB]);
+        };
+        boardSetup();
+        </script>
+    </div>
+
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

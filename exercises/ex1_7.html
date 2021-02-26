@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Discovering Dynamical Systems Through Experiment and Inquiry</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" type="text/css" href="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="p-4 pt-5">
+		  		<a href="#" class="img logo rounded mx-auto" style="background-image: url(../images/Henon.png);"></a>
+	        <ul class="list-unstyled components mb-5">
+	          <li class="active">
+	            <!--<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+	            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="#">Home 1</a>
+                </li>
+                <li>
+                    <a href="#">Home 2</a>
+                </li>
+                <li>
+                    <a href="#">Home 3</a>
+                </li>
+	            </ul>
+	          </li>-->
+	          <li>
+	              <a href="../index.html">Home</a>
+	          </li>
+	          <li>
+              <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Chapters</a>
+              <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                    <a href="../chapters/ch1.html">Chapter 1</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch2.html">Chapter 2</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch3.html">Chapter 3</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch4.html">Chapter 4</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch5.html">Chapter 5</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch6.html">Chapter 6</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch7.html">Chapter 7</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch8.html">Chapter 8</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch9.html">Chapter 9</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch10.html">Chapter 10</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch11.html">Chapter 11</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch12.html">Chapter 12</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch13.html">Chapter 13</a>
+                </li>
+              </ul>
+	          </li>
+	          <!--<li>
+              <a href="#">Portfolio</a>
+	          </li>-->
+	          <li>
+              <a href="../about.html">About the Authors</a>
+	          </li>
+              <li>
+              <a href="../contact.html">Contact</a>
+              </li>
+	        </ul>
+
+	        <div class="footer">
+	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
+						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+	        </div>
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+              <i class="fa fa-bars"></i>
+              <span class="sr-only">Toggle Menu</span>
+            </button>
+            <script> window.onload = function(){
+                document.getElementById('sidebarCollapse').click();
+                }
+            </script>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+               <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Chapter 1 Exercises
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="../exercises/ex1_7.html">Chapter 1, Exercise 7</a>
+            <a class="dropdown-item" href="../exercises/ex1_9.html">Chapter 1, Exercise 9</a>
+            <a class="dropdown-item" href="../exercises/ex1_10.html">Chapter 1, Exercise 10</a>
+        </div>
+      </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Chapters
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="../chapters/ch1.html">Chapter 1</a>
+            <a class="dropdown-item" href="../chapters/ch2.html">Chapter 2</a>
+            <a class="dropdown-item" href="../chapters/ch3.html">Chapter 3</a>
+            <a class="dropdown-item" href="../chapters/ch4.html">Chapter 4</a>
+            <a class="dropdown-item" href="../chapters/ch5.html">Chapter 5</a>
+            <a class="dropdown-item" href="../chapters/ch6.html">Chapter 6</a>
+            <a class="dropdown-item" href="../chapters/ch8.html">Chapter 8</a>
+            <a class="dropdown-item" href="../chapters/ch9.html">Chapter 9</a>
+            <a class="dropdown-item" href="../chapters/ch10.html">Chapter 10</a>
+            <a class="dropdown-item" href="../chapters/ch11.html">Chapter 11</a>
+        </div>
+      </li>
+              <li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../contact.html">Contact</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    <div>    
+        <h1>Chapter 1, Exploration 7</h1>
+        <p> The first 11
+            elements of orbits to several dynamical systems are shown below. Select \(a,b,c\), or \(d\) to change which system you are viewing. Determine whether they are periodic or not. If so determine their period. You can switch between a table of value and a plot of the points by clicking the button below. For the plot, \(x\) is the vertical axis and \(n\) is the horizontal axis.</p>
+    <!-- Create checkboxes to determine the value of r -->
+    <div id="checkboxes" style="width: 500px; height: 40px;">
+        <!-- Check "a" by default -->
+        <label>a<input class="rValueCheckbox" type="radio" name="r" value="1/3" onclick="updateR(this);"
+                checked></label>
+        <label>b<input class="rValueCheckbox" type="radio" name="r" value="1/2" onclick="updateR(this);"></label>
+        <label>c<input class="rValueCheckbox" type="radio" name="r" value="Math.PI/5" onclick="updateR(this);"></label>
+        <label>d<input class="rValueCheckbox" type="radio" name="r" value="4/7" onclick="updateR(this);"></label>
+        <p style="display: inline; padding-left: 5px;">r: <span id="rOut"></span></p>
+        <script>
+            // Get the value of r from the checkboxes
+            var rValue = eval(document.querySelector('.rValueCheckbox:checked').value);
+            var rOutput = document.getElementById("rOut");
+            rOutput.innerHTML = rValue; // Output value for student to see
+        </script>
+    </div>
+    <!-- Create buttons to determine whether to display table or plot -->
+    <div id="buttons" style="width: 500px; height: 40px;">
+        <button onclick="toggleView('table')">Table</button>
+        <button onclick="toggleView('plot')">Plot</button>
+    </div>
+    <div id="box" class="jxgbox" style="width: 500px; height: 500px;">
+        <script>
+            // Initialize the board
+            var board = JXG.JSXGraph.initBoard("box", {
+                boundingbox: [-0.5, 1, 11, -0.1],
+                axis: true,
+                grid: true,
+
+            });
+            var status = 'table';
+            var points, i;
+            function updateTableAndPlot() {
+            // Generate points
+            points = [];
+            for (i = 0; i < 11; i++) {
+                points.push(
+                    (0.5 + (rValue * i))% 1)
+            }
+        }
+            function toggleView(view) {
+                updateTableAndPlot();
+            if (view == "table") {
+                JXG.JSXGraph.freeBoard(board);
+                board = JXG.JSXGraph.initBoard("box", {
+                boundingbox: [0, 6, 12, 0],
+                axis: false,
+                grid: false,
+                showZoom: false,
+                showNavigation: false
+
+            });
+                //Make the table
+                board.create('text',[4, 5, function (){return 'n'}],{fontSize:20});
+                board.create('text',[8, 5, function (){return 'x_n'}],{fontSize:20});
+                for (i=0;i<11;i++){
+                    board.create('text',[4,4.75-(0.25*i),function(){return i}],{fontSize:20});
+                    board.create('text',[8,4.75-(0.25*i),function(){return JXG.toFixed(points[i],2)}],{fontSize:20});
+                }
+                status = 'table';
+
+            } else if (view == "plot") {
+
+                JXG.JSXGraph.freeBoard(board);
+                board = JXG.JSXGraph.initBoard("box", {
+                boundingbox: [-0.5, 1, 11, -0.1],
+                axis: true,
+                grid: true
+            });
+                for (i=0;i<11;i++){
+                    board.create('point',[i,points[i]],{withLabel:false, fixed:true});
+                    console.log(points[i]);
+                }
+                status = 'plot';
+            } else {
+                console.error("Invalid 'view' string");
+            }
+        }
+
+        toggleView('table');
+        // Function to update the table, plot and display new value when r is changed
+        function updateR(checkbox) {
+            rValue = eval(checkbox.value);
+            rOutput.innerHTML = rValue; // Output value of r for student to see
+            toggleView(status); // Update table and plot
+        }
+        </script>
+    </div>
+   <!-- <table id="table" style="display: block;" class="center">
+    </table>
+    <script>
+        // Store table and plot elements for use within functions
+        let table = document.getElementById("table");
+        let plot = document.getElementById("plot");
+        // Function to change views between table and plot
+        function toggleView(view) {
+            if (view == "table") {
+                plot.style.display = "none";
+                table.style.display = "block";
+            } else if (view == "plot") {
+                table.style.display = "none";
+                plot.style.display = "block";
+            } else {
+                console.error("Invalid 'view' string");
+            }
+        }
+        // Function to create or update both the table and plot
+        function updateTableAndPlot() {
+            // Generate points
+            var points, i;
+            points = [];
+            for (i = 0; i < 11; i++) {
+                points.push({
+                    n: i,
+                    x_n: (0.5 + (rValue * i)) % 1 // Start with 0.5. Add rValue each time
+                });
+            }
+            /*
+             * Update table
+             */
+            // Clear previous table
+            table.innerHTML = "";
+            // Create table head
+            let thead = table.createTHead();
+            let row = thead.insertRow();
+            for (let key of Object.keys(points[0])) {
+                let th = document.createElement("th");
+                let text = document.createTextNode(key);
+                th.appendChild(text);
+                row.appendChild(th);
+            }
+            // Create table data
+            for (let element of points) {
+                let row = table.insertRow();
+                for (key in element) {
+                    let cell = row.insertCell();
+                    let text = document.createTextNode(element[key]);
+                    cell.appendChild(text);
+                }
+            }
+            /*
+             * Update plot
+             */
+            // Free and recreate board
+            JXG.JSXGraph.freeBoard(board);
+            board = JXG.JSXGraph.initBoard('plot', {
+                boundingbox: [-0.5, 1, 11, -0.1],
+                axis: true,
+                grid: true
+            });
+            // Plot points
+            for (let element of points) {
+                board.create('point', [element["n"], element["x_n"]], {
+                    fixed: true,
+                    size: 1,
+                    withLabel: false
+                });
+            }
+        }-->
+    
+
+      </div>
+		</div>
+    </div>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

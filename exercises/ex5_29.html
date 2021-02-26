@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Discovering Dynamical Systems Through Experiment and Inquiry</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="p-4 pt-5">
+		  		<a href="#" class="img logo rounded mx-auto" style="background-image: url(../images/Henon.png);"></a>
+	        <ul class="list-unstyled components mb-5">
+	          <li class="active">
+	            <!--<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+	            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="#">Home 1</a>
+                </li>
+                <li>
+                    <a href="#">Home 2</a>
+                </li>
+                <li>
+                    <a href="#">Home 3</a>
+                </li>
+	            </ul>
+	          </li>-->
+	          <li>
+	              <a href="../index.html">Home</a>
+	          </li>
+	          <li>
+              <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Chapters</a>
+              <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                    <a href="../chapters/ch1.html">Chapter 1</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch2.html">Chapter 2</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch3.html">Chapter 3</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch4.html">Chapter 4</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch5.html">Chapter 5</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch6.html">Chapter 6</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch7.html">Chapter 7</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch8.html">Chapter 8</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch9.html">Chapter 9</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch10.html">Chapter 10</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch11.html">Chapter 11</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch12.html">Chapter 12</a>
+                </li>
+                <li>
+                    <a href="../chapters/ch13.html">Chapter 13</a>
+                </li>
+              </ul>
+	          </li>
+	          <!--<li>
+              <a href="#">Portfolio</a>
+	          </li>-->
+	          <li>
+              <a href="../about.html">About the Authors</a>
+	          </li>
+              <li>
+              <a href="../contact.html">Contact</a>
+              </li>
+	        </ul>
+
+	        <div class="footer">
+	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
+						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+	        </div>
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+
+             <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+              <i class="fa fa-bars"></i>
+              <span class="sr-only">Toggle Menu</span>
+            </button>
+            <script> window.onload = function(){
+                document.getElementById('sidebarCollapse').click();
+                }
+            </script>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+               <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Chapter 5 Exercises
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="../exercises/ex5_1_4.html"> Chapter 5, Explorations 1-4</a>
+
+                <a class="dropdown-item" href="../exercises/ex5_5_8.html"> Chapter 5, Explorations 5-8</a>
+    
+                <a class="dropdown-item" href="../exercises/ex5_10.html"> Chapter 5, Exploration 10</a>
+        
+                <a class="dropdown-item" href="../exercises/ex5_11.html"> Chapter 5, Exploration 11</a>
+ 
+                <a class="dropdown-item" href="../exercises/ex5_12.html"> Chapter 5, Exploration 12</a>
+     
+                <a class="dropdown-item" href="../exercises/ex5_12a.html"> Chapter 5, Exploration 12 Continued</a>
+      
+                <a class="dropdown-item" href="../exercises/ex5_13.html"> Chapter 5, Exploration 13</a>
+      
+                <a class="dropdown-item" href="../exercises/ex5_28.html"> Chapter 5, Exploration 28</a>
+            
+                <a class="dropdown-item" href="../exercises/ex5_29.html"> Chapter 5, Exploration 29</a>
+   
+                <a class="dropdown-item" href="../exercises/ex5_30.html"> Chapter 5, Exploration 30</a>           
+        </div>
+      </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Chapters
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="../chapters/ch1.html">Chapter 1</a>
+            <a class="dropdown-item" href="../chapters/ch2.html">Chapter 2</a>
+            <a class="dropdown-item" href="../chapters/ch3.html">Chapter 3</a>
+            <a class="dropdown-item" href="../chapters/ch4.html">Chapter 4</a>
+            <a class="dropdown-item" href="../chapters/ch5.html">Chapter 5</a>
+            <a class="dropdown-item" href="../chapters/ch6.html">Chapter 6</a>
+            <a class="dropdown-item" href="../chapters/ch8.html">Chapter 8</a>
+            <a class="dropdown-item" href="../chapters/ch9.html">Chapter 9</a>
+            <a class="dropdown-item" href="../chapters/ch10.html">Chapter 10</a>
+            <a class="dropdown-item" href="../chapters/ch11.html">Chapter 11</a>
+        </div>
+      </li>
+              <li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../contact.html">Contact</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+    <h1>Chapter 5, Exploration 29</h1>
+    <p> The graphs below two different plots of \(y = f^2_a(x)\).
+        The first one shows it
+        plotted on the domain \( 0 \leq x \leq 1\) and also includes the graph of \(y = f_a(x)\) so
+        that you can see the relationship between the two. The second one only shows
+        the graph of \(y = f^2_a(x)\), but zooms in on the non-zero fixed point to better
+        illustrate what happens in a period-doubling bifurcation. Use these tools to
+        answer the following questions. Make sure the sidebar menus is minimized.
+        <ol>
+            <li>Describe in general terms what happens to the non-zero fixed points
+            of \(y = f^2_a(x)\)as \(a\) increases through the bifurcation value of \(a = 3\).
+            How many fixed points are there when \(a < 3\) and what are their
+            stabilities? How many are there when \(a > 3\) and what are their
+            stabilities? The first tool will be most helpful for this exercise.</li>
+            <li>Recall that fixed points of \(y = f^2_a(x)\) are period 2 points of \(y = f_a(x)\). Are
+            any of the fixed points of \(y = f^2_a(x)\) actually fixed points of \(y = f_a(x)\) (i.e.
+            not prime period 2 points)? If so, are they attracting or repelling?
+            Are any of the fixed points of \(y = f^2_a(x)\) prime period 2 points of \(y = f_a(x)\)?
+            If so, are they attracting or repelling?</li>
+            <li> In exploration <a href="ex5_28.html">28</a> you showed that \(f_3(2/3) = 2/3\) and \(f'_3 (2/3) = −1\). What is
+            \(f''_a(2/3)\)? Look at the figure first, then calculate it.
+            How is this different from the second derivative condition in the
+            Tangent Bifurcation Theorem? Why do you think this is important
+            in explaining the bifurcation that you see when looking at the graph
+            of \(y = f^2_a(x)\).</li>
+        </ol>
+    </p>
+    <div>
+        <!-- Create a slider to determine the value of "a" -->
+        <div id="rangeslider" style="width: 500px; height: 20px;">
+            <p style="display: inline;">a:</p>
+            <input id="aSlider" type="range" min="2.5" max="3.3" value="2.5" step="0.01" style="width: 50%;">
+            <p style="display: inline;"><span id="aOut"></span></p>
+            <script>
+                // Get the value of "a" from the slider
+                var aSlider = document.getElementById("aSlider");
+                var aOutput = document.getElementById("aOut");
+                aOutput.innerHTML = aSlider.value; // Output value for student to see
+            </script>
+        </div>
+        <div style="float: left; padding-right: 10px;">
+            <!-- Create the graphs f(x) and f(f(x)) -->
+            <h3>&emsp;&emsp;&emsp;&emsp;&emsp;\(f_a(x)\) and \(f^2_a(x)\)</h3>
+            <div id="box1" class="jxgbox" style="width: 500px; height: 500px; float: left;">
+                <script type="text/javascript">
+                    // Create board
+                    var board1 = JXG.JSXGraph.initBoard('box1', {
+                        boundingbox: [-0.1, 1, 1, -0.1],
+                        axis: true,
+                        grid: true
+                    });
+                    // Create graphs
+                    var lineGraph = board1.create('functiongraph',
+                        [function (x) {
+                            return x;
+                        }, 0, 1]
+                    );
+                    // Function for the first graph
+                    function f(x) {
+                        return aSlider.value * x * (1 - x);
+                    }
+                    // Function for the second graph
+                    function fSquared(x) {
+                        return f(aSlider.value * x * (1 - x));
+                    }
+                    var fGraph = board1.create('functiongraph',
+                        [f, 0, 1], {
+                            strokeColor: 'orange'
+                        });
+                    var fSquaredGraph = board1.create('functiongraph',
+                        [fSquared, 0, 1], {
+                            strokeColor: 'green'
+                        });
+                </script>
+            </div>
+        </div>
+        <div>
+            <!-- Create the zoomed graph of f(f(x)) -->
+            <h3>&emsp;&emsp;&emsp;&emsp;&emsp;\(f^2_a(x)\), zoomed in</h3>
+            <div id="box2" class="jxgbox" style="width: 500px; height: 500px;">
+                <script type="text/javascript">
+                    // Create board
+                    var board2 = JXG.JSXGraph.initBoard('box2', {
+                        boundingbox: [0.475, 0.8, 0.8, 0.475],
+                        grid: true
+                    });
+                    // Create axis for viewing zoom
+                    var a1 = board2.create('axis', [
+                        [0.5, 0.5],
+                        [0.5, 0.8]
+                    ]);
+                    var a2 = board2.create('axis', [
+                        [0.5, 0.5],
+                        [0.8, 0.5]
+                    ]);
+                    // Create graphs
+                    var lineGraph = board2.create('functiongraph',
+                        [function (x) {
+                            return x;
+                        }, 0, 1]
+                    );
+                    var fSquaredGraphZoomed = board2.create('functiongraph',
+                        [fSquared, 0, 1], {
+                            strokeColor: 'green'
+                        });
+                </script>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Set all functiongraps to update when the "a" slider is updated
+        aSlider.oninput = function () {
+            aOutput.innerHTML = this.value; // Output value for student to see
+            fGraph.fullUpdate();
+            fSquaredGraph.fullUpdate();
+            fSquaredGraphZoomed.fullUpdate();
+        }
+    </script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
