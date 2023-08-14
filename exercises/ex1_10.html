@@ -10,8 +10,8 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../css/style.css">
 
-    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
-    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
@@ -205,7 +205,9 @@
             var i, xcors, ycors, xi;
             xcors = [x0Slider.value]; // Populate xcors with the first value = x0
             ycors = [graphFunc(x0Slider.value)]; // Populate ycors with the first value = x1
-            for (i = 0; i < 10; i++) {
+            xcorsPlot = xcors;
+            ycorsPlot = ycors;
+            for (i = 0; i < 20; i++) {
                 xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
                 // Add new point (xi, xi)
                 xcors.push(xi);
@@ -216,7 +218,7 @@
             }
             return {
                 'xcors': xcors,
-                'ycors': ycors
+                'ycors': ycors,
             };
         }
     </script>
@@ -232,11 +234,16 @@
                     grid: true
                 });
                 // Plot points with value (i, xi)
-                var i, xcors;
+                var i, xcors, ycors=[];
                 xcors = generatePoints()['xcors'];
-                for (i = 0; i < xcors.length; i++) {
+                for (i=0; i< xcors.length; i++){
+                    if(i%2!=0){
+                        ycors.push(xcors[i]);
+                    }
+                }
+                for (i = 0; i < ycors.length; i++) {
                     board1.create('point',
-                        [i + 1, xcors[i]], {
+                        [i + 1, ycors[i]], {
                             fixed: true , withLabel: false
                         });
                 }

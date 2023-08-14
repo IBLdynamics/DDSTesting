@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <title>Attracting Fixed Points of Nonlinear Systems: 13</title>
+</head>
+
+<body>
+    <h1>Attracting Fixed Points of Nonlinear Systems: 13</h1>
+    <!-- Create a dropdown menu to determine the value of "a" -->
+    <div id="dropdown" style="width: 500px; height: 40px;">
+        <p style="display: inline;">a:</p>
+        <select id="aSelection">
+            <option value=0.2>0.2</option>
+            <option value=0.4>0.4</option>
+            <option value=0.6>0.6</option>
+            <option value=0.8>0.8</option>
+            <option value=1.0>1.0</option>
+            <option value=1.2>1.2</option>
+            <option value=1.4>1.4</option>
+            <option value=1.6>1.6</option>
+            <option value=1.8>1.8</option>
+            <option value=2.0>2.0</option>
+        </select>
+    </div>
+    <!-- Create a slider to determine the value of x0 -->
+    <div id="rangeslider" style="width: 500px; height: 40px;">
+        <p style="display: inline;">x0:</p>
+        <input id="x0Slider" type="range" min="-0.5" max="0.5" value="0" step="0.01" style="width: 50%;">
+        <span id="x0Out" style="display: inline;"></span>
+        <script>
+            // Get the value of x0 from the slider
+            var x0Slider = document.getElementById("x0Slider");
+            var x0Output = document.getElementById("x0Out");
+            x0Output.innerHTML = x0Slider.value; // Output value for student to see
+        </script>
+    </div>
+    <!-- Create the rest -->
+    <div id="box" class="jxgbox" style="width: 500px; height: 500px;">
+        <script type="text/javascript">
+            // Get the "a" dropdown for later use
+            var aSelection = document.getElementById("aSelection");
+            // Create board
+            var board = JXG.JSXGraph.initBoard('box', {
+                boundingbox: [-1.0, 1.5, 1.0, -1.5],
+                axis: true,
+                grid: true
+            });
+            // Create graphs
+            var lineGraph = board.create('functiongraph',
+                [function (x) {
+                    return x
+                }, -1.0, 1.0], {
+                    strokeColor: 'green'
+                }
+            );
+            // Function used for graphing the function f(x) = asin(x)
+            function graphFunc(x) {
+                return aSelection.value * Math.sin(x);
+            }
+            var curveGraph = board.create('functiongraph',
+                [graphFunc, -1.0, 1.0]
+            );
+            // Create a step function that will be updated each time a or x0 changes
+            var stepGraph = board.create('stepfunction', [
+                [0], // Use as filler for now. It will be replaced on board update
+                [0]
+            ], {
+                strokeColor: 'red'
+            });
+            // Function to calculate and plot the attracting and repelling points
+            function plotPoints() {
+                var i, xcors, ycors, xi;
+                xcors = [x0Slider.value]; // Populate xcors with the first value = x0
+                ycors = [graphFunc(x0Slider.value)]; // Populate ycors with the first value = x1
+                for (i = 0; i < 10; i++) {
+                    xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
+                    // Add new point (xi, xi)
+                    xcors.push(xi);
+                    ycors.push(xi);
+                    // Add new point (xi, xi+1)
+                    xcors.push(xi);
+                    ycors.push(graphFunc(xi));
+                }
+                // Plot points
+                stepGraph.xterm = xcors;
+                stepGraph.yterm = ycors;
+            }
+            // Set the whole board to update when the "a" dropdown is updated
+            aSelection.onchange = function () {
+                plotPoints();
+                board.fullUpdate();
+            }
+            // Set the whole board to update when the "x0" slider is updated
+            x0Slider.oninput = function () {
+                x0Output.innerHTML = this.value; // Output value for student to see
+                plotPoints();
+                board.fullUpdate();
+            }
+            // Re-calculate the attracting and repelling points each time the board is updated
+            board.on('update', function () {
+                plotPoints();
+            });
+            // Update the board right away to replace (0,0) filler from stepGraph
+            board.fullUpdate();
+        </script>
+    </div>
+</body>
+
+</html>

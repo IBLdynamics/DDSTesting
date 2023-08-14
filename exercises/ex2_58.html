@@ -10,8 +10,8 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../css/style.css">
 
-    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
-    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
@@ -168,7 +168,7 @@
         </nav>
 
     <h1>Chapter 2, Exercise 58</h1>
-    <p> The green points below show a random sequence \(\{x_n\}\). When you select a value for \(N\) on the slider, the point \(u_N\) is shown in blue and \(v_N\) is shown in orange. Move the slider to see how the sequences that define the limit infimum and limit supremum change. What do these dots (i.e., sequences) do as you scroll through?
+    <p> The green points below show a random sequence \(\{x_n\}\). When you select a value for \(N\) on the slider, the point \(u_N\) is shown in blue and \(v_N\) is shown in orange. Note that these colors have been changed from what is in the textbook. The labels account for this. Move the slider to see how the sequences that define the limit infimum and limit supremum change. What do these dots (i.e., sequences) do as you scroll through?
     <!-- Create a slider to determine the value of N -->
     <div style="width: 500px; height: 40px;">
         <p style="display: inline;">N:</p>
@@ -205,6 +205,8 @@
                 sups = [null],
                 s = [null],
                 liminf, limsup;
+
+            sboard.emulateColorblindness('deuteranopia');
 
             function updateBoard(){
                 JXG.JSXGraph.freeBoard(board);

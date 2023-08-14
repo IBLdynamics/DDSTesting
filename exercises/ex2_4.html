@@ -217,7 +217,7 @@
                         [Math.floor(2 / e), -e]
                     ], {
                         fixed: true,
-                        strokeColor: 'green'
+                        strokeColor: 'blue'
                     });
                 board.create('line',
                     [
@@ -225,15 +225,15 @@
                         [Math.floor(2 / e), e]
                     ], {
                         fixed: true,
-                        strokeColor: 'green'
+                        strokeColor: 'blue'
                     });
                 // Plot points
                 var n;
                 for (n = 1; n < Math.floor(2 / e); n++) {
                     board.create('point', [n, Math.pow(-1, n) / n], {
                         size: 1,
-                        fillColor: 'blue',
-                        strokeColor: 'blue',
+                        fillColor: 'black',
+                        strokeColor: 'black',
                         withLabel: false
                     });
                 }

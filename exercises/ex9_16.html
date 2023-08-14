@@ -10,8 +10,8 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../css/style.css">
 
-    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
-    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
@@ -299,7 +299,7 @@ You may wish to minimize the sidebar menu to see both graphs next to each other.
             function plotPoints2() {
                 var i, xcors, ycors, xi;
                 xcors = [0.5]; // Populate xcors with the first value = x0
-                ycors = [graphFunc(0.5)]; // Populate ycors with the first value = x1
+                ycors = [graphFunc2(0.5)]; // Populate ycors with the first value = x1
                 for (i = 0; i < 10; i++) {
                     xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
                     // Add new point (xi, xi)
@@ -307,7 +307,7 @@ You may wish to minimize the sidebar menu to see both graphs next to each other.
                     ycors.push(xi);
                     // Add new point (xi, xi+1)
                     xcors.push(xi);
-                    ycors.push(graphFunc(xi));
+                    ycors.push(graphFunc2(xi));
                 }
                 // Plot points
                 stepGraph2.xterm = xcors;

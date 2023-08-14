@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <title>The Squeeze Theorem: 7-10</title>
+</head>
+
+<body>
+    <h1>The Squeeze Theorem: 7-10</h1>
+    <script>
+        // Function to generate a random integer between min and max
+        function randomInteger(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        // Function to parse a function from what the student entered in the textbox
+        function parseFunction(funcStr) {
+            eval("var func = function (n) { return " + funcStr + "; };");
+            return func;
+        }
+    </script>
+    <!-- First graph -->
+    <div>
+        <!-- Create button to display random limit value -->
+        <div style="padding: 10px;">
+            <button onclick="generateRandomLimit();">Click Here for a Limit Value!</button>
+            <p style="display: inline;">Limit: <span id="lOut"></span></p>
+            <script>
+                // Function to generate a random limit and display it
+                function generateRandomLimit() {
+                    var limitOutput = document.getElementById("lOut");
+                    limitOutput.innerHTML = randomInteger(-5, 5);
+                }
+            </script>
+        </div>
+        <!-- Create textboxes for sequences to enter -->
+        <div style="padding: 10px;">
+            <label>a<sub>n</sub>: <input id="aTextbox1" type="text"></label>
+            <label>b<sub>n</sub>: <input id="bTextbox1" type="text"></label>
+            <button onclick="plotSequences1();">Plot Sequences</button>
+        </div>
+        <!-- Create first board to display entered sequences -->
+        <div id="box1" class="jxgbox" style="width: 500px; height: 500px;">
+            <script>
+                // Initialize the board
+                var board1 = JXG.JSXGraph.initBoard("box1", {
+                    boundingbox: [-2, 10, 50, -10],
+                    axis: true,
+                    grid: true
+                });
+                // Function to plot the an and bn sequences the student entered
+                function plotSequences1() {
+                    // Free current board and recreate it
+                    JXG.JSXGraph.freeBoard(board1);
+                    board1 = JXG.JSXGraph.initBoard("box1", {
+                        boundingbox: [-2, 10, 50, -10],
+                        axis: true,
+                        grid: true
+                    });
+                    // Plot sequences
+                    var aSequence = document.getElementById("aTextbox1");
+                    var bSequence = document.getElementById("bTextbox1");
+                    var aFunction = parseFunction(aSequence.value);
+                    var bFunction = parseFunction(bSequence.value);
+                    board1.create('functiongraph', [aFunction, 0, 50]);
+                    board1.create('functiongraph', [bFunction, 0, 50], {
+                        strokeColor: "red"
+                    });
+                }
+            </script>
+        </div>
+    </div>
+    <!-- Second graph -->
+    <div>
+        <!-- Create button to display random weight value -->
+        <div style="padding: 10px;">
+            <button onclick="generateRandomWeight();">Click Here for a Weight Value!</button>
+            <p style="display: inline;">Weight: <span id="wOut"></span></p>
+            <script>
+                // Function to generate a random weight and display it
+                function generateRandomWeight() {
+                    var weightOutput = document.getElementById("wOut");
+                    weightOutput.innerHTML = randomInteger(1, 9) / 10;
+                }
+            </script>
+        </div>
+        <!-- Create textboxes for sequences to enter -->
+        <div style="padding: 10px;">
+            <label>a<sub>n</sub>: <input id="aTextbox2" type="text"></label>
+            <label>b<sub>n</sub>: <input id="bTextbox2" type="text"></label>
+            <label>c<sub>n</sub>: <input id="cTextbox" type="text"></label>
+            <button onclick="plotSequences2();">Plot Sequences</button>
+        </div>
+        <!-- Create second board to display entered sequences -->
+        <div id="box2" class="jxgbox" style="width: 500px; height: 500px;">
+            <script>
+                // Initialize the board
+                var board2 = JXG.JSXGraph.initBoard("box2", {
+                    boundingbox: [-2, 10, 50, -10],
+                    axis: true,
+                    grid: true
+                });
+                // Function to plot the an, bn, and cn sequences the student entered
+                function plotSequences2() {
+                    // Free current board and recreate it
+                    JXG.JSXGraph.freeBoard(board2);
+                    board2 = JXG.JSXGraph.initBoard("box2", {
+                        boundingbox: [-2, 10, 50, -10],
+                        axis: true,
+                        grid: true
+                    });
+                    // Plot sequences
+                    var aSequence = document.getElementById("aTextbox2");
+                    var bSequence = document.getElementById("bTextbox2");
+                    var cSequence = document.getElementById("cTextbox");
+                    var aFunction = parseFunction(aSequence.value);
+                    var bFunction = parseFunction(bSequence.value);
+                    var cFunction = parseFunction(cSequence.value);
+                    board2.create('functiongraph', [aFunction, 0, 50]);
+                    board2.create('functiongraph', [bFunction, 0, 50], {
+                        strokeColor: "red"
+                    });
+                    board2.create('functiongraph', [cFunction, 0, 50], {
+                        strokeColor: "green"
+                    });
+                }
+            </script>
+        </div>
+    </div>
+</body>
+
+</html>

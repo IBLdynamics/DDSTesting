@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <title>Liminfs & Limsups: 36</title>
+</head>
+
+<body>
+    <h1>Liminfs & Limsups: 36</h1>
+    <!-- Create a slider to determine the value of N -->
+    <div style="width: 500px; height: 40px;">
+        <p style="display: inline;">N:</p>
+        <input id="NSlider" type="range" min="1" max="19" value="1" step="1" style="width: 50%;">
+        <p style="display: inline;"><span id="NOut"></span></p>
+        <script>
+            // Get the value of N from the slider
+            var NSlider = document.getElementById("NSlider");
+            var NOutput = document.getElementById("NOut");
+            NOutput.innerHTML = NSlider.value; // Output value for student to see
+        </script>
+    </div>
+    <!-- Create board with points -->
+    <div id="box" class="jxgbox" style="width:500px; height:500px;">
+        <script type="text/javascript">
+            // Create board
+            var board = JXG.JSXGraph.initBoard('box', {
+                boundingbox: [-1, 2, 21, -0.2],
+                axis: true,
+                grid: true
+            });
+            // Generate and graph points of the sequence
+            var i;
+            var s = [null];
+            for (i = 1; i <= 20; i++) {
+                s.push(1 + Math.pow(-1, i) / i);
+                board.create('point', [i, s[i]], {
+                    fillColor: 'blue',
+                    fixed: true,
+                    strokeColor: 'blue',
+                    withLabel: false
+                });
+            }
+            // Genereate liminfs and limsups
+            var infs = [null],
+                sups = [null];
+            for (i = 1; i <= 20; i++) {
+                infs.push(Math.min.apply(null, s.slice(i + 1)));
+                sups.push(Math.max.apply(null, s.slice(i + 1)));
+            }
+            // Graph liminf and limsup points
+            var liminf = board.create('point', [NSlider.value, infs[NSlider.value]], {
+                fillColor: 'green',
+                strokeColor: 'green',
+                withLabel: false
+            });
+            var limsup = board.create('point', [NSlider.value, sups[NSlider.value]], {
+                fillColor: 'red',
+                strokeColor: 'red',
+                withLabel: false
+            });
+        </script>
+    </div>
+    <script>
+        // Set board to update when the N slider is updated
+        NSlider.oninput = function () {
+            NOutput.innerHTML = this.value; // Output value for student to see
+            liminf.moveTo([NSlider.value, infs[NSlider.value]]);
+            limsup.moveTo([NSlider.value, sups[NSlider.value]]);
+        }
+    </script>
+</body>
+
+</html>

@@ -8310,4 +8310,9 @@ a[data-toggle="collapse"] {
   clear: both;
 }
 
+#sequence{
+  max-width:500px; 
+  height:calc(100vh - 7em)
+}
+
 

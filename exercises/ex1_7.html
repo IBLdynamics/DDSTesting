@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" type="text/css" href="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
     <script type="text/javascript" src="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -221,9 +222,10 @@
                 //Make the table
                 board.create('text',[4, 5, function (){return 'n'}],{fontSize:20});
                 board.create('text',[8, 5, function (){return 'x_n'}],{fontSize:20});
-                for (i=0;i<11;i++){
-                    board.create('text',[4,4.75-(0.25*i),function(){return i}],{fontSize:20});
-                    board.create('text',[8,4.75-(0.25*i),function(){return JXG.toFixed(points[i],2)}],{fontSize:20});
+                for (j=0;j<11;j++){
+                    board.create('text',[4,4.75-(0.25*j),j],{fontSize:20});
+                    var value = JXG.toFixed(points[j],2);
+                    board.create('text',[8,4.75-(0.25*j),value],{fontSize:20});
                 }
                 status = 'table';
 
@@ -254,78 +256,7 @@
         }
         </script>
     </div>
-   <!-- <table id="table" style="display: block;" class="center">
-    </table>
-    <script>
-        // Store table and plot elements for use within functions
-        let table = document.getElementById("table");
-        let plot = document.getElementById("plot");
-        // Function to change views between table and plot
-        function toggleView(view) {
-            if (view == "table") {
-                plot.style.display = "none";
-                table.style.display = "block";
-            } else if (view == "plot") {
-                table.style.display = "none";
-                plot.style.display = "block";
-            } else {
-                console.error("Invalid 'view' string");
-            }
-        }
-        // Function to create or update both the table and plot
-        function updateTableAndPlot() {
-            // Generate points
-            var points, i;
-            points = [];
-            for (i = 0; i < 11; i++) {
-                points.push({
-                    n: i,
-                    x_n: (0.5 + (rValue * i)) % 1 // Start with 0.5. Add rValue each time
-                });
-            }
-            /*
-             * Update table
-             */
-            // Clear previous table
-            table.innerHTML = "";
-            // Create table head
-            let thead = table.createTHead();
-            let row = thead.insertRow();
-            for (let key of Object.keys(points[0])) {
-                let th = document.createElement("th");
-                let text = document.createTextNode(key);
-                th.appendChild(text);
-                row.appendChild(th);
-            }
-            // Create table data
-            for (let element of points) {
-                let row = table.insertRow();
-                for (key in element) {
-                    let cell = row.insertCell();
-                    let text = document.createTextNode(element[key]);
-                    cell.appendChild(text);
-                }
-            }
-            /*
-             * Update plot
-             */
-            // Free and recreate board
-            JXG.JSXGraph.freeBoard(board);
-            board = JXG.JSXGraph.initBoard('plot', {
-                boundingbox: [-0.5, 1, 11, -0.1],
-                axis: true,
-                grid: true
-            });
-            // Plot points
-            for (let element of points) {
-                board.create('point', [element["n"], element["x_n"]], {
-                    fixed: true,
-                    size: 1,
-                    withLabel: false
-                });
-            }
-        }-->
-    
+  
 
       </div>
 		</div>

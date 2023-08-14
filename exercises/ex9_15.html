@@ -10,8 +10,8 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../css/style.css">
 
-    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
-    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
@@ -180,11 +180,12 @@ Do you have any ideas about why the period 3 orbit "suddenly" appears from the c
 </ul> 
     </p>
      <!-- Create textboxes for sequences to enter -->
-        <div style="padding: 10px;">
-            <label>Minimum value for \(a\): <input id="aTextbox1" type="text" value=3></label>
-            <label>Maximum value for \(a\): <input id="aTextbox2" type="text" value=4></label>
-            <!--<label>c<sub>n</sub>: <input id="cTextbox" type="text"></label>-->
-            <button onclick="ZoomGraph();">Zoom Graph</button>
+     <div style="padding: 10px;"> <p>
+  <label>Minimum value for \(a\): <input id="aTextbox1" type="text" value=0></label>
+  <label>Maximum value for \(a\): <input id="aTextbox2" type="text" value=4></label>
+  <button id="ZoomButt">Zoom Graph</button></p>
+</div>
+
  <div id="jxgbox" class="jxgbox" style="width: 750px; height: 500px; float: left;">
      <script>
         function f(x, r) { //The logistic function for the bifurcation diagram
@@ -198,13 +199,13 @@ function iter(x, r, n) { //Iterates the logistic function
   }
   return x
 };
-//Runs through 100 iterations to eliminate noise, then constrcts and array of values to find periodic orbits
+//Runs through 100 iterations to eliminate noise, then constrcts an array of values to find periodic orbits
 function attractors(x, r) {
   var x = iter(x, r, 100);
   var x0 = Number(x.toFixed(4));
   var ts = [x0];
   var c;
-  for (c = 0; c < 1000; c++) {
+  for (c = 0; c < 400; c++) {
     x = f(x, r);
     xr = Number(x.toFixed(4));
     if (ts.includes(xr)) {
@@ -235,14 +236,14 @@ function attractors(x, r) {
     var ptArr = [];
     for (i = 0; i < points.length; i++) {
       ptArr.push( board.create('point', [j, points[i]], {
-        size: 1,
-        strokeWidth:0.5,
+        size: 0.02,
+        strokeWidth:0,
         color: "black",
         fixed: true,
         withLabel: false
       }))
-    document.getElementById("jxgbox_"+ptArr[i].id).setAttribute("rx",0.5);
-    document.getElementById("jxgbox_"+ptArr[i].id).setAttribute("ry",0.5);       
+    //document.getElementById("jxgbox_"+ptArr[i].id).setAttribute("rx",0.5);
+    //document.getElementById("jxgbox_"+ptArr[i].id).setAttribute("ry",0.5);       
     } 
   }
 
@@ -262,18 +263,20 @@ function ZoomGraph() {
     var ptArr = [];
     for (i = 0; i < points.length; i++) {
       ptArr.push(board.create('point', [j, points[i]], {
-        size: 0.5,
-        strokeWidth:0.5,
+        size: 0.02,
+        strokeWidth:0,
         color: "black",
         fixed: true,
         withLabel: false
       }))
-    document.getElementById("jxgbox_"+ptArr[i].id).setAttribute("rx",0.5);
-    document.getElementById("jxgbox_"+ptArr[i].id).setAttribute("ry",0.5);    
+    //document.getElementById("jxgbox_"+ptArr[i].id).setAttribute("rx",0.5);
+    //document.getElementById("jxgbox_"+ptArr[i].id).setAttribute("ry",0.5);    
     }    
   }
 }
-
+    document.getElementById("ZoomButt").addEventListener("click", function() {
+                ZoomGraph();
+                    });
     </script>
 </div>
     
