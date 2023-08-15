@@ -22,12 +22,6 @@
       var f = parser.makefct("cos(x)+sin(y)");
       for (var i = -4; i < 5; i++) {
         gph[i] = [];
-        /* for (var j=-4:j<5;j++) {
-           gph[i][j] = board.create('point',
-             [function () { var m = f([i, j]); return i + 0.5 / Math.sqrt(m * m + 1) },
-             function () { var m = f([i, j]); return j + 0.5 * m / Math.sqrt(m * m + 1); }],
-             { visible: false });
-         }*/
       }
 
 
@@ -520,9 +514,34 @@
           intcurves = [];
           board.update();
         }
-
+        /*
+          for (var i=-4;i<4.1;i+=0.25) {
+            intcrv=parser.rkf23crv(f,[-4,i],5,0.001);
+            intcurves.push(board.create('curve',intcrv,{strokeWidth:2, 
+                                                        strokeColor:'red',
+                                            highlightStrokeColor:'purple',
+                                          highlightStrokeOpacity:1}));
+          }
+        */
       }
 
+      function graph1fct() {
+        for (var i = 0; i < intcurves.length; i++) {
+          // intcurves[i].setAttribute failed silently for unknown reasons, 
+          // so I changed the color of old curves the hard way
+          // intcurves[i].visProp.strokeColor='gray';
+          // Fixed with update to jsxgraphcore.js
+          intcurves[i].setAttribute({ strokeColor: 'gray' });
+        }
+        var y0 = parseFloat(document.getElementById('init').value);
+        intcrv = parser.rkf23crv(f, [-4, y0], 5, 0.001);
+        intcurves.push(board.create('curve', intcrv, {
+          strokeWidth: 2,
+          strokeColor: 'red',
+          highlightStrokeColor: 'purple',
+          highlightStrokeOpacity: 1
+        }));
+      }
 
     </script>
 
@@ -544,7 +563,17 @@
           <td><input type=submit value='Update Slope Field'></td>
         </form>
       </tr>
-
+      <tr>
+        <form onsubmit='graph1fct();return false;'>
+          <td>y(-4) = </td>
+          <td><input type=text size=20 id='init' value=0>
+            <input type=submit value='Plot Integral Curve'>
+          </td>
+        </form>
+        <td><input type=button onclick="draw33ic(); return false;" value='Draw 33 Int. Curves'> <span id='working'>
+          </span>
+        </td>
+      </tr>
     </table>
     <p />
   </center>
