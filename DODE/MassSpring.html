@@ -1,0 +1,121 @@
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="../JSXGraph/jsxgraph.css" />
+  <script src='https://cdn.jsdelivr.net/npm/jsxgraph@1.2.1/distrib/jsxgraphcore.js' type='text/javascript'></script>
+  <script type="text/javascript" src="../JSXGraph/parser.js"></script>
+
+</head>
+
+<body>
+
+  <h3>Damping and forcing mass-spring</h3>
+  <form>
+    f(t,y)=<input type="text" id="odeinput" value="(2-t)*y + c"><input type=button value="ok" onclick="doIt()">
+  </form>
+  <div>
+    <div id='jxgbox' class='jxgbox' style='width:400px; height:400px;'></div>
+    <script type='text/javascript'>
+      var board = JXG.JSXGraph.initBoard('jxgbox', {
+        boundingbox: [-5, 10, 5, -10],
+        keepaspectratio: true, axis: true, grid: false
+      }),
+        line = board.create('line', [[0, 8], [0, -10]],
+          { visible: false, straightFirst: false, straightLast: false }),
+        point = board.create('glider', [-8, -7, line], { name: 'Mass' }),
+        isInDragMode = false,
+        springHangup = board.create('point', [0, 9], { color: 'black', name: 'Spring', fixed: true }),
+        i, numberOfSpringRings = 10, springRings = [];
+
+      for (i = 0; i < numberOfSpringRings; i++) {
+        springRings[i] = board.create('point', [0.5 - i % 2, function (i) {
+          return function () { return springHangup.Y() - (i + 1) * Math.abs((springHangup.Y() - point.Y()) / (numberOfSpringRings + 1)) };
+        }(i)], { withLabel: false, color: 'black', size: 1 });
+        if (i > 0)
+          board.create('segment', [springRings[i - 1], springRings[i]], { color: 'black', strokeWidth: 1 });
+      }
+      board.create('segment', [springHangup, springRings[0]], { color: 'black', strokeWidth: 1 });
+      board.create('segment', [springRings[numberOfSpringRings - 1], point], { color: 'black', strokeWidth: 1 });
+
+      function startAnimation(startY) {
+        point.moveAlong(function () {
+          var f = function (t, x) {
+            var c = 0.1, k = 0.5, m = 1;
+            return [x[1], -c / m * x[1] - k / m * x[0]];
+          },
+            area = [0, 200],
+            numberOfEvaluations = (area[1] - area[0]) * 100,
+            data = JXG.Math.Numerics.rungeKutta('heun', [startY, 0], area, numberOfEvaluations, f),
+            duration = 20 * 1e3;
+
+          return function (t) {
+            if (t >= duration)
+              return NaN;
+
+            return [0, data[Math.floor(t / duration * numberOfEvaluations)][0]];
+          }
+        }());
+      }
+
+      function hook() {
+        if (!isInDragMode) {
+          if (board.mode === board.BOARD_MODE_DRAG) {
+            board.stopAllAnimation();
+            isInDragMode = true;
+          }
+        }
+
+        if (isInDragMode) {
+          if (board.mode !== board.BOARD_MODE_DRAG) {
+            isInDragMode = false;
+            startAnimation(point.Y());
+          }
+        }
+      }
+      board.addHook(hook);
+      startAnimation(-5);
+    </script>
+
+    <div id='jxgbox2' class='jxgbox' style='width:400px; height:400px;'></div>
+    <script src='https://cdn.jsdelivr.net/npm/jsxgraph@1.2.1/distrib/jsxgraphcore.js' type='text/javascript'></script>
+    <script src='https://cdn.jsdelivr.net/npm/jsxgraph@1.2.1/distrib/geonext.min.js' type='text/javascript'></script>
+    <div id='jxgbox' class='jxgbox' style='width:500px; height:500px;'></div>
+    <script type='text/javascript'>
+      var brd = JXG.JSXGraph.initBoard('jxgbox2', { axis: true, boundingbox: [-11, 11, 11, -11] });
+      var N = brd.create('slider', [[-7, 9.5], [7, 9.5], [-15, 10, 15]], { name: 'N' });
+      var slider = brd.create('slider', [[-7, 8], [7, 8], [-15, 0, 15]], { name: 'c' });
+      var P = brd.create('point', [0, 1], { name: '(t_0, y_0)' });
+      var f;
+
+      function doIt() {
+        var snip = brd.jc.snippet(document.getElementById("odeinput").value, true, 't, y');
+        f = function (t, yy) {
+          return [snip(t, yy[0])];
+        }
+        brd.update();
+      }
+
+      function ode() {
+        return JXG.Math.Numerics.rungeKutta('heun', [P.Y()], [P.X(), P.X() + N.Value()], 200, f);
+      }
+
+      var g = brd.create('curve', [[0], [0]], { strokeColor: 'red', strokeWidth: 2 });
+      g.updateDataArray = function () {
+        var data = ode();
+        var h = N.Value() / 200;
+        var i;
+        this.dataX = [];
+        this.dataY = [];
+        for (i = 0; i < data.length; i++) {
+          this.dataX[i] = P.X() + i * h;
+          this.dataY[i] = data[i][0];
+        }
+      };
+      doIt();
+    </script>
+
+
+  </div>
+</body>
+
+</html>
