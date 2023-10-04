@@ -4,44 +4,102 @@
   <link rel="stylesheet" type="text/css" href="../JSXGraph/jsxgraph.css" />
   <script src='https://cdn.jsdelivr.net/npm/jsxgraph@1.2.1/distrib/jsxgraphcore.js' type='text/javascript'></script>
   <script type="text/javascript" src="../JSXGraph/parser.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
 
 </head>
 
 <body>
 
   <h3>Damping and forcing mass-spring</h3>
+  <h4>Assume a mass-spring system with ODE \( my'' + by' + ky = 0\)</h4>
+  <!--Input values for coefficients in the ODE-->
   <form>
-    f(t,y)=<input type="text" id="odeinput" value="(2-t)*y + c"><input type=button value="ok" onclick="doIt()">
+    \(m\)=<input type="number" id="mass" value="1">\(b\)=<input type="number" id="damping" value="0.1">
+    \(k\)=<input type="number" id="spring" value="0.5">
   </form>
+  <p>Any Javascript mathematical functions can be used by appending "Math." to the start of the
+    function,
+    such at "Math.cos(n)" or "Math.sqrt(n)"
+    A full list is available <a href="https://mathjs.org/docs/reference/functions.html">here</a></p>
+  <form>
+    \(F(t)\)=<input type="text" id="forcing" value="0">
+    <input type=button value="Start Animation" onclick="startAnimation(-5)">
+  </form>
+
   <div>
     <div id='jxgbox' class='jxgbox' style='width:400px; height:400px;'></div>
     <script type='text/javascript'>
+      // Function to parse a function from what the student entered in the textbox
+      function parseFunction(funcStr) {
+        if (funcStr[0] == '-') {
+          funcStr = '-1*' + funcStr.slice(1)
+        }
+        eval("var func = function (t) { return " + funcStr + "; };");
+        return func;
+      }
+
       var board = JXG.JSXGraph.initBoard('jxgbox', {
-        boundingbox: [-5, 10, 5, -10],
-        keepaspectratio: true, axis: true, grid: false
+        boundingbox: [-3, 10, 3, -10],
+        keepaspectratio: false,
+        axis: true,
+        grid: false
       }),
-        line = board.create('line', [[0, 8], [0, -10]],
-          { visible: false, straightFirst: false, straightLast: false }),
-        point = board.create('glider', [-8, -7, line], { name: 'Mass' }),
+        line = board.create('line', [
+          [0, 8],
+          [0, -10]
+        ], {
+          visible: false,
+          straightFirst: false,
+          straightLast: false
+        }),
+        point = board.create('glider', [-8, -7, line], {
+          name: 'Mass'
+        }),
         isInDragMode = false,
-        springHangup = board.create('point', [0, 9], { color: 'black', name: 'Spring', fixed: true }),
-        i, numberOfSpringRings = 10, springRings = [];
+        springHangup = board.create('point', [0, 9], {
+          color: 'black',
+          name: 'Spring',
+          fixed: true
+        }),
+        i, numberOfSpringRings = 10,
+        springRings = [];
 
       for (i = 0; i < numberOfSpringRings; i++) {
         springRings[i] = board.create('point', [0.5 - i % 2, function (i) {
-          return function () { return springHangup.Y() - (i + 1) * Math.abs((springHangup.Y() - point.Y()) / (numberOfSpringRings + 1)) };
-        }(i)], { withLabel: false, color: 'black', size: 1 });
+          return function () {
+            return springHangup.Y() - (i + 1) * Math.abs((springHangup.Y() - point.Y()) / (numberOfSpringRings + 1))
+          };
+        }(i)], {
+          withLabel: false,
+          color: 'black',
+          size: 1
+        });
         if (i > 0)
-          board.create('segment', [springRings[i - 1], springRings[i]], { color: 'black', strokeWidth: 1 });
+          board.create('segment', [springRings[i - 1], springRings[i]], {
+            color: 'black',
+            strokeWidth: 1
+          });
       }
-      board.create('segment', [springHangup, springRings[0]], { color: 'black', strokeWidth: 1 });
-      board.create('segment', [springRings[numberOfSpringRings - 1], point], { color: 'black', strokeWidth: 1 });
+      board.create('segment', [springHangup, springRings[0]], {
+        color: 'black',
+        strokeWidth: 1
+      });
+      board.create('segment', [springRings[numberOfSpringRings - 1], point], {
+        color: 'black',
+        strokeWidth: 1
+      });
 
       function startAnimation(startY) {
+        // Get the values from the input boxes
+        var mValue = document.getElementById('mass').value;
+        var bValue = document.getElementById('damping').value;
+        var kValue = document.getElementById('spring').value;
+        var forcer = document.getElementById("forcing");
+        var ForceFunction = parseFunction(forcer.value);
         point.moveAlong(function () {
           var f = function (t, x) {
-            var c = 0.1, k = 0.5, m = 1;
-            return [x[1], -c / m * x[1] - k / m * x[0]];
+            return [x[1], -bValue / mValue * x[1] - kValue / mValue * x[0] + ForceFunction(t)];
           },
             area = [0, 200],
             numberOfEvaluations = (area[1] - area[0]) * 100,
@@ -72,11 +130,12 @@
           }
         }
       }
-      board.addHook(hook);
-      startAnimation(-5);
+      board.on(hook);
+
+      //startAnimation(-5);
     </script>
 
-    <div id='jxgbox2' class='jxgbox' style='width:400px; height:400px;'></div>
+    <!--<div id='jxgbox2' class='jxgbox' style='width:400px; height:400px;'></div>
     <script src='https://cdn.jsdelivr.net/npm/jsxgraph@1.2.1/distrib/jsxgraphcore.js' type='text/javascript'></script>
     <script src='https://cdn.jsdelivr.net/npm/jsxgraph@1.2.1/distrib/geonext.min.js' type='text/javascript'></script>
     <div id='jxgbox' class='jxgbox' style='width:500px; height:500px;'></div>
@@ -115,7 +174,7 @@
     </script>
 
 
-  </div>
+  </div>-->
 </body>
 
 </html>
