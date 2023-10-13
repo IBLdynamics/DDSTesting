@@ -1,0 +1,1499 @@
+/*========================================<html>
+
+<head>
+  <script type="text/javascript" charset="UTF-8"
+    src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+</head>
+<script>
+============================================================ ODE_001 ===*/
+
+function ODE_001 () {
+
+
+  var layerSim          = null;                            // layer         simulation window
+  var layerObj          = null;                            //               control    window
+  var layerFormula      = null;                            //               info
+  var layerCx           = null;                            //               coordinate axis  x
+  var layerCy           = null;                            //                                y
+
+  var nColLayer         = null;                            // color         layer  default
+  var nColCanvas        = '#000000';                       // color         canvas default drawing (black)
+
+  var mc_fig            = null;
+
+  var mc_grid           = null;
+  var mc_axis           = null;
+  var mc_function       = null;
+  var mc_P              = null;                            // point
+  var mc_FPoint         = null;
+
+  var mc_FPointX        = null;
+
+  var mc_numeric        = null;
+  var mc_analytic       = null;
+
+  var mc_coord          = null;
+
+  var mc_simN           = null;                            // simulation numeric
+  var mc_simA           = null;                            //            analytic
+
+  var mc_simNX          = null;
+
+  var mc_expData        = null;                            // sim coord on x-axis
+
+  var pointF            = null;                            // point object
+  var sPointName        = 'N/image/Box2.jpg';              //       file name
+
+  var xMin0             = -300;
+  var xMax0             =  300;
+  var yMin0             = -200;
+  var yMax0             =  200;
+  var xMin              = -300;
+  var xMax              =  300;
+  var yMin              = -200;
+  var yMax              =  200;
+
+  var x0Current         = 250;
+  var y0Current         = 205;
+
+  var txt_functionT     = null;
+
+  var txt_function      = null;
+  var sFunction         = null;
+
+  var txt_xInT          = null;
+  var txt_yOutT         = null;
+  var txt_xIn           = null;
+  var txt_yOut          = null;
+
+  var nFMax             =  1; //5;       // max number of functions
+  var nFCur             =  1;            // cur number of function
+
+  var xF                = 0;             // current value x
+  var yF                = 0;             //               y
+  var yFD               = 0;             //               Dy
+  var yFDD              = 0;             //               DDy
+
+  var txt_coordX        = null;
+  var txt_coordY        = null;
+
+  var xOrigin_0         = 308;
+  var xOrigin           = 308;
+  var yOrigin_0         = 215;
+  var yOrigin           = 215;
+
+  var x0mc              = 308;
+  var y0mc              = 215;
+
+  var x0Graph           = 125 ;
+  var y0Graph           = 250 ;
+  var xScaleGraph       = 1/25;
+  var yScaleGraph       = 1/25;
+  var zScaleGraph       = 1/25;
+  var xScale0           = 1/25;
+  var yScale0           = 1/25;
+  var xScale            = 1/25;
+  var yScale            = 1/25;
+
+  var vectorAxis        = null;
+
+  var nColAxis          = '#AAAAAA';
+  var nColGrid          = '#BBBBBB';
+
+  var nColEditY         = '#FFFFFF';
+  var nColEditN         = '#AAFFFAA';
+
+  var nColNumeric       = '#FF0000';
+  var nColAnalytic      = '#0000FF';
+  var nColNumericSim    = '#000000';
+  var nColExpData       = '#FF0000';
+
+  var cb_analytic       = null;
+  var cb_numeric        = null;
+  var cb_analyticXY     = null;
+  var cb_numericXY      = null;
+  var cb_analyticSim    = null;
+  var cb_numericSim     = null;
+
+  var cb_expTab         = null;
+  var cb_expGraph       = null;
+
+  var cb_axis           = null;
+  var cb_grid           = null;
+  var cb_P              = null;
+
+  var cb_coord          = null;
+  var cb_origin         = null;
+  var cb_path           = null;
+  var pb_compute        = null;
+  var pb_clear          = null;
+  var pb_reset          = null;
+
+  var bGraph            = null;
+  var bCbGraph          = null;
+
+  var bSbV              = false;
+  var sb_V              = null;
+  var sb_VA             = null;
+  var txt_sbVA          = null;
+
+  var sP0               = xMax;    // start   scrollposition
+  var sP                = xMax0;   // current
+
+  var formulaVF         = null     // formula
+
+  var pointF            = null     // pointOrigin;
+
+  var fCfunction        = null     //                    function
+  var fCyIn             = null     //                    y  In
+
+  var fCR               = null;
+  var fCaCoeff          = null;
+
+  var bCoord            = false;
+  var bMoveOrigin       = false;
+  var bAuto             = false;
+
+  var nOrder            = 0;
+  var nOrderPrev        = 0;
+  var nOrder            =    1;
+  var txt_initT         = null;
+  var txt_init          = null;
+  var txt_aCoeffT       = null;
+  var txt_initT         = null;
+  var txt_xInitT        = ""  ;
+  var txt_xInit         = null;
+  var txt_xyInit        = null;
+  var txt_xInT          = null;
+  var txt_xIn           = null;
+
+  var txt_nStepT        = null;
+  var txt_nStep         = null;
+  var dh                = 0.01;
+
+  var txt_expDataXT     = null;
+  var txt_expDataYT     = null;
+  var txt_expDataX      = null;
+  var txt_expDataY      = null;
+
+  var aCoeff            = null;
+  var xyInit            = null;
+  var xInit             = 0   ;
+  var rCoeff            = 0   ;
+
+  var bStart            = true;
+
+
+  var nDiffArray        = null;
+
+  var nDiffEqNr0        = 1;
+  var nDiffEqNrPrev     = nDiffEqNr0;
+  var nDiffEqNr         = nDiffEqNr0;
+  var fDiffEq           = null;
+
+  var xTab              = null;                      // array of numerical x-values
+  var yTab              = null;                      //                    y-values
+
+  var sDiff             = "y' + 2y = cos(4x)";
+  var yx                = "0.1cos(4x)+0.2sin(4x)+2.9e^(-2x)";
+
+  var fDiffEqS          = ["","y'+2y=0              y(0)=3",
+                              "y'+2y=cos(4x)     y(0)=3",
+                              "y''+9y'+8y=0       y(0)=2  y'(0)=-1","",""];
+
+   var fExactSolution   = ["","3e^(-2x)",
+                              "0.1cos(4x)+0.2sin(4x)+2.9e^(-2x)",
+                              "15/7e^(-x)-1/7e^(-8x)","",""];
+
+  var xPoint            = 0;
+  var yPoint            = 0;
+  var vPoint            = 0;
+  var yA0               = null;
+  var yA                = null;
+  var nDeg              = 0;
+
+  var txt_head          = null;
+  var sHead             = "Differential Equations";
+
+
+  sInfo                 = "\r" +
+                          " Differential Equations: \r\r"+
+
+                          " With this application we can solve numerically \r"+
+                          " ordinary differential equations of any order. \r"+
+                          " (at the moment up to order 3, but the application is prepared for any order). \r\r"+
+
+                          " When we start this application, we see the numerical solution (blue graph) \r"+
+                          " and the analytical solution (red graph) \r"+
+                          " of the following differential equation:\r\r"+
+
+                          "     y' + 2y = cos(4x)     y(0) = 3 \r\r"+
+
+                          " To start the study of a new diff.ee., click 'Reset' \r" +
+                          " Then write the diff.eq. in the data field 'Diff.Eq.'. \r"+
+                          " The coefficients can be either scalars or functions of x and y. \r"+
+                          " It's important to write the elements in decreasing diff-order. \r"+
+                          " Write the initial conditions in the white data field 'Init.' \r"+
+                          " The initial values of x, y, y', y'' are scalars. \r\r"+
+
+                          " By marking the checkbox 'Coord', we can change the units on the axis. \r"+
+                          " By marking the checkbox 'Origin', we can move the origin \r"+
+                          " by mouse click in the simulation window. \r\r\r"+
+
+
+                          " Control Objects: \r\r"+
+
+                          " - Diff.Eq.              : Write the differential equation here \r"+
+                          " - Init x-y-y'-y''-y'''  : Initial conditions  \r"+
+                          " - xInput                : x input value to move a point on the graph \r"+
+                          " - Analytic Solution     : Analytical solution          (if it exists)  \r"+
+                          " - Numeric               : Show the numerical solution  \r"+
+                          " - Analytic              : Show the analytical solution (if it exists)  \r"+
+                          " - (x,y) N               : The point value (x,y) on the numerical graph \r"+
+                          " - (x,y) A               : The point value (x,y) on the analytical graph \r"+
+                          " - Sim N                 : Simulation of the numerical solution \r"+
+                          " - Sim A                 : Simulation of the analytical  solution \r"+
+                          " - Exp Tab               : Experimental (x,y) values - Table \r"+
+                          " - Exp Graph             : Experimental (x,y) values - Graph \r"+
+                          " - Axis                  : Show the axis  \r"+
+                          " - Grid                  : Show the grid  \r"+
+                          " - Coord                 : Change the units in the coordinate system  \r"+
+                          " - Origin                : Move the origin  \r"+
+                          " - Clear                 : Clear the data fields and the graphs  \r"+
+                          " - Reset                 : Reset the application (clear and new coord) \r"+
+                          " - Compute               : Compute and show the numerical solution ";
+
+  this.movePos          = movePos ;                         // public     function(s)
+  this.get_info         = get_info;
+
+  init();                                                   // start      function
+
+  /*------------------------------------------------------------------------------------------------------ init ---*/
+
+  function init() {
+    xTab        = new Array(10001);
+    yTab        = new Array(10001);
+
+    init_layer      ();
+    init_canvas     ();
+    init_calculator ();
+    init_obj        ();
+    init_listener   ();
+    init_axis       ();
+    init_grid       ();
+    init_diff       (0);
+
+    nOrder   = 1;              show_coeff(nOrder); //act_TxtOrder ();
+    txt_xInit .set_value(0 );  act_TxtXInit ();
+
+    find_diff       ();
+
+    bStart      = false;
+
+    txt_xyInit[0].set_value("3"); act_TxtXYInit(0);
+    act_PbCompute();
+    cb_numericXY.select(true); act_CbNumericXY();
+    var nt = 100;
+    act_sbVDown();   sb_V.set_value(nt); act_sbVUp(); move_point(nt);
+
+    cb_analytic  .select(true );  cb_analytic   .enable(true); act_CbAnalytic();
+    cb_analyticXY.select(false);//cb_analyticXY .enable(false);
+
+  //act_PbClear();
+    cb_expTab  .select(false);
+    cb_expGraph.select(false);
+    act_CbExpTab   ();
+    act_CbExpGraph ();
+    moveOriginAuto ();
+  }
+  /*------------------------------------------------------------------------------------------------ init_layer ---*/
+
+  function init_layer()       {
+    layerSim     = new CLayer('sim' ,51,nColLayer);                            // create layer simulations
+    layerObj     = new CLayer('obj' ,52,nColLayer);                            // create layer control objects
+    layerFormula = new CLayer('sim' ,53,nColLayer);  layerFormula.show(false)  // create layer formula
+    layerCx      = new CLayer('sim' ,54,nColLayer);  layerCx     .show(false)  // create layer coordinate x
+    layerCy      = new CLayer('sim' ,54,nColLayer);  layerCy     .show(false)  //                         y
+
+    layerCx.set_ps(x0mc+17,y0mc+ 2,50,50);  layerCy.set_ps(x0mc-25,y0mc-35,50,50); // layerCoord   pos/size
+  }
+  /*--------------------------------------------------------------------------------------------------- init_mc ---*/
+
+  function init_canvas() {
+    mc_grid           = new CCanvas (layerSim, 1,nColGrid  ,xOrigin_0,yOrigin_0);
+    mc_axis           = new CCanvas (layerSim, 2,nColCanvas,x0mc,y0mc);
+
+    mc_numeric        = new CCanvas (layerSim, 6,nColCanvas,x0mc,y0mc);
+    mc_analytic       = new CCanvas (layerSim, 6,nColCanvas,x0mc,y0mc);
+
+    mc_P              = new CCanvas (layerSim,10,nColCanvas,x0mc,y0mc);
+    mc_FPoint         = new CCanvas (layerSim,15,nColCanvas,x0mc,y0mc);
+    mc_FPointXY       = new CCanvas (layerSim,15,nColCanvas,x0mc,y0mc);  mc_FPointXY.show(false);
+
+    mc_simNX          = new CCanvas (layerSim,15,nColCanvas,x0mc,y0mc);  mc_simNX   .show(false);
+
+    mc_simN           = new CCanvas (layerSim,15,nColCanvas,x0mc,y0mc);//mc_simN.show(false);
+    mc_simA           = new CCanvas (layerSim,15,nColCanvas,x0mc,y0mc);//mc_simA.show(false);
+
+    mc_expData        = new CCanvas (layerSim,15,nColCanvas,x0mc,y0mc);
+  }
+  /*------------------------------------------------------------------------------------------ init_calculator --- */
+
+  function init_calculator() {
+
+     fCR           = new FunctionCompute();
+     fCaCoeff      = new Array(6); //FunctionCompute();
+
+     for(var i=0; i<=5; i++) {
+       fCaCoeff[i]    = new FunctionCompute();
+     }
+
+     fCfunction    = new FunctionCompute();     // function
+     fCyIn         = new Array(nFMax+1);
+
+     bGraph        = new Array(nFMax+1);        // graph drawn
+     bCbGraph      = new Array(nFMax+1);
+     for(var i=0;i<nFMax;i++) {
+       fCyIn[i]         = new FunctionCompute();
+       bGraph[i]        = false;
+       bCbGraph[i]      = false;
+     }
+  }
+  /*------------------------------------------------------------------------------------------------- init_axis ---*/
+
+  function init_axis() {
+    mc_axis.lineStyle (0.5,nColAxis,1);
+    mc_axis.vector    (xMin,0   ,xMax,0   ,1,nColAxis);
+    mc_axis.vector    (0   ,yMax,0   ,yMin,1,nColAxis);
+  }
+  /*------------------------------------------------------------------------------------------------- init_grid ---*/
+
+  function init_grid() {
+    mc_grid.clear();
+    mc_grid.lineStyle(0.5,nColGrid,1);
+    for(var i = yMin;i<=yMax;i=i+25) {
+      mc_grid.moveTo(xMin,i); mc_grid.lineTo(xMax,i);
+    }
+    for(var i = xMin;i<=xMax;i=i+25) {
+      mc_grid.moveTo(i,yMin); mc_grid.lineTo(i,yMax);
+    }
+  }
+  /*------------------------------------------------------------------------------------------------ init_diff ---*/
+
+  function init_diff(n) {
+
+                 /*  nDeg : Order of the differential equation        */
+                 /*  The array length of yA0 is nDeg + 2              */
+                 /*  The array yA0 contains:    [xPoint,yPoint,...].  */
+                 /*  The laste array element is always 0.             */
+                 /*                                                   */
+                 /*  yA[0] : x-value                                  */
+                 /*  yA[1] : y-value                                  */
+                 /*                                                   */
+                 /*  nDeg = 1 : yA0 = [x,y,0]                         */
+                 /*         2 : yA0 = [x,y,y',0]                      */
+                 /*         3 : yA0 = [x,y,y',y'',0]                  */
+                 /*         4 : yA0 = [x,y,y',y'',y''',0]             */
+                 /*         ...                                       */
+    nDiffEqNr = 2;
+    nDiffEqNrPrev = nDiffEqNr;
+
+    if(n==1) {
+      //yx = " ";
+    }
+    xPoint    = 0;
+    yPoint    = 0;
+    vPoint    = 0;
+    yA0       = [xPoint,yPoint,0];
+
+    yA   = yA0;
+    nDeg = yA.length-2;
+    if(n==0 || n==1) {  // || n==3) {
+      txt_function.set_value(yx); //alert(yx);
+      act_TxtFunction ();
+      if(!bMoveOrigin && n==0) {
+        moveOriginAuto  ();
+      }
+    }
+    draw_numeric         ();
+  }
+  /*-------------------------------------------------------------------------------------------------- objLoad ---*/
+
+  function objLoad() {                          // complete load of external objects
+  }
+  /*------------------------------------------------------------------------------------------------- init_obj ---*/
+
+ function init_obj() {
+
+    pointF           = new ObjExt  (layerSim,0,0,sPointName,1,xOrigin,yOrigin);
+
+    txt_head         = new Txt     (layerObj, 20,  10,210,20,sHead     ,false,false,'#FFFFFF','#0000FF');  txt_head.set_size(14);  txt_head.set_bold();
+
+    txt_diffEqT      = new Txt     (layerObj,  0,  50,210,20,"Diff.Eq.",false,false,'#FFFFFF','#0000FF');
+    txt_out          = new Txt     (layerObj,  5,  70,215,20,sDiff     ,true ,true );
+
+    txt_initT        = new Txt     (layerObj,  0, 110, 60,20,"Init"    ,false,false,'#FFFFFF','#0000FF');
+    txt_xInitT       = new Txt     (layerObj, 23, 150, 60,20,"x"       ,false,false);
+    txt_xInit        = new Txt     (layerObj,  5, 130, 50,20,""        ,true ,true );
+
+    txt_xyInitT      = new Array(6);
+    txt_xyInit       = new Array(6);
+
+    aCoeff           = new Array(6);
+    xyInit           = new Array(6);
+
+    xInit            = 0;
+
+    for(var i=0;i<=3;i++) {
+      txt_xyInitT[i] = new Txt     (layerObj, 77+i*55,150, 50,20,"",false,false);
+      txt_xyInit[i]  = new Txt     (layerObj, 62+i*55,130, 50,20,"",true ,true );
+      aCoeff[i]      = 0;
+      xyInit[i]      = 0;
+    }
+    txt_xyInitT[0].set_value("y");
+    txt_xyInitT[1].set_value("y'");
+    txt_xyInitT[2].set_value("y''");
+    txt_xyInitT[3].set_value("y'''");   txt_xyInitT[3].show(false);
+
+
+    rInit            = 0;
+
+    txt_expDataXT    = new Txt       (layerSim, 500, 20, 50,20,"x Data",false,false);
+    txt_expDataYT    = new Txt       (layerSim, 560, 20, 50,20,"y Data",false,false);
+    txt_expDataX     = new Array(11);
+    txt_expDataY     = new Array(11);
+    for(var i=1;i<=10;i++) {
+      txt_expDataX[i] = new Txt       (layerSim, 500,  20+i*25, 50,20,"",true ,true );
+      txt_expDataY[i] = new Txt       (layerSim, 560,  20+i*25, 50,20,"",true ,true );
+    }
+
+    fDiffEq        = new Array(6);
+    for(var i=1;i<=5;i++) {
+      fDiffEq[i]     = new Txt (layerObj,0, 60 + i*20,220,20,fDiffEqS[i]         ,false,false,'#FFFFFF','#0000FF'); fDiffEq[i].show(false);
+    }
+
+    txt_xInT         = new Txt     (layerObj,   0, 180,110,20,"xInput"           ,false,false,'#FFFFFF','#0000FF');
+    txt_xIn          = new Txt     (layerObj,   5, 200, 50,20,""                 ,true ,true                     );
+
+    txt_nStepT       = new Txt     (layerObj, 167, 180,110,20,"nStep"            ,false,false,'#FFFFFF','#0000FF');
+    txt_nStep        = new Txt     (layerObj, 172, 200, 50,20,dh                 ,true ,true                    );
+
+    txt_functionT    = new Txt     (layerObj,   0, 230,200,20,"Analytic Solution",false,false,'#FFFFFF','#0000FF');
+    txt_function     = new Txt     (layerObj,   5, 250,215,20,yx                 ,true ,true                    );
+
+
+    sFunction        = new Array(nFMax+1);
+    for(var i=0;i<=nFMax;i++) {
+      sFunction[i] = "";
+    }
+
+    txt_xInT         = new Txt     (layerObj,   0, 210, 40,20,"x = "    ,false,false                    ); txt_xInT .show(false);
+    txt_yOutT        = new Txt     (layerObj, 110, 210, 40,18,"y = "    ,false,false                    ); txt_yOutT.show(false);
+  //txt_xIn          = new Txt     (layerObj,  30, 210, 50,20,""        ,true ,true                     ); txt_xIn  .show(false);
+    txt_yOut         = new Txt     (layerObj, 140, 210, 75,18,""        ,true ,false,nColEditN          ); txt_yOut .show(false);
+
+    txt_coordX       = new Txt     (layerCx ,   0,   0, 50,20,"1"       ,false,true );   txt_coordX.set_alpha(0.5);
+    txt_coordY       = new Txt     (layerCy ,   0,   0, 50,20,"1"       ,false,true );   txt_coordY.set_alpha(0.5);
+
+  //txt_test         = new Txt     (layerSim, 100, 100,215,20,""                 ,true ,true                    );
+
+    cb_numeric       = new Cb      (layerObj,   2, 295, 15,15,"Numeric"  ,false,60,15);
+    cb_analytic      = new Cb      (layerObj,   2, 315, 15,15,"Analytic" ,false,60,15);
+    cb_numericXY     = new Cb      (layerObj,  90, 295, 15,15,"(x,y) N"  ,false,60,15);
+    cb_analyticXY    = new Cb      (layerObj,  90, 315, 15,15,"(x,y) A"  ,false,60,15);
+    cb_numericSim    = new Cb      (layerObj, 160, 295, 15,15,"Sim N"    ,false,60,15);
+    cb_analyticSim   = new Cb      (layerObj, 160, 315, 15,15,"Sim A"    ,false,60,15);
+    cb_expTab        = new Cb      (layerObj,   2, 345, 15,15,"Exp Tab"  ,true ,70,15);
+    cb_expGraph      = new Cb      (layerObj,   2, 365, 15,15,"Exp Graph",true ,70,15);
+    cb_axis          = new Cb      (layerObj,  90, 345, 15,15,"Axis"     ,true ,50,15);
+    cb_grid          = new Cb      (layerObj,  90, 365, 15,15,"Grid"     ,true ,50,15);
+    cb_coord         = new Cb      (layerObj, 160, 345, 15,15,"Coord"    ,false,50,15);
+    cb_origin        = new Cb      (layerObj, 160, 365, 15,15,"Origin"   ,false,50,15);
+
+    pb_clear         = new Pb      (layerObj,   5, 395,104,20,"Clear"               );
+    pb_reset         = new Pb      (layerObj, 112, 395,104,20,"Reset"               );
+    pb_compute       = new Pb      (layerObj,   5, 420,212,20,"Compute"             );
+
+    sb_V             = new Sb      (layerSim,   7, 419,600, 0, 2*xMax,1,  0         );   sb_V.set_value(sP0);
+  }
+  /*--------------------------------------------------------------------------------------------- init_listener ---*/
+
+  function init_listener() {
+    txt_out          .get_obj() .oninput     = function() { act_TxtOut          ();}
+    txt_xInit        .get_obj() .oninput     = function() { act_TxtXInit        ();}
+    txt_xyInit[0]    .get_obj() .oninput     = function() { act_TxtXYInit       (0);}
+    txt_xyInit[1]    .get_obj() .oninput     = function() { act_TxtXYInit       (1);}
+    txt_xyInit[2]    .get_obj() .oninput     = function() { act_TxtXYInit       (2);}
+    txt_xyInit[3]    .get_obj() .oninput     = function() { act_TxtXYInit       (3);}
+    txt_function     .get_obj() .oninput     = function() { act_TxtFunction     ();}
+    txt_xIn          .get_obj() .oninput     = function() { act_TxtXIn          ();}
+    txt_nStep        .get_obj() .oninput     = function() { act_TxtStep         ();}
+
+    for(var i=1;i<=10;i++) {
+      txt_expDataX[i].get_obj() .oninput     = function() { act_TxtExpData      ();}
+      txt_expDataY[i].get_obj() .oninput     = function() { act_TxtExpData      ();}
+    }
+
+    txt_coordX       .get_obj() .oninput     = function() { act_TxtCoordX       (1);}
+    txt_coordY       .get_obj() .oninput     = function() { act_TxtCoordY       (1);}
+    cb_analytic      .get_obj() .onclick     = function() { act_CbAnalytic      ();}
+    cb_numeric       .get_obj() .onclick     = function() { act_CbNumeric       ();}
+    cb_numericXY     .get_obj() .onclick     = function() { act_CbNumericXY     ();}
+    cb_analyticXY    .get_obj() .onclick     = function() { act_CbAnalyticXY    ();}
+    cb_numericSim    .get_obj() .onclick     = function() { act_CbNumericSim    ();}
+    cb_analyticSim   .get_obj() .onclick     = function() { act_CbAnalyticSim   ();}
+    cb_expTab        .get_obj() .onclick     = function() { act_CbExpTab        ();}
+    cb_expGraph      .get_obj() .onclick     = function() { act_CbExpGraph      ();}
+    cb_grid          .get_obj() .onclick     = function() { act_CbGrid          ();}
+    cb_axis          .get_obj() .onclick     = function() { act_CbAxis          ();}
+    cb_coord         .get_obj() .onclick     = function() { act_CbCoord         ();}
+    cb_origin        .get_obj() .onclick     = function() { act_CbOrigin        ();}
+
+    pb_compute       .get_obj() .onclick     = function() { act_PbCompute       ();}
+    pb_clear         .get_obj() .onclick     = function() { act_PbClear         ();}
+    pb_reset         .get_obj() .onclick     = function() { act_PbReset         ();}
+    sb_V             .get_obj() .onmousedown = function() { act_sbVDown         ();}
+    sb_V             .get_obj() .onmousemove = function() { act_sbV             ();}
+    sb_V             .get_obj() .ontouchmove = function() { act_sbV             ();}
+    sb_V             .get_obj() .onmouseup   = function() { act_sbVUp           ();}
+
+    window.onclick      = function() {act_click();}    // click the new postion of origin
+    window.ontouchstart = function() {act_click();}
+    window.ontouchmove  = function() {act_click();}
+  }
+
+  function disable_coeff() {
+
+  }
+  /*------------------------------------------------------------------------------------------------------- act ---*/
+
+  function act_click() {
+    var b = cb_origin.selected() && event.clientX <= 615 && event.clientY <= 530;
+    bMoveOrigin = b;
+    if(b) {
+      moveOrigin();
+      init_diff(2);
+      bMoveOrigin = false;
+      act_TxtFunction();
+      act_PbCompute  ();
+      cb_analytic  .select(true );  cb_analytic   .enable(true); act_CbAnalytic();
+    }
+  }
+  function act_TxtOut() {
+    var s = txt_out.value();
+    if(s != "") {
+      find_diff();
+      init_diff(3);
+    }
+    pointF.show(false);
+    mc_FPointXY.clear();
+  }
+
+  function act_TxtXYInit(i) {
+    var s = txt_xyInit[i].value();
+    var n = 0;
+    if(s != "") {
+      n = Number(s);
+      xyInit[i] = n; }
+    else {
+      xyInit[i] = 0;
+    }
+  //remove_exactSolution();
+    init_diff(3);
+    pointF.show(false);
+    mc_FPointXY.clear();
+  }
+  function act_TxtXInit() {
+    var s = txt_xInit.value();
+    var n = 0;
+    if(s != "") {
+      n = Number(s);
+      xInit = n; }
+    else {
+      xInit = 0;
+    }
+  //remove_exactSolution();
+    init_diff(3);
+    pointF.show(false);
+    mc_FPointXY.clear();
+  }
+
+  function act_TxtFunction() {
+    var sF = txt_function.value();
+    mc_analytic.clear();
+    bGraph[nFCur] = false;
+    if(sF != "") {
+      bGraph[nFCur] = true;
+      yx = sF;
+      sFunction[nFCur] = sF;
+      fCfunction.exprX(sF);
+      cb_analytic.enable(true);
+      cb_analytic.select(true); act_CbAnalytic();
+      draw_analytic();    }
+    else {
+      cb_analytic.enable(false);
+      cb_analytic.select(false); act_CbAnalytic();
+    }
+  }
+
+  function act_TxtXIn() {
+    var xFs = txt_xIn.value();
+    if(xFs != "") {
+      var xFt = fCyIn[0].valueX(fCyIn[0].exprX(xFs));
+      act_sbVDown();  sb_V.set_value(xOrigin-8+xFt/xScale); act_sbVUp();
+      var n  = sb_V.scrollPosition();
+      xF   = (n-xMax0 + xOrigin_0-xOrigin)*xScale;
+      yF   = fCfunction.valueX(xF);
+      move_point(n);
+    }
+  }
+
+  function act_TxtStep() {
+    var nStep = txt_nStep.value();
+    if(nStep != "") {
+      dh = nStep;
+    }
+  }
+
+  function act_TxtExpData() {
+    draw_expData();
+  }
+
+  function act_TxtCoordX(m) {
+    var s = txt_coordX.value();
+    var n = 1;
+    if(s != "") {
+      n = Number(s);
+    }
+    xScaleGraph = n/25;
+    xScale      = n/25;
+    draw_analytic();
+    mc_expData       .set_xy(xOrigin,yOrigin);  draw_expData();
+    if(m==1)  {
+      init_diff(2);
+      move_point(sb_V.scrollPosition());
+      act_TxtFunction();
+      act_PbCompute  ();
+    //cb_analytic  .select(true );  cb_analytic   .enable(true); act_CbAnalytic();
+    }
+  }
+
+  function act_TxtCoordY(m) {
+    var s = txt_coordY.value();
+    var n = 1;
+    if(s != "") {
+      n = Number(s);
+    }
+    yScaleGraph = n/25;
+    yScale      = n/25;
+    draw_analytic();
+    mc_expData       .set_xy(xOrigin,yOrigin);  draw_expData();
+    if(m==1)  {
+      init_diff(2);
+      move_point(sb_V.scrollPosition());
+      act_TxtFunction();
+      act_PbCompute  ();
+    //cb_analytic  .select(true );  cb_analytic   .enable(true); act_CbAnalytic();
+    }
+  }
+  function act_CbAnalytic() {
+    var b      = cb_analytic.selected();
+    var bXY    = cb_analyticXY.selected();
+    mc_analytic  .show(b);
+    cb_analyticXY.enable(b);
+    if(!b) {
+      cb_analyticXY.select(b);
+      cb_analyticXY.enable(b);
+      if(!cb_numeric.selected()) {
+        mc_FPointXY.show(b); }
+      else {
+        if(bXY) {
+          cb_numericXY.select(true);
+        }
+      }
+    }
+    move_point(sb_V.scrollPosition());
+  }
+  function act_CbNumeric() {
+    var b      = cb_numeric.selected();
+    var bXY    = cb_numericXY.selected();
+    mc_numeric  .show(b);
+    cb_numericXY.enable(b);
+    if(!b) {
+      cb_numericXY.select(b);
+      cb_numericXY.enable(b);
+      if(!cb_analytic.selected()) {
+        mc_FPointXY.show(b); }
+      else {
+        if(bXY) {
+          cb_analyticXY.select(true);
+        }
+      }
+    }
+    move_point(sb_V.scrollPosition());
+  }
+  function act_CbNumericXY() {
+    var b = cb_numericXY.selected();
+    if(b) {
+      cb_analyticXY.select(!b);
+    }
+    mc_FPointXY.show(b);
+    move_point(sb_V.scrollPosition());
+  }
+  function act_CbAnalyticXY() {
+    var b = cb_analyticXY.selected();
+    if(b) {
+      cb_numericXY.select(!b);
+    }
+    mc_FPointXY.show(b);
+    move_point(sb_V.scrollPosition());
+  }
+  function act_CbNumericSim() {
+    var b = cb_numericSim.selected();
+    mc_simNX.show(b);
+    if(b) {
+      move_point(sb_V.scrollPosition()); }
+    else {
+      mc_simN.clear(); mc_simNX.clear();
+    }
+  }
+  function act_CbAnalyticSim() {
+    var b = cb_analyticSim.selected();
+  }
+  function act_CbOrigin() {
+    var b = cb_origin.selected();
+    if(b) {
+      sP0 = Number(sb_V.scrollPosition()) - xOrigin;
+      cb_coord.select(!b);
+      layerCx.show(!b);
+      layerCy.show(!b);
+    }
+  }
+
+  function act_CbExpTab() {
+    var b = cb_expTab.selected();
+    show_expTab(b);
+  }
+  function act_CbExpGraph() {
+    var b = cb_expGraph.selected();
+    mc_expData.show(b);
+  }
+  function act_CbGrid() {
+    mc_grid.show(cb_grid.selected());
+  }
+
+  function act_CbAxis() {
+    mc_axis.show(cb_axis.selected());
+  }
+
+  function act_CbGridF() {
+    if(cb_grid.selected()) {
+     draw_vectorFGridF(); }
+    else {
+      mc_F.clear();
+    }
+  }
+
+  function act_CbFPoint() {
+    mc_P.show(cb_FPoint.selected());
+  }
+
+  function act_CbF() {
+    mc_FPoint.show(cb_F.selected());
+  }
+
+  function act_CbCoord() {
+    var b = cb_coord.selected();
+    layerCx.show(b);
+    layerCy.show(b);
+    if(b) {
+      cb_origin.select(false);
+      bMoveOrigin = false;
+    }
+  }
+  function act_Rb0123(n) {
+    nOrder = n;
+    show_coeff(nOrder);
+    txt_function.set_value("");
+    mc_numeric.clear();
+    mc_analytic.clear();
+    pointF.set_xy(xOrigin,yOrigin);
+    remove_exactSolution();
+  }
+
+  function act_sbVDown() {
+    bSbV = true;
+  }
+  function act_sbVUp() {
+    bSbV = false;
+  }
+  function act_sbV() {
+    var n  = sb_V.scrollPosition();
+    if(bSbV) {
+      act_CbOrigin();
+      xF   = (n-xMax0 + xOrigin_0-xOrigin)*xScale;
+      yF   = fCfunction.valueX(xF);
+      set_functionValue ();
+      move_point(n);
+    }
+  }
+  function act_PbCompute() {
+    upDate_model();
+    draw_numeric();
+    cb_numeric  .select(true);
+    cb_analytic .select(false);
+    cb_analytic .enable(false); cb_analyticXY.select(false); cb_analyticXY.enable(false);
+    cb_numericXY.select(true);
+    act_CbNumeric();
+    act_CbNumericXY();
+    pointF.show(true);
+    move_point(sb_V.scrollPosition());
+  }
+  function act_PbClear() {
+    upDate_model();
+    cb_analytic.select(false);  act_CbAnalytic();
+    cb_numeric .select(false);  act_CbNumeric ();
+    clearField();
+  }
+  function clearField() {
+    for(var i=0;i<=3;i++) {
+      txt_xyInit[i] .set_value("");
+    }
+    txt_xInit     .set_value("");
+    txt_function  .set_value(""); yx = txt_function.value();
+    txt_out       .set_value("");
+    mc_FPointXY.clear();
+    mc_numeric .clear();
+    mc_analytic.clear();
+  }
+  function act_PbReset() {
+    nDiffEqNr = 1   ;
+    dh        = 0.01;  txt_nStep.set_value(dh);
+    act_Rb0123(1);
+    moveOriginReset();
+    act_PbClear();
+  }
+  /*---------------------------------------------------------------------------------------------------- action ---*/
+
+  function action_TxtACoeff(i) {
+    var s = aCoeff[i];
+    var n = 0;
+    if(s != "") {
+      fCaCoeff[i] .infixPostfix (s); }
+    else {
+      aCoeff[i] = 0;
+    }
+    remove_exactSolution();
+  }
+  function action_TxtRCoeff() {
+    var s = rCoeff;
+    var n = 0;
+    if(s != "") {
+      fCR .infixPostfix (s);
+      var xt = fCR.valueX(1,2);  }
+    else {
+      rCoeff = 0;
+    }
+    remove_exactSolution();
+  }
+  /*---------------------------------------------------------------------------------------------- update_model ---*/
+
+  function upDate_model() {
+     xPoint = xInit;
+     yPoint = xyInit[0];
+     for(var i=0;i<nOrder;i++) {
+       xyInit[i] = txt_xyInit[i].get_value();
+     }
+     vPoint = 0;
+     yA0    = [xPoint,yPoint,xyInit[1],xyInit[2],xyInit[3],xyInit[4],xyInit[5]];
+     yA     = yA0;
+     nDeg   = nOrder;
+
+  }
+  function remove_exactSolution() {
+    if(!bStart) {
+      txt_function.set_value("");
+      cb_analytic.select(false);  act_CbAnalytic();
+      mc_analytic.clear();
+      mc_numeric.clear();
+    }
+  }
+  /*-------------------------------------------------------------------------------- show / hide initial values ---*/
+
+  function hide_coeff() {
+    var col = '#EEEEEE';
+    for(var i=0;i<=3;i++) {
+      txt_xyInit[i].set_value("");
+      txt_xyInit[i].get_obj() .style.background = col;  txt_xyInit[i]  .disabled = true;
+    }
+    txt_xInit   .set_value("");
+    txt_xInit   .get_obj().style.background = col;  txt_xInit  .disabled = true;
+  }
+
+  function show_coeff(nOrder) {
+    hide_coeff();
+    var col = '#FFFFFF';
+    hide_coeff();
+    txt_xInit .get_obj() .style.background = col;  txt_xInit  .disabled = false;
+
+    for(var i=0;i<nOrder;i++) {
+      txt_xyInit[i].get_obj().style.background = col;  txt_xyInit[i] .disabled = false;
+    }
+
+    if(nOrder == 0) {
+      txt_xInit.get_obj().style.background = '#EEEEEE';  txt_xInit.disabled = true;
+    }
+  }
+  /*----------------------------------------------------------------------------------------------- show_expTab ---*/
+
+  function show_expTab(b) {
+    txt_expDataXT.show(b);
+    txt_expDataYT.show(b);
+    for(var i=1;i<=10;i++) {
+      txt_expDataX[i].show(b);
+      txt_expDataY[i].show(b);
+    }
+  }
+  /*----------------------------------------------------------------------------------------- set_functionValue ---*/
+
+  function set_functionValue() {
+    var k   = 1000;
+    txt_xIn  .set_value(xF  );
+    txt_yOut .set_value(Math.round(yF  *k)/k);
+  }
+  /*------------------------------------------------------------------------------------------------------ move ---*/
+
+  /*------------------------------------------------------------------------------------------------ moveOrigin ---*/
+
+  function moveOriginAuto() {
+    var xTmp =  40; // 65;
+    var yTmp = 340; //190; //340;
+    xOrigin  =  8 + 25*Math.round(xTmp/25);
+    yOrigin  = 15 + 25*Math.round(yTmp/25);
+    sb_V.set_value(100);
+    sP0 = Number(sb_V.scrollPosition()) - xOrigin;
+    cb_coord.check(true)      ; act_CbCoord  ();
+    txt_coordX.set_value(0.2) ; act_TxtCoordX(2);
+    txt_coordY.set_value(0.2) ; act_TxtCoordY(2);
+    mc_axis.clear();
+    xMin    = xMin0+(xOrigin_0-xOrigin);
+    xMax    = xMax0+(xOrigin_0-xOrigin);
+    yMax    = yMax0+(yOrigin_0-yOrigin);
+    yMin    = yMin0+(yOrigin_0-yOrigin);
+    sP      = Number(sb_V.scrollPosition());
+    var x1  = xOrigin + sP0;
+    sb_V.set_value(x1);
+    move_point(sb_V.scrollPosition());
+    xF   = (sb_V.scrollPosition()-xMax0 + xOrigin_0-xOrigin)*xScale;
+    yF   = fCfunction.valueX(xF);
+    set_functionValue (nFCur);
+    move_canvas();
+  }
+  function moveOriginReset() {
+    var xTmp =  40;
+    var yTmp = 190;
+    xOrigin  =  8 + 25*Math.round(xTmp/25);
+    yOrigin  = 15 + 25*Math.round(yTmp/25);
+    sb_V.set_value(100);
+    sP0 = Number(sb_V.scrollPosition()) - xOrigin;
+    cb_coord.check(true)      ; act_CbCoord  ();
+    txt_coordX.set_value(1) ; act_TxtCoordX(2);
+    txt_coordY.set_value(1) ; act_TxtCoordY(2);
+    mc_axis.clear();
+    xMin    = xMin0+(xOrigin_0-xOrigin);
+    xMax    = xMax0+(xOrigin_0-xOrigin);
+    yMax    = yMax0+(yOrigin_0-yOrigin);
+    yMin    = yMin0+(yOrigin_0-yOrigin);
+    sP      = Number(sb_V.scrollPosition());
+    var x1  = xOrigin + sP0;
+    sb_V.set_value(x1);
+    move_point(sb_V.scrollPosition());
+    xF   = (sb_V.scrollPosition()-xMax0 + xOrigin_0-xOrigin)*xScale;
+    yF   = fCfunction.valueX(xF);
+    set_functionValue (nFCur);
+    move_canvas       ();
+  }
+  function moveOrigin() {
+    var xTmp = simPosX();
+    var yTmp = simPosY();
+    xOrigin  =  8 + 25*Math.round(xTmp/25);
+    yOrigin  = 15 + 25*Math.round(yTmp/25);
+    if(xOrigin >= 0 && xOrigin <= 610 && yOrigin >= 5 && yOrigin <= 420) {
+    mc_axis.clear();
+    xMin   = xMin0+(xOrigin_0-xOrigin);
+    xMax   = xMax0+(xOrigin_0-xOrigin);
+    yMax   = yMax0+(yOrigin_0-yOrigin);
+    yMin   = yMin0+(yOrigin_0-yOrigin);
+    sP     = Number(sb_V.scrollPosition());
+    var x1 = xOrigin + sP0;
+    sb_V.set_value(x1);
+    xF   = (sb_V.scrollPosition()-xMax0 + xOrigin_0-xOrigin)*xScale;
+    yF   = fCfunction.valueX(xF);
+    set_functionValue (nFCur);
+    move_canvas       ();
+    }
+  }
+  /*----------------------------------------------------------------------------------------------- move_canvas ---*/
+
+  function move_canvas() {
+    mc_axis          .set_xy(xOrigin,yOrigin);  init_axis();
+    mc_numeric       .set_xy(xOrigin,yOrigin);
+    mc_analytic      .set_xy(xOrigin,yOrigin);
+    mc_expData       .set_xy(xOrigin,yOrigin);  draw_expData();
+    mc_P             .set_xy(xOrigin,yOrigin);
+    mc_FPoint        .set_xy(xOrigin,yOrigin);
+    pointF.set_xy(xF/xScale + xOrigin - xOrigin_0,-yF/yScale + yOrigin - yOrigin_0);
+    move_point(sb_V.scrollPosition());
+    layerCx.set_ps(x0mc+17 + xOrigin - xOrigin_0,y0mc+ 2 + yOrigin - yOrigin_0,50,50);
+    layerCy.set_ps(x0mc-25 + xOrigin - xOrigin_0,y0mc-35 + yOrigin - yOrigin_0,50,50);
+  }
+  /*------------------------------------------------------------------------------------------------ move_point ---*/
+/*
+  function move_point(n) {
+    if(cb_numericXY.selected()) {
+      move_pointNumeric(n); }
+    else if(cb_analyticXY.selected()) {
+      move_pointAnalytic(n); }
+    else {
+      if(!cb_numeric.selected() && !cb_analytic.selected()) {
+        pointF.show(false); }
+      else {
+        pointF.show(true);
+        if(cb_numeric.selected()) {
+          move_pointNumeric(n); }
+        else if(cb_analytic.selected())  {
+          move_pointAnalytic(n);
+        }
+      }
+    }
+  }
+*/
+  function move_point(n) {     //alert(n);
+    if(cb_numericXY.selected()) {
+      move_pointNumeric(n); }
+    else if(cb_analyticXY.selected()) {
+     move_pointAnalytic(n); }
+    else {
+      if(!cb_numeric.selected() && !cb_analytic.selected()) {
+        pointF.show(false); }
+      else {
+        pointF.show(true);
+        if(cb_numeric.selected()) {
+          move_pointNumeric(n); }
+        else if(cb_analytic.selected())  {
+         move_pointAnalytic(n);
+        }
+      }
+    }
+  }
+  function move_pointAnalytic(n) {
+    var xCur = (n-xMax0 + xOrigin_0-xOrigin)*xScale;
+    var yCur;
+    if(txt_function.value() != "") {
+      yCur   = fCfunction.valueX(xCur);
+      pointF  .set_x( xCur/xScale + xOrigin - xOrigin_0);
+      pointF  .set_y(-yCur/yScale + yOrigin - yOrigin_0); }
+    else {
+      pointF  .set_x(xCur/xScale - xOrigin - xOrigin_0);
+      pointF  .set_y(yOrigin - yOrigin_0);
+    }
+    mc_FPointXY.clear();
+    mc_FPointXY.lineStyle(0.5,'#555555',1);
+    var xP = Math.round(xCur*100)/100;
+    var yP = Math.round(yCur*100)/100;
+    mc_FPointXY.set_txtRel("("+xP+", "+yP+")",pointF.get_x()+10,pointF.get_y()-10,11);
+  }
+/*
+  function move_pointAnalytic(n) {
+    var xCur = (n-xMax0 + xOrigin_0-xOrigin)*xScale;
+    var yCur;
+    if(txt_function.value() != "") {
+      yCur   = fCfunction.valueX(xCur);
+      pointF  .set_x( yCur/yScale + xOrigin - xOrigin_0);
+      pointF  .set_y(-xCur/xScale + yOrigin - yOrigin_0); }
+    else {
+      pointF  .set_x(xCur/xScale - xOrigin - xOrigin_0);
+      pointF  .set_y(yOrigin - yOrigin_0);
+    }
+    mc_FPointXY.clear();
+    mc_FPointXY.lineStyle(0.5,'#555555',1);
+    var xP = Math.round(xCur*100)/100;
+    var yP = Math.round(yCur*100)/100;
+    mc_FPointXY.set_txtRel("("+xP+", "+yP+")",pointF.get_x()+10,pointF.get_y()-10,11);
+  }
+*/
+  function move_pointNumeric(n) {
+    var xCur  = (n-xMax0 + xOrigin_0-xOrigin)*xScale;
+    var xtCur = Math.round(xCur*100);
+    var yCur  = yCur   = yTab[xtCur];
+    var xP    = Math.round(xCur*100)/100;
+    var yP    = Math.round(yCur*100)/100;
+    pointF     .set_x( xCur/xScale + xOrigin - xOrigin_0);
+    pointF     .set_y(-yCur/yScale + yOrigin - yOrigin_0);
+    mc_FPointXY.clear();
+    mc_FPointXY.lineStyle(0.5,'#555555',1);
+    mc_FPointXY.set_txtRel("("+xP+", "+yP+")",pointF.get_x()+10,pointF.get_y()-10,11);
+    var x1 = pointF.get_x();
+    var y1 = pointF.get_y();
+    var y  = yP;
+    var x  = x1 + Math.sqrt(100-y*y)/xScale;
+    var k = 1/Math.sqrt(100-y*y)*y;
+    if(cb_numericSim.selected()) {
+      simN(x1,y1,x);
+    }
+  }
+  /*------------------------------------------------------------------------------------------------- draw_diff ---*/
+
+  function draw_numeric() {
+    mc_numeric.clear();
+    mc_numeric.lineStyle(0.5,nColNumeric,1);
+    mc_numeric.moveTo(xPoint/xScale,-yPoint/yScale);
+    var x  = 0;
+    var xt = Math.round(100)*x;
+    var yt = 0;
+    while(x<=xMax*xScale) {
+      xPoint = x;  yA[0] = xPoint;
+      yA     = rk4(yA,dh,mModel);
+      yPoint = yA[1];                xt = Math.round(100*x); xTab[xt] = yA[0];  yTab[xt] = yA[1];
+      mc_numeric.lineTo(x/xScale,-yPoint/yScale);
+      yt = -yPoint/yScale;
+      x  = x + dh;
+    }
+  }
+  /*------------------------------------------------------------------------------------------------------ draw ---*/
+
+  function draw_analytic() {
+    var x = xMin*xScale;
+    var y = fCfunction.valueX(x);
+    mc_analytic.clear();
+    mc_analytic.lineStyle(0.5,nColAnalytic,1);
+    mc_analytic.moveTo(x/xScale,-y/yScale);
+    while(x<=xMax*xScale) {
+      y = fCfunction.valueX(x);
+      if(y<=-yMin*yScale && y>=-yMax*yScale) {
+        mc_analytic.lineTo(x/xScale,-y/yScale); }
+      else {
+        mc_analytic.moveTo(x/xScale,-y/yScale);
+      }
+      x = x + 0.05;
+    }
+    act_sbV();
+  }
+  /*------------------------------------------------------------------------------------------------------ draw ---*/
+
+  function draw_analyticInverse() {
+    var x = xMin*xScale;
+    var y = fCfunction.valueX(x);
+    mc_analytic.clear();
+    mc_analytic.lineStyle(0.5,nColAnalytic,1);
+    mc_analytic.moveTo(y/xScale,-x/yScale);
+    while(x<=xMax*xScale) {
+      y = fCfunction.valueX(x);
+    //if(x<=-xMin*xScale && x>=-xMax*xScale) {
+        mc_analytic.lineTo(y/xScale,-x/yScale); //}
+    //else {
+      //mc_analytic.moveTo(y/xScale,-x/yScale);
+    //}
+      x = x + 0.05;
+    }
+    act_sbV();
+  }
+  /*---------------------------------------------------------------------------------------------- draw_expData ---*/
+
+  function draw_expData() {
+    var xData = 0;
+    var yData = 0;
+    mc_expData.clear();
+    mc_expData.lineStyle(2,nColExpData,1);
+    for(var i=1;i<=10;i++) {
+      xData = Number(txt_expDataX[i].get_value());
+      yData = Number(txt_expDataY[i].get_value());
+      if(xData !="" && yData != "") {
+        mc_expData.moveTo(xData/xScale-5,-yData/yScale  );  mc_expData.lineTo(xData/xScale+5,-yData/yScale  );
+        mc_expData.moveTo(xData/xScale  ,-yData/yScale-5);  mc_expData.lineTo(xData/xScale  ,-yData/yScale+5);
+      }
+    }
+  }
+  /*------------------------------------------------------------------------------------------------------- sim ---*/
+
+  function simN(x1,y1,x) {
+    /*
+    mc_simN  .clear();  mc_simNX.show(true);  mc_simNX.clear();  mc_simNX.lineStyle(0.5,'#555555',1);
+    mc_simN  .lineStyle(0.5,nColNumericSim,1);
+    mc_simN  .moveTo(x1,y1);
+    mc_simN  .lineTo(x,150);
+    var xp  = (x - (xOrigin - xOrigin_0))*xScale;
+    xp      = Math.round(xp*100)/100;
+    mc_simNX .set_txtRel(xp,x,165,11);
+    */
+  }
+
+  function simA() {
+  }
+  /*-------------------------------------------------------------------------------------------------------- ODE --*/
+  /*---------------------------------------------------------------------------------------------------- mModul ---*/
+
+  function mModel(yT) {                       // The Mathematical Model
+    var a  = 0;
+    var b  = 0;
+    var c  = 0;
+    var d  = 0;
+    var e  = 0;
+    var g  = 0;
+    var h  = Number(yT[0]);
+    var m  = 0;
+    var p  = 0;
+    var q  = Number(yT[1]);
+    var aC = 0;
+    for(var i=1;i<=nOrder;i++) {
+      m  = fCaCoeff[i-1].valueX(h,q);
+      a  = Number(m);
+      b  = Number(yT[i]);
+      c  = a*b;
+      aC = aC + c;
+    }
+    d = fCR.valueX(h,q);
+    p = fCaCoeff[nOrder].valueX(h,q);
+    e = p;
+    g = (d-aC)/e;
+    return g;
+  }
+  /*------------------------------------------------------------------------------------------------------- rk4 ---*/
+
+  function rk4(yA,dh,f)  {
+
+           // Rugne Kutta Order 4                                                            //
+           // Returns final (function value, derivate value) array after time dt has passed. //
+           //         yA contains [x,y,y',...]                                               //
+           //            yA[0] : initial x                                                   //
+           //            yA[1] : initial y                                                   //
+           //            yA[2] : initial derivate                                            //
+           //            ...   : initial second, third, ... derivate                         //
+           //         f : action function mModel   (must be callable)                        //
+           //         dh: timestep                                                           //
+
+    var a = 0;
+    var b = 0;
+    var c = 0;
+    var d = 0;
+    var e = 0;
+    var g = 0;
+
+    var yT1  = new Array(nDeg+2);
+    var yT2  = new Array(nDeg+2);
+    var yT3  = new Array(nDeg+2);
+    var yT4  = new Array(nDeg+2);
+    var yTf  = new Array(nDeg+2);
+
+    for(var i=0;i<=nDeg+1;i++) {
+      yT1[i] = yA[i];
+      yT2[i] = yA[i];
+      yT3[i] = yA[i];
+      yT4[i] = yA[i];
+      yTf[i] = yA[i];
+    }
+    yT1[nDeg+1] = f(yT1, 0);
+
+    for(var i=1;i<=nDeg;i++) {
+      a = Number(yA[i]);  b = Number(yT1[i+1]);  c = a + 0.5*b*dh;
+      yT2[i] = c;
+    }
+    yT2[nDeg+1] = f(yT2,dh/2);
+    for(var i=1;i<=nDeg;i++) {
+      a = Number(yA[i]);  b = Number(yT2[i+1]);  c = a + 0.5*b*dh;
+      yT3[i] = c;
+    }
+    yT3[nDeg+1] = f(yT3,dh/2);
+
+    for(var i=1;i<=nDeg;i++) {
+      a = Number(yA[i]);  b = Number(yT3[i+1]);  c = a + 0.5*b*dh;
+      yT4[i] = c;
+    }
+    yT4[nDeg+1] = f(yT4,dh);
+
+    for(var i=1;i<=nDeg+1;i++) {
+      a = Number(yA[i]);  b = Number(yT1[i+1]);  c = Number(yT2[i+1]);  d = Number(yT3[i+1]);  e = Number(yT4[i+1]);  g = a + dh/6*(b+2*c+2*d+e);
+      yTf[i] = g;
+    }
+    return yTf;
+  }
+  /*------------------------------------------------------------------------------------------------- find_diff ---*/
+
+  function find_diff() {          // Analyze and split the diffe.eq. into different parts. //
+    var s     = txt_out.value();
+    var space = " ";
+    var sNew  = "" ;
+    var t     = "" ;
+    var len   = s.length;         // remove space
+    for(var i=0;i<=len;i++) {
+      t = s.charAt(i);
+      if(t !=space) {
+        sNew = sNew + t;
+      }
+    }
+    s = sNew;                     // s without space
+    len = s.length;               // new length of s
+
+    var pos3 = 0;
+    var pos2 = 0;
+    var pos1 = 0;
+    var pos0 = 0;
+
+
+    pos3       = s.indexOf("'''"       );      // find tripple diff.sign.
+    if(pos3   >= 0) {
+      nOrder   = 3;                              // diff.eq. of order 3
+      pos2     = s.indexOf("''" ,pos3+4);        // find double  diff.sign.
+      if(pos2 >= 0) {                            // double diff.sign. exists
+        pos1   = s.indexOf("'"  ,pos2+3); }         // find double diff.sign.
+      else {                                     // bouble diff.sign. don't exist
+        pos1   = s.indexOf("'"  ,pos3+4); }}        // find single diff.sign.
+    else {                                       // diff.eq. not of order 3
+      pos2     = s.indexOf("''"        );           // find double  diff.sign.
+      if(pos2 >= 0) {
+        nOrder = 2;                                    // diff.eq. of order 2
+        pos1   = s.indexOf("'"  ,pos2+3); }            // find single diff.sign.
+      else {                                        // diff.eq. not of order 2
+        nOrder =1;                                     // diff.eq. of order 1
+        pos1   = s.indexOf("'"         );              // find. single diff.sign.
+        if(pos1 < 0) {
+          nOrder = 0;                                     // diff.eq. of order 0
+        }
+      }
+    }
+    pos0  = s.indexOf("="         );          // find =
+
+    var c0    = s.charAt(pos0-2);
+    var c1    = s.charAt(pos1-2);
+    var c2    = s.charAt(pos2-2);
+    var c3    = s.charAt(pos3-2);
+
+
+    if(c0=='+' || c0=='-' ||  (c0=='' && nOrder == 0)) {                                // set 1-coefficients
+      s = s.substring(0,pos0-1) + "1" + s.substring(pos0-1,len);
+      len = s.length;
+    }
+    if(c1=='+' || c1=='-' ||  (c1==''  && nOrder == 1)) {
+      s = s.substring(0,pos1-1) + "1" + s.substring(pos1-1,len);
+      len = s.length;
+    }
+    if(c2=='+' || c2=='-' ||  (c2==''  && nOrder == 2)) {
+      s = s.substring(0,pos2-1) + "1" + s.substring(pos2-1,len);
+      len = s.length;
+    }
+    if(c3=='+' || c3=='-' ||  (c3==''  && nOrder == 3)) {
+      s = s.substring(0,pos3-1) + "1" + s.substring(pos3-1,len);
+      len = s.length;
+    }
+
+    pos3        = s.indexOf("'''"       );
+    if(pos3    >= 0) {
+      nOrder    = 3;
+      pos2      = s.indexOf("''" ,pos3+4);
+      if(pos2  >= 0) {
+        pos1    = s.indexOf("'" ,pos2+3); }
+      else {
+        pos1    = s.indexOf("'" ,pos3+4); }}
+    else {
+      pos2      = s.indexOf("''"       );
+      if(pos2  >= 0) {
+        nOrder  = 2;
+        pos1    = s.indexOf("'" ,pos2+3); }
+      else {
+        nOrder  = 1;
+        pos1    = s.indexOf("'");
+        if(pos1<0) {
+          nOrder=0;
+        }
+      }
+    }
+    pos0  = s.indexOf("="         );
+
+    if(nOrder != nOrderPrev) {
+      switch(nOrder) {
+        case 0: if(!bStart) {act_Rb0123(0)};  break;
+        case 1: if(!bStart) {act_Rb0123(1)};  break;
+        case 2: if(!bStart) {act_Rb0123(2)};  break;
+        case 3: if(!bStart) {act_Rb0123(3)};  break;
+      }
+    }
+    nOrderPrev = nOrder;
+
+if(nOrder==3) {
+     aCoeff[3] = s.substring(0     ,pos3-1);
+     aCoeff[2] = s.substring(pos3+4,pos2-1); if(s.charAt(pos3+3)=="-") {aCoeff[2]="-1*"+aCoeff[2]};
+     aCoeff[1] = s.substring(pos2+3,pos1-1); if(s.charAt(pos2+2)=="-") {aCoeff[1]="-1*"+aCoeff[1]};
+     aCoeff[0] = s.substring(pos1+2,pos0-1); if(s.charAt(pos1+1)=="-") {aCoeff[0]="-1*"+aCoeff[0]};
+     rCoeff    = s.substring(pos0+1,len   );   }
+   else if(nOrder==2) {
+     aCoeff[3] = "0"                       ;
+     aCoeff[2] = s.substring(0     ,pos2-1);
+     aCoeff[1] = s.substring(pos2+3,pos1-1); if(s.charAt(pos2+2)=="-") {aCoeff[1]="-1*"+aCoeff[1]};
+     aCoeff[0] = s.substring(pos1+2,pos0-1); if(s.charAt(pos1+1)=="-") {aCoeff[0]="-1*"+aCoeff[0]};
+     rCoeff    = s.substring(pos0+1,len   );   }
+   else if(nOrder==1) {
+     aCoeff[3] = "0"                       ;
+     aCoeff[2] = "0"                       ;
+     aCoeff[1] = s.substring(0     ,pos1-1);
+     aCoeff[0] = s.substring(pos1+2,pos0-1); if(s.charAt(pos1+1)=="-") {aCoeff[0]="-1*"+aCoeff[0]};
+     rCoeff    = s.substring(pos0+1,len   );   }
+   else if(nOrder==0) {
+     aCoeff[3] = "0"                       ;
+     aCoeff[2] = "0"                       ;
+     aCoeff[1] = "0"                       ;
+     aCoeff[0] = s.substring(0     ,pos0-1);
+     rCoeff    = s.substring(pos0+1,len   );   }
+   else  {
+     aCoeff[3] = "0"                       ;
+     aCoeff[2] = "0"                       ;
+     aCoeff[1] = "0"                       ;
+     aCoeff[0] = "0"                       ;
+     rCoeff    = "0"                       ;
+   }
+
+
+   if(nOrder == 3) {
+     if(pos2 <= 0) {
+       aCoeff[1] = s.substring(pos3+4,pos1-1);
+     }}
+   else if(nOrder == 2) {
+     if(pos1 <= 0) {
+       aCoeff[0] = s.substring(pos2+3,pos0-1);
+     }
+   }
+   var pos0Tmp = pos0;
+   var pos1Tmp = pos1;
+   if(s.charAt(pos0Tmp-1) != "y") {pos0 = 0;}
+
+   if(pos3<=0) {aCoeff[3] = "0"; }
+   if(pos2<=0) {aCoeff[2] = "0"; }
+   if(pos1<=0) {aCoeff[1] = "0"; }
+   if(pos0<=0) {aCoeff[0] = "0"; }
+
+   for(var i=0;i<=3;i++) {
+     action_TxtACoeff(i);
+   }
+   action_TxtRCoeff();
+   bStart = false;
+  }
+  /*--------------------------------------------------------------------------------------------------- ODE end ---*/
+  /*-------------------------------------------------------------------------------------------------- get_info ---*/
+
+  function get_info()    {
+    return sInfo;                                                       // get information
+  }
+  /*--------------------------------------------------------------------------------------------------- movePos ---*/
+
+  function movePos(t,n)  {
+  }
+  /*---------------------------------------------------------------------------------------------------------------*/
+}
+/*=================================================================================================================*/
+
+</script>
+
+</html>
