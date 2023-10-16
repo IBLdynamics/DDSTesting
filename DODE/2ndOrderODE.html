@@ -122,11 +122,12 @@
       g3 = brd2.create('curve', [[y01], [y02]], { strokeColor: 'purple', strokeWidth: 2 });
       g3.updateDataArray = function () {
         var data = ode();
+        console.log(data);
         var h = sdN.Value() / 200;
         this.dataX = [];
         this.dataY = [];
         for (i = 0; i < data.length; i++) {
-          this.dataX[i] = P4.X() + i * h;
+          this.dataX[i] = data[i][0];
           this.dataY[i] = data[i][1];
         }
       }
