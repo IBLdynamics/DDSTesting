@@ -85,7 +85,7 @@
       brd = JXG.JSXGraph.initBoard('box', { boundingbox: [xMin, yMax, xMax, yMin], showCopyright: false, axis: true });
       brd2 = JXG.JSXGraph.initBoard('box2', { boundingbox: [xMin, yMax, xMax, yMin], showCopyright: false, axis: true });
       brd.addChild(brd2);
-      sdN = brd.create('slider', [[-7, -8.5], [7, -8.5], [-15, 10, 15]], { name: 't' });
+      sdN = brd.create('slider', [[-7, -8.5], [7, -8.5], [-15, 10, 25]], { name: 't' });
 
       P1 = brd.create('point', [x0, y01], { color: 'red', name: '(x_0, y_0)' });
       line = brd.create('line', [function () { return -P1.X(); }, function () { return 1; }, function () { return 0; }], { visible: false });
@@ -131,7 +131,13 @@
           this.dataY[i] = data[i][1];
         }
       }
-      confirm();
+      var a = document.getElementById('a').value;                        //               y01
+      var b = document.getElementById('b').value;
+      f = function (x, y) {
+        return [y[1], - a * y[1] - b * y[0]];
+      }
+
+      brd.update();
     }
     /*--------------------------------------------------------------------------------------------------------- confirm ---*/
 
