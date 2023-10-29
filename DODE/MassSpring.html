@@ -31,6 +31,7 @@
   <div>
     <div id='jxgbox' class='jxgbox' style='width:400px; height:400px;'></div>
     <script type='text/javascript'>
+
       // Function to parse a function from what the student entered in the textbox
       function parseFunction(funcStr) {
         if (funcStr[0] == '-') {
@@ -65,6 +66,8 @@
         }),
         i, numberOfSpringRings = 10,
         springRings = [];
+
+
 
       for (i = 0; i < numberOfSpringRings; i++) {
         springRings[i] = board.create('point', [0.5 - i % 2, function (i) {
@@ -132,7 +135,7 @@
         }
       }
       board.on(hook);
-
+      board.addChild(brd);
     </script>
 
     <div id='jxgbox2' class='jxgbox' style='width:400px; height:400px;'></div>
