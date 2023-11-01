@@ -23,7 +23,7 @@
 
   </div>
   <div id="jxgbox" class="jxgbox" style="width:600px; height:600px; float: left;"></div>
-  <!--<div id="jxgbox2" class="jxgbox" style="width:600px; height:600px; float: left;"></div> -->
+  <div id="jxgbox2" class="jxgbox" style="width:600px; height:600px; float: left;"></div>
   <script>
     // Initialise board
     board = JXG.JSXGraph.initBoard('jxgbox', { boundingbox: [-1.5, 35, 60, -1.5], axis: true, grid: false });
@@ -101,7 +101,7 @@
     }
 
     // Plot Predator
-    g3 = board.create('curve', [t, datapred], { strokeColor: 'red', strokeWidth: '2px' });
+    g3 = board.create('curve', [t, dataprey], { strokeColor: 'red', strokeWidth: '2px' });
     g3.updateDataArray = function () {
       var data = ode();
       this.dataX = [];
@@ -113,7 +113,7 @@
     }
 
     // Plot Prey
-    g4 = board.create('curve', [t, dataprey], { strokeColor: 'blue', strokeWidth: '2px' });
+    g4 = board.create('curve', [t, datapred], { strokeColor: 'blue', strokeWidth: '2px' });
     g4.updateDataArray = function () {
       var data = ode();
       this.dataX = [];
@@ -124,19 +124,19 @@
       }
     }
   </script>
-  <!--  <script>
-   //Add in a second board, tied to the first board
-board2 = JXG.JSXGraph.initBoard('jxgbox2', {
-  boundingbox: [-1.5, 28.5, 28.5, -1.5],
-  axis: true,
-  grid: false
-});
-board.addChild(board2);
-/* Moves the initial condition in the second board
-var initial = board2.create('point', [function(){return startprey.Y();},function(){return startpred.Y();}],{fixed: false},{visible:false});
-var final = board2.create('point', [function(){return dataprey[1].Y();},function(){return datapred[1].Y();}]);
-  */
-  function doIt() {
+  <script>
+    //Add in a second board, tied to the first board
+    board2 = JXG.JSXGraph.initBoard('jxgbox2', {
+      boundingbox: [-1.5, 28.5, 28.5, -1.5],
+      axis: true,
+      grid: false
+    });
+    board.addChild(board2);
+    /* Moves the initial condition in the second board
+    var initial = board2.create('point', [function(){return startprey.Y();},function(){return startpred.Y();}],{fixed: false},{visible:false});
+    var final = board2.create('point', [function(){return dataprey[1].Y();},function(){return datapred[1].Y();}]);
+      */
+    function doIt() {
       JXG.JSXGraph.freeBoard(brd);
 
       length = 0.4;
@@ -168,7 +168,7 @@ var final = board2.create('point', [function(){return dataprey[1].Y();},function
         }
       }
     }
-  </script> -->
+  </script>
   </div>
 </body>
 
