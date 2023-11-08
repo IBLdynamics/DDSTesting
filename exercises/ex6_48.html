@@ -1,31 +1,32 @@
 <!doctype html>
 <html lang="en">
-  <head>
-  	<title>Discovering Dynamical Systems Through Experiment and Inquiry</title>
+
+<head>
+    <title>Discovering Dynamical Systems Through Experiment and Inquiry</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-		
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="../css/style.css">
 
-    <link rel="stylesheet" type="text/css" href="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
-    <script type="text/javascript" src="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" type="text/css" href="../css/jsxgraph.min.css" />
+    <script type="text/javascript" src="../js/jsxgraphcore.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
-  </head>
-  <body>
-		
-		<div class="wrapper d-flex align-items-stretch">
-			<nav id="sidebar">
-				<div class="p-4 pt-5">
-		  		<a href="#" class="img logo rounded mx-auto" style="background-image: url(../images/Henon.png);"></a>
-	        <ul class="list-unstyled components mb-5">
-	          <li class="active">
-	            <!--<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+</head>
+
+<body>
+
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="p-4 pt-5">
+                <a href="#" class="img logo rounded mx-auto" style="background-image: url(../images/Henon.png);"></a>
+                <ul class="list-unstyled components mb-5">
+                    <li class="active">
+                        <!--<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
 	            <ul class="collapse list-unstyled" id="homeSubmenu">
                 <li>
                     <a href="#">Home 1</a>
@@ -38,156 +39,175 @@
                 </li>
 	            </ul>
 	          </li>-->
-	          <li>
-	              <a href="../index.html">Home</a>
-	          </li>
-	          <li>
-              <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Chapters</a>
-              <ul class="collapse list-unstyled" id="pageSubmenu">
-                <li>
-                    <a href="../chapters/ch1.html">Chapter 1</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch2.html">Chapter 2</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch3.html">Chapter 3</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch4.html">Chapter 4</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch5.html">Chapter 5</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch6.html">Chapter 6</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch8.html">Chapter 8</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch9.html">Chapter 9</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch10.html">Chapter 10</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch11.html">Chapter 11</a>
-                </li>
-              </ul>
-	          </li>
-	          <!--<li>
+                    <li>
+                        <a href="../index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle">Chapters</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                            <li>
+                                <a href="../chapters/ch1.html">Chapter 1</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch2.html">Chapter 2</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch3.html">Chapter 3</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch4.html">Chapter 4</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch5.html">Chapter 5</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch6.html">Chapter 6</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch8.html">Chapter 8</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch9.html">Chapter 9</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch10.html">Chapter 10</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch11.html">Chapter 11</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--<li>
               <a href="#">Portfolio</a>
 	          </li>-->
-	          <li>
-              <a href="../about.html">About the Authors</a>
-	          </li>
-              <li>
-              <a href="../contact.html">Contact</a>
-              </li>
-	        </ul>
+                    <li>
+                        <a href="../about.html">About the Authors</a>
+                    </li>
+                    <li>
+                        <a href="../contact.html">Contact</a>
+                    </li>
+                </ul>
 
-	        <div class="footer">
-	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
-						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-	        </div>
+                <div class="footer">
+                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                            target="_blank">Colorlib.com</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
 
-	      </div>
-    	</nav>
-
-        <!-- Page Content  -->
-      <div id="content" class="p-4 p-md-5">
-
-     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
-
-            <button type="button" id="sidebarCollapse" class="btn btn-primary">
-              <i class="fa fa-bars"></i>
-              <span class="sr-only">Toggle Menu</span>
-            </button>
-            <script> window.onload = function(){
-                document.getElementById('sidebarCollapse').click();
-                }
-            </script>
-            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="../index.html">Home</a>
-                </li>
-               <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Chapter 6 Exercises
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                <a class="dropdown-item" href="../exercises/ex6_1.html"> Chapter 6, Applications 1-8</a>
-
-                <a class="dropdown-item" href="../exercises/ex6_9.html"> Chapter 6, Application 9</a>
-
-                <a class="dropdown-item" href="../exercises/ex6_15.html"> Chapter 6, Exploration 15</a>
-
-                <a class="dropdown-item" href="../exercises/ex6_16.html"> Chapter 6, Exploration 16</a>
-
-                <a class="dropdown-item" href="../exercises/ex6_18.html"> Chapter 6, Explorations 18-23</a>
-
-                <a class="dropdown-item" href="../exercises/ex6_29.html"> Chapter 6, Exploration 29</a>
-
-                <a class="dropdown-item" href="../exercises/ex6_35.html"> Chapter 6, Exploration 35</a>
-
-                <a class="dropdown-item" href="../exercises/fig6_3.html"> Chapter 6, Figure 6.3</a>
-
-                <a class="dropdown-item" href="../exercises/ex6_48.html"> Chapter 6, Exploration 48</a>
-
-        </div>
-      </li>
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Chapters
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="../chapters/ch1.html">Chapter 1</a>
-            <a class="dropdown-item" href="../chapters/ch2.html">Chapter 2</a>
-            <a class="dropdown-item" href="../chapters/ch3.html">Chapter 3</a>
-            <a class="dropdown-item" href="../chapters/ch4.html">Chapter 4</a>
-            <a class="dropdown-item" href="../chapters/ch5.html">Chapter 5</a>
-            <a class="dropdown-item" href="../chapters/ch6.html">Chapter 6</a>
-            <a class="dropdown-item" href="../chapters/ch8.html">Chapter 8</a>
-            <a class="dropdown-item" href="../chapters/ch9.html">Chapter 9</a>
-            <a class="dropdown-item" href="../chapters/ch10.html">Chapter 10</a>
-            <a class="dropdown-item" href="../chapters/ch11.html">Chapter 11</a>
-        </div>
-      </li>
-              <li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../contact.html">Contact</a>
-                </li>
-              </ul>
             </div>
-          </div>
         </nav>
 
-    <h1>Chapter 6, Exploration 48</h1>
-    <p> 
-        The graph below is for the function \(x_{n+1} = f_{4.5}(x) = 4.5x(1-x)\). You can select the value of \(n\) to display \(f^n_{4.5}(x)\). Notice that, as \(n\) increases, certain intervals along the \(x\)-axis are colored red.
-        <ul>
-            <li> How do the intervals relate to properties of the graphs of \(y=f^n_{4.5}(x)\)
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                        <i class="fa fa-bars"></i>
+                        <span class="sr-only">Toggle Menu</span>
+                    </button>
+                    <script> window.onload = function () {
+                            document.getElementById('sidebarCollapse').click();
+                        }
+                    </script>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="../index.html">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Chapter 6 Exercises
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="../exercises/ex6_1.html"> Chapter 6, Applications
+                                        1-8</a>
+
+                                    <a class="dropdown-item" href="../exercises/ex6_9.html"> Chapter 6, Application
+                                        9</a>
+
+                                    <a class="dropdown-item" href="../exercises/ex6_15.html"> Chapter 6, Exploration
+                                        15</a>
+
+                                    <a class="dropdown-item" href="../exercises/ex6_16.html"> Chapter 6, Exploration
+                                        16</a>
+
+                                    <a class="dropdown-item" href="../exercises/ex6_18.html"> Chapter 6, Explorations
+                                        18-23</a>
+
+                                    <a class="dropdown-item" href="../exercises/ex6_29.html"> Chapter 6, Exploration
+                                        29</a>
+
+                                    <a class="dropdown-item" href="../exercises/ex6_35.html"> Chapter 6, Exploration
+                                        35</a>
+
+                                    <a class="dropdown-item" href="../exercises/fig6_3.html"> Chapter 6, Figure 6.3</a>
+
+                                    <a class="dropdown-item" href="../exercises/ex6_48.html"> Chapter 6, Exploration
+                                        48</a>
+
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Chapters
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="../chapters/ch1.html">Chapter 1</a>
+                                    <a class="dropdown-item" href="../chapters/ch2.html">Chapter 2</a>
+                                    <a class="dropdown-item" href="../chapters/ch3.html">Chapter 3</a>
+                                    <a class="dropdown-item" href="../chapters/ch4.html">Chapter 4</a>
+                                    <a class="dropdown-item" href="../chapters/ch5.html">Chapter 5</a>
+                                    <a class="dropdown-item" href="../chapters/ch6.html">Chapter 6</a>
+                                    <a class="dropdown-item" href="../chapters/ch8.html">Chapter 8</a>
+                                    <a class="dropdown-item" href="../chapters/ch9.html">Chapter 9</a>
+                                    <a class="dropdown-item" href="../chapters/ch10.html">Chapter 10</a>
+                                    <a class="dropdown-item" href="../chapters/ch11.html">Chapter 11</a>
+                                </div>
+                            </li>
+                            <li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../contact.html">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <h1>Chapter 6, Exploration 48</h1>
+            <p>
+                The graph below is for the function \(x_{n+1} = f_{4.5}(x) = 4.5x(1-x)\). You can select the value of
+                \(n\) to display \(f^n_{4.5}(x)\). Notice that, as \(n\) increases, certain intervals along the
+                \(x\)-axis are colored red.
+            <ul>
+                <li> How do the intervals relate to properties of the graphs of \(y=f^n_{4.5}(x)\)
                     for each \(n\)?</li>
-            <li>How many intervals of each color are there for each \(n\)? Is there a
-                general formula in terms of \(n\)? Why? </li>
-            <li> Are there points in the interval [0, 1] whose orbits remain in that
+                <li>How many intervals of each color are there for each \(n\)? Is there a
+                    general formula in terms of \(n\)? Why? </li>
+                <li> Are there points in the interval [0, 1] whose orbits remain in that
                     interval for all \(n\)? If so, describe them. If not, explain why. </li>
-            <li> Does the process demonstrated here remind you of anything else
+                <li> Does the process demonstrated here remind you of anything else
                     that you have encountered in mathematics? If so, what?</li>
-        </ul>
-    </p>
-    
-    <!-- Create a slider to determine the value of x0 -->
-    <!--<div style="width: 500px; height: 40px;">
+            </ul>
+            </p>
+
+            <!-- Create a slider to determine the value of x0 -->
+            <!--<div style="width: 500px; height: 40px;">
         <p style="display: inline;">x0:</p>
         <input id="x0Slider" type="range" min="0" max="1" value="0.5" step="0.01">
         <span id="x0Out" style="display: inline;"></span>
@@ -198,113 +218,115 @@
             x0Output.innerHTML = x0Slider.value; // Output value for student to see
         </script>
     </div>-->
-    <!-- Create a slider to determine the value of "n" -->
-    <div id="nrangeslider" style="width: 500px; height: 50px;">
-        <p style="display: inline;">n:</p>
-        <input id="nSlider" type="range" min="1" max="5" value="1" step="1" style="width: 50%;">
-        <p style="display: inline;"><span id="nOut"></span></p>
-        <script>
-            // Get the value of "n" from the slider
-            var nSlider = document.getElementById("nSlider");
-            var nOutput = document.getElementById("nOut");
-            nOutput.innerHTML = nSlider.value; // Output value for student to see
-        </script>
-        
-    </div>
-    
-    <!-- Create the board -->
-    <div id="box" class="jxgbox" style="width: 500px; height: 500px;">
-        <script type="text/javascript">
-            // Create board2
-            var board = JXG.JSXGraph.initBoard('box', {
-                boundingbox: [-0.1, 1.5, 1.1, -0.1],
-                axis: true,
-                grid: true,
-                showFullscreen: true
-            });
-            // Create graph at y=1
-            var topBound = board.create('functiongraph',
-                [function (x) {
-                    return 1
-                }, -0.1, 1.1], {
-                    strokeColor: 'green'
+            <!-- Create a slider to determine the value of "n" -->
+            <div id="nrangeslider" style="width: 500px; height: 50px;">
+                <p style="display: inline;">n:</p>
+                <input id="nSlider" type="range" min="1" max="5" value="1" step="1" style="width: 50%;">
+                <p style="display: inline;"><span id="nOut"></span></p>
+                <script>
+                    // Get the value of "n" from the slider
+                    var nSlider = document.getElementById("nSlider");
+                    var nOutput = document.getElementById("nOut");
+                    nOutput.innerHTML = nSlider.value; // Output value for student to see
+                </script>
+
+            </div>
+
+            <!-- Create the board -->
+            <div id="box" class="jxgbox" style="width: 500px; height: 500px;">
+                <script type="text/javascript">
+                    // Create board2
+                    var board = JXG.JSXGraph.initBoard('box', {
+                        boundingbox: [-0.1, 1.5, 1.1, -0.1],
+                        axis: true,
+                        grid: true,
+                        showFullscreen: true
+                    });
+                    // Create graph at y=1
+                    var topBound = board.create('functiongraph',
+                        [function (x) {
+                            return 1
+                        }, -0.1, 1.1], {
+                        strokeColor: 'green'
+                    }
+                    );
+                    // Color the whole axis blue
+                    function resetLine() {
+                        g = []
+                        var lineGraph = board.create('functiongraph',
+                            [function (x) {
+                                return 0;
+                            }, 0, 1], {
+                            strokeColor: 'blue',
+                            strokeWidth: 3
+                        }
+                        );
+                    }
+                    //empty list for the middle third graphs
+                    var g = [];
+                    //Function that colors middle third of given interval
+                    function colorThird(left, right) {
+                        g.push(board.create('functiongraph',
+                            [function (x) {
+                                return 0;
+                            }, left, right], {
+                            strokeColor: 'red',
+                            strokeWidth: 3
+                        }
+                        ));
+                    };
+                    //Function that colors middle thirds as n changes
+                    function cantorSet(start, stop, loops) {
+                        var length = (stop - start) / 3;
+                        var left = start + length;
+                        var right = start + 2 * length;
+                        colorThird(left, right);
+                        if (loops != 1) {
+                            cantorSet(start, left, loops - 1);
+                            cantorSet(right, right + length, loops - 1);
+                        }
+                    };
+
+                    // Function used for graphing the function f(x) = ax(1-x)
+                    function graphFunc(x) {
+                        var i, n, returnVal;
+                        // Use returnVal to hold the result between compositions
+                        returnVal = 4.5 * x * (1 - x);
+                        // Compose f on f n-1 times
+                        for (i = 1; i < nSlider.value; i++) {
+                            returnVal = 4.5 * returnVal * (1 - returnVal);
+                        }
+                        return returnVal;
+                    }
+                    var curveGraph = board.create('functiongraph',
+                        [graphFunc, -2, 4]
+                    );
+
+
+                    // Color the initial middle third
+                    resetLine();
+                    cantorSet(0, 1, 1);
+                    board.fullUpdate();
+                </script>
+
+            </div>
+            <!-- Set boards to be updated when the sliders for "a" and "n" are moved -->
+            <script>
+                // Set the second board to update when the "n" slider is updated
+                nSlider.oninput = function () {
+                    nOutput.innerHTML = this.value; // Output value for student to see
+                    resetLine();
+                    cantorSet(0, 1, nSlider.value);
+                    board.fullUpdate();
                 }
-            );
-            // Color the whole axis blue
-            function resetLine(){
-                g = []
-                var lineGraph = board.create('functiongraph',
-                [function (x) {
-                    return 0;
-                }, 0, 1], {
-                    strokeColor: 'blue',
-                    strokeWidth:3
-                }
-            );
-            }
-            //empty list for the middle third graphs
-            var g = [];
-            //Function that colors middle third of given interval
-            function colorThird(left, right){
-                g.push(board.create('functiongraph',
-                   [function (x) {
-                    return 0;
-                    }, left, right], {
-                    strokeColor: 'red',
-                    strokeWidth:3}
-                    ));
-                };
-            //Function that colors middle thirds as n changes
-            function cantorSet(start, stop, loops){
-                    var length = (stop-start)/3;
-                    var left= start + length;
-                    var right = start + 2*length;
-                    colorThird(left,right);
-                if (loops!=1){
-                    cantorSet(start,left,loops-1);
-                    cantorSet(right, right+length,loops-1);
-                }
-                                }; 
-
-            // Function used for graphing the function f(x) = ax(1-x)
-            function graphFunc(x) {
-                var i, n, returnVal;
-                // Use returnVal to hold the result between compositions
-                returnVal =  4.5 * x * (1 - x);
-                // Compose f on f n-1 times
-                for (i = 1; i < nSlider.value; i++) {
-                    returnVal = 4.5 * returnVal * (1 - returnVal);
-                }
-                return returnVal;
-            }
-            var curveGraph = board.create('functiongraph',
-                [graphFunc, -2, 4]
-            );
-            
-
-            // Color the initial middle third
-            resetLine();
-            cantorSet(0,1,1);
-            board.fullUpdate();
-        </script>
-
-    </div>
-    <!-- Set boards to be updated when the sliders for "a" and "n" are moved -->
-    <script>
-        // Set the second board to update when the "n" slider is updated
-        nSlider.oninput = function () {
-            nOutput.innerHTML = this.value; // Output value for student to see
-                resetLine();
-                cantorSet(0,1,nSlider.value);
-                board.fullUpdate();
-        }
-    </script>
-        
+            </script>
 
 
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/popper.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/main.js"></script>
-  </body>
+
+            <script src="../js/jquery.min.js"></script>
+            <script src="../js/popper.js"></script>
+            <script src="../js/bootstrap.min.js"></script>
+            <script src="../js/main.js"></script>
+</body>
+
 </html>

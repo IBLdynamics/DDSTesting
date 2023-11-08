@@ -1,31 +1,32 @@
 <!doctype html>
 <html lang="en">
-  <head>
-  	<title>Discovering Dynamical Systems Through Experiment and Inquiry</title>
+
+<head>
+    <title>Discovering Dynamical Systems Through Experiment and Inquiry</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-		
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="../css/style.css">
 
-    <link rel="stylesheet" type="text/css" href="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
-    <script type="text/javascript" src="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" type="text/css" href="../css/jsxgraph.min.css" />
+    <script type="text/javascript" src="../js/jsxgraphcore.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
-  </head>
-  <body>
-		
-		<div class="wrapper d-flex align-items-stretch">
-			<nav id="sidebar">
-				<div class="p-4 pt-5">
-		  		<a href="#" class="img logo rounded mx-auto" style="background-image: url(../images/Henon.png);"></a>
-	        <ul class="list-unstyled components mb-5">
-	          <li class="active">
-	            <!--<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+</head>
+
+<body>
+
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="p-4 pt-5">
+                <a href="#" class="img logo rounded mx-auto" style="background-image: url(../images/Henon.png);"></a>
+                <ul class="list-unstyled components mb-5">
+                    <li class="active">
+                        <!--<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
 	            <ul class="collapse list-unstyled" id="homeSubmenu">
                 <li>
                     <a href="#">Home 1</a>
@@ -38,281 +39,296 @@
                 </li>
 	            </ul>
 	          </li>-->
-	          <li>
-	              <a href="../index.html">Home</a>
-	          </li>
-	          <li>
-              <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Chapters</a>
-              <ul class="collapse list-unstyled" id="pageSubmenu">
-                <li>
-                    <a href="../chapters/ch1.html">Chapter 1</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch2.html">Chapter 2</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch3.html">Chapter 3</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch4.html">Chapter 4</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch5.html">Chapter 5</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch6.html">Chapter 6</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch7.html">Chapter 7</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch8.html">Chapter 8</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch9.html">Chapter 9</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch10.html">Chapter 10</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch11.html">Chapter 11</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch12.html">Chapter 12</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch13.html">Chapter 13</a>
-                </li>
-              </ul>
-	          </li>
-	          <!--<li>
+                    <li>
+                        <a href="../index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle">Chapters</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                            <li>
+                                <a href="../chapters/ch1.html">Chapter 1</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch2.html">Chapter 2</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch3.html">Chapter 3</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch4.html">Chapter 4</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch5.html">Chapter 5</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch6.html">Chapter 6</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch7.html">Chapter 7</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch8.html">Chapter 8</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch9.html">Chapter 9</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch10.html">Chapter 10</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch11.html">Chapter 11</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch12.html">Chapter 12</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch13.html">Chapter 13</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--<li>
               <a href="#">Portfolio</a>
 	          </li>-->
-	          <li>
-              <a href="../about.html">About the Authors</a>
-	          </li>
-              <li>
-              <a href="../contact.html">Contact</a>
-              </li>
-	        </ul>
+                    <li>
+                        <a href="../about.html">About the Authors</a>
+                    </li>
+                    <li>
+                        <a href="../contact.html">Contact</a>
+                    </li>
+                </ul>
 
-	        <div class="footer">
-	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
-						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-	        </div>
+                <div class="footer">
+                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                            target="_blank">Colorlib.com</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
 
-	      </div>
-    	</nav>
+            </div>
+        </nav>
 
         <!-- Page Content  -->
-      <div id="content" class="p-4 p-md-5">
+        <div id="content" class="p-4 p-md-5">
 
-               <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
 
-            <button type="button" id="sidebarCollapse" class="btn btn-primary">
-              <i class="fa fa-bars"></i>
-              <span class="sr-only">Toggle Menu</span>
-            </button>
-            <script> window.onload = function(){
-                document.getElementById('sidebarCollapse').click();
-                }
-            </script>
-            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button>
+                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                        <i class="fa fa-bars"></i>
+                        <span class="sr-only">Toggle Menu</span>
+                    </button>
+                    <script> window.onload = function () {
+                            document.getElementById('sidebarCollapse').click();
+                        }
+                    </script>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-bars"></i>
+                    </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="../index.html">Home</a>
-                </li>
-               <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Chapter 1 Exercises
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="../exercises/ex1_7.html">Chapter 1, Exercise 7</a>
-            <a class="dropdown-item" href="../exercises/ex1_9.html">Chapter 1, Exercise 9</a>
-            <a class="dropdown-item" href="../exercises/ex1_10.html">Chapter 1, Exercise 10</a>
-        </div>
-      </li>
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Chapters
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="../chapters/ch1.html">Chapter 1</a>
-            <a class="dropdown-item" href="../chapters/ch2.html">Chapter 2</a>
-            <a class="dropdown-item" href="../chapters/ch3.html">Chapter 3</a>
-            <a class="dropdown-item" href="../chapters/ch4.html">Chapter 4</a>
-            <a class="dropdown-item" href="../chapters/ch5.html">Chapter 5</a>
-            <a class="dropdown-item" href="../chapters/ch6.html">Chapter 6</a>
-            <a class="dropdown-item" href="../chapters/ch8.html">Chapter 8</a>
-            <a class="dropdown-item" href="../chapters/ch9.html">Chapter 9</a>
-            <a class="dropdown-item" href="../chapters/ch10.html">Chapter 10</a>
-            <a class="dropdown-item" href="../chapters/ch11.html">Chapter 11</a>
-        </div>
-      </li>
-              <li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../contact.html">Contact</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-    <div>    
-        <h1>Chapter 1, Exercise 10</h1>
-        <p>Use the checkboxes to select a value for \(k\) and the slider to choose an initial condition \(x_0\). Analyze the given starstep diagrams and recreate them on paper. Close the sidebar menu to ensure the iterated points and the graph are side-by-side.</p>
-    <!-- Create a slider to determine the value of x0 -->
-    <div id="rangeslider" style="width: 500px; height: 40px;">
-        <p style="display: inline;">Initial Condition</p>
-        <input id="x0Slider" type="range" min="-1" max="2" value="0.5" step="0.01" style="width: 50%;">
-        <p style="display: inline;">\(x_0\): <span id="x0Out"></span></p>
-        <script>
-            // Get the value of x0 from the slider
-            var x0Slider = document.getElementById("x0Slider");
-            var x0Output = document.getElementById("x0Out");
-            x0Output.innerHTML = x0Slider.value; // Output value for student to see
-        </script>
-    </div>
-    <!-- Create checkboxes to determine the value of c -->
-    <div id="checkboxes" style="width: 500px; height: 40px;">
-        <!-- Check "a" by default -->
-        <label>0.5<input class="cValueCheckbox" type="radio" name="c" value="0.5" onclick="updateC(this);"
-                checked></label>
-        <label>0.25<input class="cValueCheckbox" type="radio" name="c" value="0.25" onclick="updateC(this);"></label>
-        <label>0.1<input class="cValueCheckbox" type="radio" name="c" value="0.1" onclick="updateC(this);"></label>
-        <label>-0.5<input class="cValueCheckbox" type="radio" name="c" value="-0.5" onclick="updateC(this);"></label>
-        <!--<p style="display: inline; padding-left: 5px;">k: <span id="cOut"></span></p>-->
-        <script>
-            // Get the value of c from the checkboxes
-            var cValue = document.querySelector('.cValueCheckbox:checked').value;
-            var cOutput = document.getElementById("cOut");
-            cOutput.innerHTML = cValue; // Output value for student to see
-        </script>
-    </div>
-    <!-- Define functions that both boards share -->
-    <script>
-        // Graph function for both boards
-        function graphFunc(x) {
-            return x * x + Number(cValue);
-        }
-        // Function to calculate the attracting and repelling points
-        function generatePoints() {
-            var i, xcors, ycors, xi;
-            xcors = [x0Slider.value]; // Populate xcors with the first value = x0
-            ycors = [graphFunc(x0Slider.value)]; // Populate ycors with the first value = x1
-            xcorsPlot = xcors;
-            ycorsPlot = ycors;
-            for (i = 0; i < 20; i++) {
-                xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
-                // Add new point (xi, xi)
-                xcors.push(xi);
-                ycors.push(xi);
-                // Add new point (xi, xi+1)
-                xcors.push(xi);
-                ycors.push(graphFunc(xi));
-            }
-            return {
-                'xcors': xcors,
-                'ycors': ycors,
-            };
-        }
-    </script>
-    <!-- Create board with plotted points -->
-    <div id="box1" class="jxgbox" style="width:500px; height:500px; float: left;">
-        <script type="text/javascript">
-            var board1;
-            // Function to create board and plot the x-coordinates from generatePoints
-            function createBoard1() {
-                board1 = JXG.JSXGraph.initBoard('box1', {
-                    boundingbox: [-1, 6, 12, -3],
-                    axis: true,
-                    grid: true
-                });
-                // Plot points with value (i, xi)
-                var i, xcors, ycors=[];
-                xcors = generatePoints()['xcors'];
-                for (i=0; i< xcors.length; i++){
-                    if(i%2!=0){
-                        ycors.push(xcors[i]);
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="../index.html">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Chapter 1 Exercises
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="../exercises/ex1_7.html">Chapter 1, Exercise 7</a>
+                                    <a class="dropdown-item" href="../exercises/ex1_9.html">Chapter 1, Exercise 9</a>
+                                    <a class="dropdown-item" href="../exercises/ex1_10.html">Chapter 1, Exercise 10</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Chapters
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="../chapters/ch1.html">Chapter 1</a>
+                                    <a class="dropdown-item" href="../chapters/ch2.html">Chapter 2</a>
+                                    <a class="dropdown-item" href="../chapters/ch3.html">Chapter 3</a>
+                                    <a class="dropdown-item" href="../chapters/ch4.html">Chapter 4</a>
+                                    <a class="dropdown-item" href="../chapters/ch5.html">Chapter 5</a>
+                                    <a class="dropdown-item" href="../chapters/ch6.html">Chapter 6</a>
+                                    <a class="dropdown-item" href="../chapters/ch8.html">Chapter 8</a>
+                                    <a class="dropdown-item" href="../chapters/ch9.html">Chapter 9</a>
+                                    <a class="dropdown-item" href="../chapters/ch10.html">Chapter 10</a>
+                                    <a class="dropdown-item" href="../chapters/ch11.html">Chapter 11</a>
+                                </div>
+                            </li>
+                            <li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../contact.html">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div>
+                <h1>Chapter 1, Exercise 10</h1>
+                <p>Use the checkboxes to select a value for \(k\) and the slider to choose an initial condition \(x_0\).
+                    Analyze the given starstep diagrams and recreate them on paper. Close the sidebar menu to ensure the
+                    iterated points and the graph are side-by-side.</p>
+                <!-- Create a slider to determine the value of x0 -->
+                <div id="rangeslider" style="width: 500px; height: 40px;">
+                    <p style="display: inline;">Initial Condition</p>
+                    <input id="x0Slider" type="range" min="-1" max="2" value="0.5" step="0.01" style="width: 50%;">
+                    <p style="display: inline;">\(x_0\): <span id="x0Out"></span></p>
+                    <script>
+                        // Get the value of x0 from the slider
+                        var x0Slider = document.getElementById("x0Slider");
+                        var x0Output = document.getElementById("x0Out");
+                        x0Output.innerHTML = x0Slider.value; // Output value for student to see
+                    </script>
+                </div>
+                <!-- Create checkboxes to determine the value of c -->
+                <div id="checkboxes" style="width: 500px; height: 40px;">
+                    <!-- Check "a" by default -->
+                    <label>0.5<input class="cValueCheckbox" type="radio" name="c" value="0.5" onclick="updateC(this);"
+                            checked></label>
+                    <label>0.25<input class="cValueCheckbox" type="radio" name="c" value="0.25"
+                            onclick="updateC(this);"></label>
+                    <label>0.1<input class="cValueCheckbox" type="radio" name="c" value="0.1"
+                            onclick="updateC(this);"></label>
+                    <label>-0.5<input class="cValueCheckbox" type="radio" name="c" value="-0.5"
+                            onclick="updateC(this);"></label>
+                    <!--<p style="display: inline; padding-left: 5px;">k: <span id="cOut"></span></p>-->
+                    <script>
+                        // Get the value of c from the checkboxes
+                        var cValue = document.querySelector('.cValueCheckbox:checked').value;
+                        var cOutput = document.getElementById("cOut");
+                        cOutput.innerHTML = cValue; // Output value for student to see
+                    </script>
+                </div>
+                <!-- Define functions that both boards share -->
+                <script>
+                    // Graph function for both boards
+                    function graphFunc(x) {
+                        return x * x + Number(cValue);
                     }
-                }
-                for (i = 0; i < ycors.length; i++) {
-                    board1.create('point',
-                        [i + 1, ycors[i]], {
-                            fixed: true , withLabel: false
+                    // Function to calculate the attracting and repelling points
+                    function generatePoints() {
+                        var i, xcors, ycors, xi;
+                        xcors = [x0Slider.value]; // Populate xcors with the first value = x0
+                        ycors = [graphFunc(x0Slider.value)]; // Populate ycors with the first value = x1
+                        xcorsPlot = xcors;
+                        ycorsPlot = ycors;
+                        for (i = 0; i < 20; i++) {
+                            xi = ycors[ycors.length - 1]; // Next point to graph starts at the same y-coordinate as the previous
+                            // Add new point (xi, xi)
+                            xcors.push(xi);
+                            ycors.push(xi);
+                            // Add new point (xi, xi+1)
+                            xcors.push(xi);
+                            ycors.push(graphFunc(xi));
+                        }
+                        return {
+                            'xcors': xcors,
+                            'ycors': ycors,
+                        };
+                    }
+                </script>
+                <!-- Create board with plotted points -->
+                <div id="box1" class="jxgbox" style="width:500px; height:500px; float: left;">
+                    <script type="text/javascript">
+                        var board1;
+                        // Function to create board and plot the x-coordinates from generatePoints
+                        function createBoard1() {
+                            board1 = JXG.JSXGraph.initBoard('box1', {
+                                boundingbox: [-1, 6, 12, -3],
+                                axis: true,
+                                grid: true
+                            });
+                            // Plot points with value (i, xi)
+                            var i, xcors, ycors = [];
+                            xcors = generatePoints()['xcors'];
+                            for (i = 0; i < xcors.length; i++) {
+                                if (i % 2 != 0) {
+                                    ycors.push(xcors[i]);
+                                }
+                            }
+                            for (i = 0; i < ycors.length; i++) {
+                                board1.create('point',
+                                    [i + 1, ycors[i]], {
+                                    fixed: true, withLabel: false
+                                });
+                            }
+                        }
+                        createBoard1();
+                    </script>
+                </div>
+                <!-- Create board with curve and line graphs -->
+                <div id="box2" class="jxgbox" style="width:500px; height:500px;">
+                    <script type="text/javascript">
+                        // Create board
+                        var board2 = JXG.JSXGraph.initBoard('box2', {
+                            boundingbox: [-3, 5, 3, -3],
+                            axis: true,
+                            grid: true
                         });
-                }
-            }
-            createBoard1();
-        </script>
-    </div>
-    <!-- Create board with curve and line graphs -->
-    <div id="box2" class="jxgbox" style="width:500px; height:500px;">
-        <script type="text/javascript">
-            // Create board
-            var board2 = JXG.JSXGraph.initBoard('box2', {
-                boundingbox: [-3, 5, 3, -3],
-                axis: true,
-                grid: true
-            });
-            // Create line graph
-            var lineGraph = board2.create('functiongraph',
-                [function (x) {
-                    return x
-                }, -2, 2], {
-                    strokeColor: 'green'
-                }
-            );
-            // Create curve graph
-            var curveGraph = board2.create('functiongraph',
-                [graphFunc, -2, 2]
-            );
-            // Create a step function that will be updated each time a or x0 changes
-            var stepGraph = board2.create('stepfunction', [
-                [0], // Use as filler for now. It will be replaced on board update
-                [0]
-            ], {
-                strokeColor: 'red'
-            });
-        </script>
-    </div>
-    <!-- Setup boards so they both change when either x0 or c changes-->
-    <script>
-        // Function to re-calculate the attracting and repelling points and graph them
-        function reCalculate() {
-            var points = generatePoints();
-            // Update board1
-            JXG.JSXGraph.freeBoard(board1); // Have to free the whole board to get rid of all the points
-            createBoard1();
-            // Update board2
-            stepGraph.xterm = points['xcors'];
-            stepGraph.yterm = points['ycors'];
-        }
-        // Set both boards to update when the "x0" slider is updated
-        x0Slider.oninput = function () {
-            x0Output.innerHTML = this.value; // Output value for student to see
-            reCalculate();
-            board1.fullUpdate();
-            board2.fullUpdate();
-        }
-        // Set both boards to update when the "c" value checkbox is changed
-        function updateC(checkbox) {
-            cValue = checkbox.value;
-            //cOutput.innerHTML = cValue; // Output value for student to see
-            reCalculate();
-            board1.fullUpdate();
-            board2.fullUpdate();
-        }
-    </script>
-    </div>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/popper.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/main.js"></script>
-  </body>
+                        // Create line graph
+                        var lineGraph = board2.create('functiongraph',
+                            [function (x) {
+                                return x
+                            }, -2, 2], {
+                            strokeColor: 'green'
+                        }
+                        );
+                        // Create curve graph
+                        var curveGraph = board2.create('functiongraph',
+                            [graphFunc, -2, 2]
+                        );
+                        // Create a step function that will be updated each time a or x0 changes
+                        var stepGraph = board2.create('stepfunction', [
+                            [0], // Use as filler for now. It will be replaced on board update
+                            [0]
+                        ], {
+                            strokeColor: 'red'
+                        });
+                    </script>
+                </div>
+                <!-- Setup boards so they both change when either x0 or c changes-->
+                <script>
+                    // Function to re-calculate the attracting and repelling points and graph them
+                    function reCalculate() {
+                        var points = generatePoints();
+                        // Update board1
+                        JXG.JSXGraph.freeBoard(board1); // Have to free the whole board to get rid of all the points
+                        createBoard1();
+                        // Update board2
+                        stepGraph.xterm = points['xcors'];
+                        stepGraph.yterm = points['ycors'];
+                    }
+                    // Set both boards to update when the "x0" slider is updated
+                    x0Slider.oninput = function () {
+                        x0Output.innerHTML = this.value; // Output value for student to see
+                        reCalculate();
+                        board1.fullUpdate();
+                        board2.fullUpdate();
+                    }
+                    // Set both boards to update when the "c" value checkbox is changed
+                    function updateC(checkbox) {
+                        cValue = checkbox.value;
+                        //cOutput.innerHTML = cValue; // Output value for student to see
+                        reCalculate();
+                        board1.fullUpdate();
+                        board2.fullUpdate();
+                    }
+                </script>
+            </div>
+            <script src="../js/jquery.min.js"></script>
+            <script src="../js/popper.js"></script>
+            <script src="../js/bootstrap.min.js"></script>
+            <script src="../js/main.js"></script>
+</body>
+
 </html>

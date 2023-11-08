@@ -1,31 +1,32 @@
 <!doctype html>
 <html lang="en">
-  <head>
-  	<title>Discovering Dynamical Systems Through Experiment and Inquiry</title>
+
+<head>
+    <title>Discovering Dynamical Systems Through Experiment and Inquiry</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-		
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="../css/style.css">
 
-    <link rel="stylesheet" type="text/css" href="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
-    <script type="text/javascript" src="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" type="text/css" href="../css/jsxgraph.min.css" />
+    <script type="text/javascript" src="../js/jsxgraphcore.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
-  </head>
-  <body>
-		
-		<div class="wrapper d-flex align-items-stretch">
-			<nav id="sidebar">
-				<div class="p-4 pt-5">
-		  		<a href="#" class="img logo rounded mx-auto" style="background-image: url(../images/Henon.png);"></a>
-	        <ul class="list-unstyled components mb-5">
-	          <li class="active">
-	            <!--<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+</head>
+
+<body>
+
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="p-4 pt-5">
+                <a href="#" class="img logo rounded mx-auto" style="background-image: url(../images/Henon.png);"></a>
+                <ul class="list-unstyled components mb-5">
+                    <li class="active">
+                        <!--<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
 	            <ul class="collapse list-unstyled" id="homeSubmenu">
                 <li>
                     <a href="#">Home 1</a>
@@ -38,241 +39,262 @@
                 </li>
 	            </ul>
 	          </li>-->
-	          <li>
-	              <a href="../index.html">Home</a>
-	          </li>
-	          <li>
-              <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Chapters</a>
-              <ul class="collapse list-unstyled" id="pageSubmenu">
-                <li>
-                    <a href="../chapters/ch1.html">Chapter 1</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch2.html">Chapter 2</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch3.html">Chapter 3</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch4.html">Chapter 4</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch5.html">Chapter 5</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch6.html">Chapter 6</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch7.html">Chapter 7</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch8.html">Chapter 8</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch9.html">Chapter 9</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch10.html">Chapter 10</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch11.html">Chapter 11</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch12.html">Chapter 12</a>
-                </li>
-                <li>
-                    <a href="../chapters/ch13.html">Chapter 13</a>
-                </li>
-              </ul>
-	          </li>
-	          <!--<li>
+                    <li>
+                        <a href="../index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle">Chapters</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                            <li>
+                                <a href="../chapters/ch1.html">Chapter 1</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch2.html">Chapter 2</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch3.html">Chapter 3</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch4.html">Chapter 4</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch5.html">Chapter 5</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch6.html">Chapter 6</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch7.html">Chapter 7</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch8.html">Chapter 8</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch9.html">Chapter 9</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch10.html">Chapter 10</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch11.html">Chapter 11</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch12.html">Chapter 12</a>
+                            </li>
+                            <li>
+                                <a href="../chapters/ch13.html">Chapter 13</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--<li>
               <a href="#">Portfolio</a>
 	          </li>-->
-	          <li>
-              <a href="../about.html">About the Authors</a>
-	          </li>
-              <li>
-              <a href="../contact.html">Contact</a>
-              </li>
-	        </ul>
+                    <li>
+                        <a href="../about.html">About the Authors</a>
+                    </li>
+                    <li>
+                        <a href="../contact.html">Contact</a>
+                    </li>
+                </ul>
 
-	        <div class="footer">
-	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
-						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-	        </div>
+                <div class="footer">
+                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                            target="_blank">Colorlib.com</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
 
-	      </div>
-    	</nav>
-
-        <!-- Page Content  -->
-      <div id="content" class="p-4 p-md-5">
-
-     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
-
-            <button type="button" id="sidebarCollapse" class="btn btn-primary">
-              <i class="fa fa-bars"></i>
-              <span class="sr-only">Toggle Menu</span>
-            </button>
-            <script> window.onload = function(){
-                document.getElementById('sidebarCollapse').click();
-                }
-            </script>
-            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="../index.html">Home</a>
-                </li>
-               <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Chapter 6 Exercises
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                <a class="dropdown-item" href="../exercises/ex6_1.html"> Chapter 6, Applications 1-8</a>
-
-                <a class="dropdown-item" href="../exercises/ex6_9.html"> Chapter 6, Application 9</a>
-
-                <a class="dropdown-item" href="../exercises/ex6_15.html"> Chapter 6, Exploration 15</a>
-
-                <a class="dropdown-item" href="../exercises/ex6_16.html"> Chapter 6, Exploration 16</a>
-
-                <a class="dropdown-item" href="../exercises/ex6_18.html"> Chapter 6, Explorations 18-23</a>
-
-                <a class="dropdown-item" href="../exercises/ex6_29.html"> Chapter 6, Exploration 29</a>
-
-                <a class="dropdown-item" href="../exercises/ex6_35.html"> Chapter 6, Exploration 35</a>
-
-                <a class="dropdown-item" href="../exercises/fig6_3.html"> Chapter 6, Figure 6.3</a>
-
-                <a class="dropdown-item" href="../exercises/ex6_48.html"> Chapter 6, Exploration 48</a>
-
-        </div>
-      </li>
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Chapters
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="../chapters/ch1.html">Chapter 1</a>
-            <a class="dropdown-item" href="../chapters/ch2.html">Chapter 2</a>
-            <a class="dropdown-item" href="../chapters/ch3.html">Chapter 3</a>
-            <a class="dropdown-item" href="../chapters/ch4.html">Chapter 4</a>
-            <a class="dropdown-item" href="../chapters/ch5.html">Chapter 5</a>
-            <a class="dropdown-item" href="../chapters/ch6.html">Chapter 6</a>
-            <a class="dropdown-item" href="../chapters/ch8.html">Chapter 8</a>
-            <a class="dropdown-item" href="../chapters/ch9.html">Chapter 9</a>
-            <a class="dropdown-item" href="../chapters/ch10.html">Chapter 10</a>
-            <a class="dropdown-item" href="../chapters/ch11.html">Chapter 11</a>
-        </div>
-      </li>
-              <li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../contact.html">Contact</a>
-                </li>
-              </ul>
             </div>
-          </div>
         </nav>
 
-    <h1>Chapter 6, Exploration 35</h1>
-    <p> 
-        The binary expansion of the point \(s = .010101\ldots\) is given in the textbook. The slider below for \(n\) moves through the points in the expansion of \(s\), narrowing the intervals in which \(s\) can be found. \(s\) is always in the orange interval. Explore how this interval changes as you adjust the slider. Think carefully about what this means in terms of the coordiantes of \(s\).
-    </p>
-    
-    <!-- Create a slider to determine the value of "n" -->
-    <div id="nrangeslider" style="width: 500px; height: 50px;">
-        <p style="display: inline;">n:</p>
-        <input id="nSlider" type="range" min="1" max="7" value="1" step="1" style="width: 50%;">
-        <p style="display: inline;"><span id="nOut"></span></p>
-        <script>
-            // Get the value of "n" from the slider
-            var nSlider = document.getElementById("nSlider");
-            var nOutput = document.getElementById("nOut");
-            nOutput.innerHTML = nSlider.value; // Output value for student to see
-        </script>
-        
-    </div>
-    
-    <div id="box" class="jxgbox" style="width: 500px; height: 500px;">
-        <script type="text/javascript">
-            // Create board2
-            var board = JXG.JSXGraph.initBoard('box', {
-                boundingbox: [-0.1, 0.3, 1.1, -0.3],
-                axis: true,
-                grid: true
-            });
-        // Color the whole axis blue
-            function resetLine(){
-                var lineGraph = board.create('functiongraph',
-                [function (x) {
-                    return 0;
-                }, 0, 1], {
-                    strokeColor: 'blue',
-                    strokeWidth:3
-                }
-            );
-            }
-            var s = [0];
-        // Calculate the point s, based on N
-            function makeS(){
-                s = [0]
-                var i;
-                for (i=0;i<nSlider.value;i++){
-                    if (i%2==0){
-                        s.push(0);
-                    }
-                    else{
-                        s.push(1);
-                    }
-                }
-            }
-        // Finds the interval with the correct endpoints and adds it to the graph.
-            function endPoints(){
-                var i, left, right;
-                left = 0;
-                right = 1;
-                for (i=1;i<s.length;i++){
-                    if(s[i]==0){
-                        right = right - 0.5**i;
-                    }
-                    else{
-                        left = left + 0.5**i;
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5">
 
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                        <i class="fa fa-bars"></i>
+                        <span class="sr-only">Toggle Menu</span>
+                    </button>
+                    <script> window.onload = function () {
+                            document.getElementById('sidebarCollapse').click();
+                        }
+                    </script>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="../index.html">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Chapter 6 Exercises
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="../exercises/ex6_1.html"> Chapter 6, Applications
+                                        1-8</a>
+
+                                    <a class="dropdown-item" href="../exercises/ex6_9.html"> Chapter 6, Application
+                                        9</a>
+
+                                    <a class="dropdown-item" href="../exercises/ex6_15.html"> Chapter 6, Exploration
+                                        15</a>
+
+                                    <a class="dropdown-item" href="../exercises/ex6_16.html"> Chapter 6, Exploration
+                                        16</a>
+
+                                    <a class="dropdown-item" href="../exercises/ex6_18.html"> Chapter 6, Explorations
+                                        18-23</a>
+
+                                    <a class="dropdown-item" href="../exercises/ex6_29.html"> Chapter 6, Exploration
+                                        29</a>
+
+                                    <a class="dropdown-item" href="../exercises/ex6_35.html"> Chapter 6, Exploration
+                                        35</a>
+
+                                    <a class="dropdown-item" href="../exercises/fig6_3.html"> Chapter 6, Figure 6.3</a>
+
+                                    <a class="dropdown-item" href="../exercises/ex6_48.html"> Chapter 6, Exploration
+                                        48</a>
+
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Chapters
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="../chapters/ch1.html">Chapter 1</a>
+                                    <a class="dropdown-item" href="../chapters/ch2.html">Chapter 2</a>
+                                    <a class="dropdown-item" href="../chapters/ch3.html">Chapter 3</a>
+                                    <a class="dropdown-item" href="../chapters/ch4.html">Chapter 4</a>
+                                    <a class="dropdown-item" href="../chapters/ch5.html">Chapter 5</a>
+                                    <a class="dropdown-item" href="../chapters/ch6.html">Chapter 6</a>
+                                    <a class="dropdown-item" href="../chapters/ch8.html">Chapter 8</a>
+                                    <a class="dropdown-item" href="../chapters/ch9.html">Chapter 9</a>
+                                    <a class="dropdown-item" href="../chapters/ch10.html">Chapter 10</a>
+                                    <a class="dropdown-item" href="../chapters/ch11.html">Chapter 11</a>
+                                </div>
+                            </li>
+                            <li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../contact.html">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <h1>Chapter 6, Exploration 35</h1>
+            <p>
+                The binary expansion of the point \(s = .010101\ldots\) is given in the textbook. The slider below for
+                \(n\) moves through the points in the expansion of \(s\), narrowing the intervals in which \(s\) can be
+                found. \(s\) is always in the orange interval. Explore how this interval changes as you adjust the
+                slider. Think carefully about what this means in terms of the coordiantes of \(s\).
+            </p>
+
+            <!-- Create a slider to determine the value of "n" -->
+            <div id="nrangeslider" style="width: 500px; height: 50px;">
+                <p style="display: inline;">n:</p>
+                <input id="nSlider" type="range" min="1" max="7" value="1" step="1" style="width: 50%;">
+                <p style="display: inline;"><span id="nOut"></span></p>
+                <script>
+                    // Get the value of "n" from the slider
+                    var nSlider = document.getElementById("nSlider");
+                    var nOutput = document.getElementById("nOut");
+                    nOutput.innerHTML = nSlider.value; // Output value for student to see
+                </script>
+
+            </div>
+
+            <div id="box" class="jxgbox" style="width: 500px; height: 500px;">
+                <script type="text/javascript">
+                    // Create board2
+                    var board = JXG.JSXGraph.initBoard('box', {
+                        boundingbox: [-0.1, 0.3, 1.1, -0.3],
+                        axis: true,
+                        grid: true
+                    });
+                    // Color the whole axis blue
+                    function resetLine() {
+                        var lineGraph = board.create('functiongraph',
+                            [function (x) {
+                                return 0;
+                            }, 0, 1], {
+                            strokeColor: 'blue',
+                            strokeWidth: 3
+                        }
+                        );
                     }
-                }
-                var interval = board.create('functiongraph',
-                [function (x) {
-                    return 0;
-                }, left, right], {
-                    strokeColor: 'orange',
-                    strokeWidth:4
-                }
-            );
-            }
-        makeS();
-        resetLine();
-        endPoints();
-        // Set the board to update when the "n" slider is updated
-        nSlider.oninput = function () {
-            nOutput.innerHTML = this.value; // Output value for student to see
-                resetLine();
-                makeS();
-                endPoints();
-                board.fullUpdate();
-        }
-        </script>
-    </div>
+                    var s = [0];
+                    // Calculate the point s, based on N
+                    function makeS() {
+                        s = [0]
+                        var i;
+                        for (i = 0; i < nSlider.value; i++) {
+                            if (i % 2 == 0) {
+                                s.push(0);
+                            }
+                            else {
+                                s.push(1);
+                            }
+                        }
+                    }
+                    // Finds the interval with the correct endpoints and adds it to the graph.
+                    function endPoints() {
+                        var i, left, right;
+                        left = 0;
+                        right = 1;
+                        for (i = 1; i < s.length; i++) {
+                            if (s[i] == 0) {
+                                right = right - 0.5 ** i;
+                            }
+                            else {
+                                left = left + 0.5 ** i;
+
+                            }
+                        }
+                        var interval = board.create('functiongraph',
+                            [function (x) {
+                                return 0;
+                            }, left, right], {
+                            strokeColor: 'orange',
+                            strokeWidth: 4
+                        }
+                        );
+                    }
+                    makeS();
+                    resetLine();
+                    endPoints();
+                    // Set the board to update when the "n" slider is updated
+                    nSlider.oninput = function () {
+                        nOutput.innerHTML = this.value; // Output value for student to see
+                        resetLine();
+                        makeS();
+                        endPoints();
+                        board.fullUpdate();
+                    }
+                </script>
+            </div>
 
 
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/popper.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/main.js"></script>
-  </body>
+            <script src="../js/jquery.min.js"></script>
+            <script src="../js/popper.js"></script>
+            <script src="../js/bootstrap.min.js"></script>
+            <script src="../js/main.js"></script>
+</body>
+
 </html>
