@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+Test
+<link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+<script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+<div id="plot" class="jxgbox" style="width: 500px; height: 500px; display: none;">
+  <script>
+    // Initialize the board
+    var board = JXG.JSXGraph.initBoard("plot", {
+      boundingbox: [-0.5, 1, 11, -0.1],
+      axis: true,
+      grid: true
+    });
+  </script>
+
+  <!--
+    // Slider to control length of vectors
+    var s = board.create('slider', [
+      [-3, 7],
+      [3, 7],
+      [0, 0.33, 1]
+    ], {
+      name: 'length'
+    });
+    // Slider to control number of steps
+    var stepsize = board.create('slider', [
+      [-3, 6],
+      [3, 6],
+      [1, 20, 100]
+    ], {
+      name: 'steps',
+      snapWidth: 1
+    });
+
+    var field = board.create('slopefield', [
+      (x, y) => x * x - y * y,
+      [-6, () => stepsize.Value(), 6],
+      [-5, () => stepsize.Value(), 5]
+    ], {
+      strokeWidth: 1.5,
+      highlightStrokeWidth: 0.5,
+      highlightStrokeColor: JXG.palette.blue,
+
+      scale: () => s.Value(),
+
+      arrowHead: {
+        enabled: false,
+        size: 8,
+        angle: Math.PI / 16
+      }
+    });
+  </script>-->
+</div>
+
+</html>
